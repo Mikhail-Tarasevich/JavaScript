@@ -1,14 +1,27 @@
 .tennis { 
 	background: #F0EE7F; 
-	height: 350px;
-    width: 600px; 
+	height: 500px;
+    width: 800px; 
 	border: solid 1px black; 
 	position: relative;
 }
 .rocket { 
-	height: 20px;
-    width: 80px; 
+	position: absolute;
+	height: 160px;
+	width: 20px; 
+	top: 170px;
 }
+
+.ball {
+	position: absolute;
+	background: #EB2237;
+	height: 50px;
+	width: 50px; 
+	top: 225px;
+	left: 375px;
+	border-radius: 50%;
+}
+
 .topFrame { 
 	background: red; 
 	height: 50px;
