@@ -29,7 +29,7 @@ function run() {
                                         
                                             switch (event.code) {
                                             case "ArrowDown":
-                                                if (rocket2.offsetTop>=(tennis.offsetHeight - rocket2.offsetHeight)) {
+                                                if (rocket2.offsetTop>=(tennis.offsetHeight - rocket2.offsetHeight - 2)) {
                                                     rocket2.speed = 0;
                                                 }
                                                 else {
@@ -37,7 +37,7 @@ function run() {
                                                 }
                                                 break;
                                             case "ArrowUp":
-                                                if (rocket2.offsetTop<=1) {
+                                                if (rocket2.offsetTop<=2) {
                                                     rocket2.speed = 0;
                                                 }
                                                 else {
@@ -67,7 +67,7 @@ function run() {
                                             // Cancel the default action to avoid it being handled twice
         //                                    event.preventDefault();
 
-                                            console.log("speed: rocket1 " + rocket1.speed + ", rocket2 " + rocket2.speed);
+                                            console.log("keydown->speed: rocket1 " + rocket1.speed + ", rocket2 " + rocket2.speed);
                                         }, false);
 
   document.addEventListener('keyup', function (event) {
@@ -95,7 +95,7 @@ function run() {
                                         // Cancel the default action to avoid it being handled twice
       //                                  event.preventDefault();
 
-                                        console.log("speed: rocket1 " + rocket1.speed + ", rocket2 " + rocket2.speed);
+                                        console.log("keyup->speed: rocket1 " + rocket1.speed + ", rocket2 " + rocket2.speed);
     }, false);
     
     var dtn = new Date();
@@ -103,6 +103,12 @@ function run() {
 };
 
 function draw() {
+    if (rocket2.offsetTop>=(tennis.offsetHeight - rocket2.offsetHeight - 2)) {
+        rocket2.speed = 0;
+    };
+    if (rocket2.offsetTop<=2) {
+        rocket2.speed = 0;
+    };
     rocket1.style.top = (rocket1.offsetTop + rocket1.speed) + 'px';
     rocket2.style.top = (rocket2.offsetTop + rocket2.speed) + 'px';
 
