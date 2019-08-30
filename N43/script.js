@@ -98,8 +98,12 @@ function run() {
                                         console.log("keyup->speed: rocket1 " + rocket1.speed + ", rocket2 " + rocket2.speed);
     }, false);
     
-    var dtn = new Date();
-    setTimeout(draw,DISPLAY_REFRESH-dtn.getMilliseconds());
+//    var dtn = new Date();
+  //  setTimeout(draw,DISPLAY_REFRESH-dtn.getMilliseconds());
+  requestAnimationFrame(function measure(time) {
+    draw2();
+    requestAnimationFrame(measure);
+  });
 };
 
 function draw() {
@@ -114,7 +118,18 @@ function draw() {
 
     var dtn = new Date();
     setTimeout(draw,DISPLAY_REFRESH-dtn.getMilliseconds());
-  }
+  };
+
+function draw2() {
+    if (rocket2.offsetTop>=(tennis.offsetHeight - rocket2.offsetHeight - 2)) {
+        rocket2.speed = 0;
+    };
+    if (rocket2.offsetTop<=2) {
+        rocket2.speed = 0;
+    };
+    rocket1.style.top = (rocket1.offsetTop + rocket1.speed) + 'px';
+    rocket2.style.top = (rocket2.offsetTop + rocket2.speed) + 'px';
+};
 
 
 run();
