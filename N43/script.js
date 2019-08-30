@@ -5,6 +5,8 @@ var rocket2 = null;
 var tennis = null;
 var ball = null;
 
+var DISPLAY_REFRESH = 1000 / 60; // обновление монитора 60 раз в секунду
+
 function run() {
     tennis = document.getElementById('tennis');
 
@@ -21,37 +23,57 @@ function run() {
     rocket2.speed = 0;
 
     document.addEventListener('keydown', function (event) {
-                                            if (event.defaultPrevented) {
-                                            return; // Do nothing if the event was already processed
-                                            }
+          //                                  if (event.defaultPrevented) {
+            //                                return; // Do nothing if the event was already processed
+              //                              }
                                         
                                             switch (event.code) {
                                             case "ArrowDown":
-                                                rocket2.speed = -1;
+                                                if (rocket2.offsetTop>=(tennis.offsetHeight - rocket2.offsetHeight)) {
+                                                    rocket2.speed = 0;
+                                                }
+                                                else {
+                                                    rocket2.speed = 1;
+                                                }
                                                 break;
                                             case "ArrowUp":
-                                                rocket2.speed = 1;
+                                                if (rocket2.offsetTop<=1) {
+                                                    rocket2.speed = 0;
+                                                }
+                                                else {
+                                                    rocket2.speed = -1;
+                                                }
                                                 break;
                                             case "ShiftLeft":
-                                                rocket1.speed = 1;
+                                                    if (rocket1.offsetTop<=1) {
+                                                        rocket1.speed = 0;
+                                                    }
+                                                    else {
+                                                        rocket1.speed = -1;
+                                                    }
                                                 break;
                                             case "ControlLeft":
-                                                rocket1.speed = -1;
+                                                    if (rocket1.offsetTop>=(tennis.offsetHeight - rocket1.offsetHeight)) {
+                                                        rocket1.speed = 0;
+                                                    }
+                                                    else {
+                                                        rocket1.speed = 1;
+                                                    }
                                                 break;
                                             default:
                                                 return; // Quit when this doesn't handle the key event.
                                             }
                                         
                                             // Cancel the default action to avoid it being handled twice
-                                            event.preventDefault();
+        //                                    event.preventDefault();
 
-                                            console.log("rocket1 " + rocket1.speed + ", rocket2 " + rocket2.speed);
+                                            console.log("speed: rocket1 " + rocket1.speed + ", rocket2 " + rocket2.speed);
                                         }, false);
 
   document.addEventListener('keyup', function (event) {
-                                        if (event.defaultPrevented) {
-                                        return; // Do nothing if the event was already processed
-                                        }
+//                                        if (event.defaultPrevented) {
+  //                                      return; // Do nothing if the event was already processed
+    //                                    }
                                     
                                         switch (event.code) {
                                         case "ArrowDown":
@@ -71,11 +93,22 @@ function run() {
                                         }
                                     
                                         // Cancel the default action to avoid it being handled twice
-                                        event.preventDefault();
+      //                                  event.preventDefault();
 
-                                        console.log("rocket1 " + rocket1.speed + ", rocket2 " + rocket2.speed);
-                                    }, false);
-
+                                        console.log("speed: rocket1 " + rocket1.speed + ", rocket2 " + rocket2.speed);
+    }, false);
+    
+    var dtn = new Date();
+    setTimeout(draw,DISPLAY_REFRESH-dtn.getMilliseconds());
 };
+
+function draw() {
+    rocket1.style.top = (rocket1.offsetTop + rocket1.speed) + 'px';
+    rocket2.style.top = (rocket2.offsetTop + rocket2.speed) + 'px';
+
+    var dtn = new Date();
+    setTimeout(draw,DISPLAY_REFRESH-dtn.getMilliseconds());
+  }
+
 
 run();
