@@ -5,6 +5,8 @@ function run() {
     var rocket2 = null;
     var tennis = null;
     var ball = null;
+    var buttonStart = null;
+    var requestId = null;
     
     var ROCKET_SPEED = 5;
     var BALL_SPEED = 4;
@@ -16,8 +18,6 @@ function run() {
     ball = document.getElementById('ball');
     var BALL_HEIGTH = ball.offsetHeight;
     var BALL_RADIUS = BALL_HEIGTH / 2;
-    ball.speedV = (Math.random()<0.5)? -1 : 1; // вектор скорости по вертикали (1 и -1)
-    ball.speedG = (Math.random()<0.5)? -1 : 1; // вектор скорости по горизонтали (1 и -1)
     
     rocket1 = document.getElementById('rocket1');
     rocket1.style.backgroundColor = '#09A85A';
@@ -30,6 +30,9 @@ function run() {
     rocket2.style.left = (TENNIS_SIZE_X - ROCKET_WIDTH) + 'px'; 
     rocket2.style.backgroundColor = '#171392';
     rocket2.speed = 0;
+
+    buttonStart = document.getElementById('start');
+    buttonStart.onclick = start;
 
     document.addEventListener('keydown', function (event) {
           //                                  if (event.defaultPrevented) {
@@ -82,19 +85,14 @@ function run() {
         //                                  event.preventDefault();
     }, false);
     
-    requestAnimationFrame(function measure() {
-        draw();
-        requestAnimationFrame(measure);
-    });
-
     function draw() {
         rocket1.style.top = (rocket1.offsetTop + rocket1.speed) + 'px';
         rocket2.style.top = (rocket2.offsetTop + rocket2.speed) + 'px';
     
         var ballX = ball.offsetLeft + BALL_RADIUS;
         var ballY = ball.offsetTop + BALL_RADIUS;
-        var ballXnew = ballX + (ball.speedG * BALL_SPEED);
-        var ballYnew = ballY + (ball.speedV * BALL_SPEED);
+        var ballXnew = ballX + (ball.speedG * ball.speed);
+        var ballYnew = ballY + (ball.speedV * ball.speed);
         var tennisTop = tennis.offsetTop;
         var tennisHeight = tennis.offsetHeight;
         var tennisLeft = tennis.offsetLeft;
@@ -115,7 +113,7 @@ function run() {
                 ball.speedG = -ball.speedG;
             }
             else { // гол правому игроку
-                BALL_SPEED = 0; 
+                ball.speed = 0; 
                 ballXnew = TENNIS_SIZE_X-BALL_RADIUS;
                 if (((ballYnew+BALL_RADIUS)>=rocket2.offsetTop) && (ballYnew<(rocket2.offsetTop+BALL_RADIUS))) { // попал в верхний край ракетки и отскочил в гол
                     // устанавливаем мяч сверху, рядом с ракеткой
@@ -137,7 +135,7 @@ function run() {
                 ball.speedG = -ball.speedG;
             }
             else { // гол левому игроку
-                BALL_SPEED = 0; 
+                ball.speed = 0; 
                 ballXnew = BALL_RADIUS;
                 if (((ballYnew+BALL_RADIUS)>=rocket1.offsetTop) && (ballYnew<(rocket1.offsetTop+BALL_RADIUS))) { // попал в верхний край ракетки и отскочил в гол
                     // устанавливаем мяч сверху, рядом с ракеткой
@@ -171,6 +169,28 @@ function run() {
         ball.style.left = (ballXnew - BALL_RADIUS) + 'px';
         ball.style.top = (ballYnew - BALL_RADIUS) + 'px';
     };
+
+    function start() {
+        rocket1.style.top = ((TENNIS_SIZE_Y - ROCKET_HEIGTH) / 2) + 'px';
+
+        rocket2.style.top = ((TENNIS_SIZE_Y - ROCKET_HEIGTH) / 2) + 'px';
+
+        ball.style.left = ((TENNIS_SIZE_X / 2) - BALL_RADIUS) + 'px';
+        ball.style.top = ((TENNIS_SIZE_Y / 2) - BALL_RADIUS) + 'px';
+        ball.speedV = (Math.random()<0.5)? -1 : 1; // вектор скорости по вертикали (1 и -1)
+        ball.speedG = (Math.random()<0.5)? -1 : 1; // вектор скорости по горизонтали (1 и -1)
+        ball.speed = BALL_SPEED;
+
+        if (requestId!=null) {
+            cancelAnimationFrame(requestId);
+        };
+        requestId = requestAnimationFrame(function measure() {
+            draw();
+            requestId = requestAnimationFrame(measure);
+        });
+    }
+
+    start();
 };
 
 run();

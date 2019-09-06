@@ -24,8 +24,9 @@
 
 .topFrame { 
 	background: red; 
+	text-align: center;
 	height: 50px;
-	width: 600px; 
+	width: 800px; 
 	clear: both;
 }
 .bottomFrame { 
@@ -34,8 +35,12 @@
 	width: 600px; 
 }
 .buttonFrame { 
+	margin: auto;
 	width: 100px; 
-	float:left; 
+}
+.scoreFrame { 
+	margin: auto;
+	width: 400px; 
 }
 table {
 	border:1px solid maroon;
