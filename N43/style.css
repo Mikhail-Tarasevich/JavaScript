@@ -23,11 +23,10 @@
 }
 
 .topFrame { 
-	background: red; 
-	text-align: center;
+	background: white; 
+	border: solid 1px black; 
 	height: 50px;
 	width: 800px; 
-	clear: both;
 }
 .bottomFrame { 
 	background:blue; 
@@ -39,12 +38,13 @@
 	width: 100px; 
 }
 .scoreFrame { 
-	margin: auto;
+	position: absolute;
+	top: -5px;
+	left: 375px;
 	width: 400px; 
 }
-table {
-	border:1px solid maroon;
-}
-td {
-	border:1px solid blue;
+button {
+	position: absolute;
+	top: 23px;
+	left: 20px;
 }
