@@ -7,9 +7,16 @@ function run() {
     var ball = null;
     var buttonStart = null;
     var requestId = null;
+    var score = null;
+    var score1 = 0;
+    var score2 = 0;
+    var scoreUpdate = true;
     
     var ROCKET_SPEED = 5;
     var BALL_SPEED = 4;
+
+    score = document.getElementById('score');
+    score.innerHTML = '<p>' + score1 + ':' + score2 + '</p>';
 
     tennis = document.getElementById('tennis');
     var TENNIS_SIZE_X = tennis.offsetWidth - 2; // размер поля по X равен offsetWidth - 2px на границы
@@ -114,6 +121,11 @@ function run() {
             }
             else { // гол правому игроку
                 ball.speed = 0; 
+                if (scoreUpdate) {
+                    scoreUpdate = false;
+                    score1 = score1 + 1;
+                    score.innerHTML = '<p>' + score1 + ':' + score2 + '</p>';
+                }
                 ballXnew = TENNIS_SIZE_X-BALL_RADIUS;
                 if (((ballYnew+BALL_RADIUS)>=rocket2.offsetTop) && (ballYnew<(rocket2.offsetTop+BALL_RADIUS))) { // попал в верхний край ракетки и отскочил в гол
                     // устанавливаем мяч сверху, рядом с ракеткой
@@ -135,7 +147,12 @@ function run() {
                 ball.speedG = -ball.speedG;
             }
             else { // гол левому игроку
-                ball.speed = 0; 
+                ball.speed = 0;
+                if (scoreUpdate) {
+                    scoreUpdate = false;
+                    score2 = score2 + 1; 
+                    score.innerHTML = '<p>' + score1 + ':' + score2 + '</p>';
+                }
                 ballXnew = BALL_RADIUS;
                 if (((ballYnew+BALL_RADIUS)>=rocket1.offsetTop) && (ballYnew<(rocket1.offsetTop+BALL_RADIUS))) { // попал в верхний край ракетки и отскочил в гол
                     // устанавливаем мяч сверху, рядом с ракеткой
@@ -171,8 +188,9 @@ function run() {
     };
 
     function start() {
-        rocket1.style.top = ((TENNIS_SIZE_Y - ROCKET_HEIGTH) / 2) + 'px';
+        scoreUpdate = true;
 
+        rocket1.style.top = ((TENNIS_SIZE_Y - ROCKET_HEIGTH) / 2) + 'px';
         rocket2.style.top = ((TENNIS_SIZE_Y - ROCKET_HEIGTH) / 2) + 'px';
 
         ball.style.left = ((TENNIS_SIZE_X / 2) - BALL_RADIUS) + 'px';
