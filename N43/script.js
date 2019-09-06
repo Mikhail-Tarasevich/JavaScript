@@ -7,7 +7,7 @@ function run() {
     var ball = null;
     
     var ROCKET_SPEED = 5;
-    var BALL_SPEED = 1;
+    var BALL_SPEED = 4;
 
     tennis = document.getElementById('tennis');
     var TENNIS_SIZE_X = tennis.offsetWidth - 2; // размер поля по X равен offsetWidth - 2px на границы
@@ -37,34 +37,16 @@ function run() {
               //                              }
         switch (event.code) {
         case "ArrowDown":
-            if (rocket2.offsetTop>=(tennis.offsetHeight - rocket2.offsetHeight - ROCKET_SPEED)) {
-                rocket2.speed = -ROCKET_SPEED;
-            }
-            else { rocket2.speed = ROCKET_SPEED; }
+            rocket2.speed = ROCKET_SPEED; 
             break;
         case "ArrowUp":
-            if (rocket2.offsetTop<=ROCKET_SPEED) {
-                rocket2.speed = ROCKET_SPEED;
-            }
-            else {
-                rocket2.speed = -ROCKET_SPEED;
-            }
+            rocket2.speed = -ROCKET_SPEED;
             break;
         case "ShiftLeft":
-            if (rocket1.offsetTop<=ROCKET_SPEED) {
-                rocket1.speed = ROCKET_SPEED;
-            }
-            else {
-                rocket1.speed = -ROCKET_SPEED;
-            }
+            rocket1.speed = -ROCKET_SPEED;
             break;
         case "ControlLeft":
-            if (rocket1.offsetTop>=(tennis.offsetHeight - rocket1.offsetHeight)) {
-                rocket1.speed = -ROCKET_SPEED;
-            }
-            else {
-                rocket1.speed = ROCKET_SPEED;
-            }
+            rocket1.speed = ROCKET_SPEED;
             break;
         default:
             return; // Quit when this doesn't handle the key event.
@@ -119,11 +101,11 @@ function run() {
         var tennisWidth = tennis.offsetWidth;
         var speedG = ball.speedG;
         var speedV = ball.speedV;
-        if (ballYnew<=BALL_RADIUS+1) { // верхняя стенка
+        if ((ballYnew<=BALL_RADIUS+1) && (ball.speedV<0)) { // верхняя стенка
             ballYnew = BALL_RADIUS+1;
             ball.speedV = -ball.speedV;
         }
-        else if (ballXnew>=(TENNIS_SIZE_X-ROCKET_WIDTH-BALL_RADIUS-1)) {  // правая стенка
+        else if (ballXnew>=(TENNIS_SIZE_X-ROCKET_WIDTH-BALL_RADIUS-1) && (ball.speedG>0)) {  // правая стенка
             if ((ballYnew>rocket2.offsetTop) && (ball.speedV>0)) { // попал в ракетку при движении мяча вниз
                 ballXnew = tennis.offsetWidth-ROCKET_WIDTH-BALL_RADIUS-1;
                 ball.speedG = -ball.speedG;
@@ -134,48 +116,56 @@ function run() {
             }
             else { // гол правому игроку
                 BALL_SPEED = 0; 
+                ballXnew = TENNIS_SIZE_X-BALL_RADIUS;
                 if (((ballYnew+BALL_RADIUS)>=rocket2.offsetTop) && (ballYnew<(rocket2.offsetTop+BALL_RADIUS))) { // попал в верхний край ракетки и отскочил в гол
                     // устанавливаем мяч сверху, рядом с ракеткой
                     ballYnew = rocket2.offsetTop-BALL_RADIUS; 
-                    ballXnew = TENNIS_SIZE_X-BALL_RADIUS;
                 }
-                else if (((ballYnew+BALL_RADIUS)<=rocket2.offsetTop+ROCKET_HEIGTH) && (ballYnew<(rocket2.offsetTop+ROCKET_HEIGTH+BALL_RADIUS))) { // попал в нижний край ракетки и отскочил в гол
+                else if (((ballYnew-BALL_RADIUS)<=rocket2.offsetTop+ROCKET_HEIGTH) && (ballYnew>(rocket2.offsetTop+ROCKET_HEIGTH))) { // попал в нижний край ракетки и отскочил в гол
                     // устанавливаем мяч снизу, рядом с ракеткой
                     ballYnew = rocket2.offsetTop+ROCKET_HEIGTH+BALL_RADIUS; 
-                    ballXnew = TENNIS_SIZE_X-BALL_RADIUS;
                 }
             }
         }
-        else if (ballXnew<=(ROCKET_WIDTH+1)) {  // левая стенка
+        else if ((ballXnew<=(ROCKET_WIDTH+BALL_RADIUS+1)) && (ball.speedG<0)) {  // левая стенка
             if ((ballYnew>rocket1.offsetTop) && (ball.speedV>0)) { // попал в ракетку при движении мяча вниз
-                ballXnew = ROCKET_WIDTH + 1;
+                ballXnew = ROCKET_WIDTH + BALL_RADIUS + 1;
                 ball.speedG = -ball.speedG;
             }
             else if ((ballYnew<(rocket1.offsetTop+ROCKET_HEIGTH)) && (ball.speedV<0)) { // попал в ракетку при движении мяча вверх
-                ballXnew = ROCKET_WIDTH + 1;
+                ballXnew = ROCKET_WIDTH + BALL_RADIUS + 1;
                 ball.speedG = -ball.speedG;
             }
             else { // гол левому игроку
                 BALL_SPEED = 0; 
-                if (((ballYnew+BALL_RADIUS)>=rocket2.offsetTop) && (ballYnew<(rocket2.offsetTop+BALL_RADIUS))) { // попал в верхний край ракетки и отскочил в гол
+                ballXnew = BALL_RADIUS;
+                if (((ballYnew+BALL_RADIUS)>=rocket1.offsetTop) && (ballYnew<(rocket1.offsetTop+BALL_RADIUS))) { // попал в верхний край ракетки и отскочил в гол
                     // устанавливаем мяч сверху, рядом с ракеткой
-                    ballYnew = rocket2.offsetTop-BALL_RADIUS; 
-                    ballXnew = BALL_RADIUS;
+                    ballYnew = rocket1.offsetTop-BALL_RADIUS; 
                 }
-                else if (((ballYnew+BALL_RADIUS)<=rocket2.offsetTop+ROCKET_HEIGTH) && (ballYnew<(rocket2.offsetTop+ROCKET_HEIGTH+BALL_RADIUS))) { // попал в нижний край ракетки и отскочил в гол
+                else if (((ballYnew-BALL_RADIUS)<=rocket1.offsetTop+ROCKET_HEIGTH) && (ballYnew>(rocket1.offsetTop+ROCKET_HEIGTH))) { // попал в нижний край ракетки и отскочил в гол
                     // устанавливаем мяч снизу, рядом с ракеткой
-                    ballYnew = rocket2.offsetTop+ROCKET_HEIGTH+BALL_RADIUS; 
-                    ballXnew = BALL_RADIUS;
+                    ballYnew = rocket1.offsetTop+ROCKET_HEIGTH+BALL_RADIUS; 
                 }
             }
         }
-        else if (ballYnew>=(TENNIS_SIZE_Y-BALL_HEIGTH-1)) {  // нижняя стенка
-            ballYnew = TENNIS_SIZE_Y-BALL_HEIGTH-1;
+        else if ((ballYnew>=(TENNIS_SIZE_Y-BALL_RADIUS-1)) && (ball.speedV>0)) {  // нижняя стенка
+            ballYnew = TENNIS_SIZE_Y-BALL_RADIUS-1;
             ball.speedV = -ball.speedV;
         };
-
-        if ((ballXnew>(TENNIS_SIZE_X-BALL_HEIGTH)) || (ballYnew>(TENNIS_SIZE_Y-BALL_HEIGTH)) || (ballXnew<BALL_HEIGTH) || (ballYnew<BALL_HEIGTH)) {
-            console.log(ballXnew + ", " + ballXnew);
+        // контроль выезда левой ракетки за границу поля
+        if (rocket1.offsetTop<=0) {
+            rocket1.style.top = 0 + 'px';
+        }
+        else if (rocket1.offsetTop+ROCKET_HEIGTH>TENNIS_SIZE_Y) {
+            rocket1.style.top = TENNIS_SIZE_Y - ROCKET_HEIGTH + 'px';
+        }
+        // контроль выезда правой ракетки за границу поля
+        if (rocket2.offsetTop<=0) {
+            rocket2.style.top = 0 + 'px';
+        }
+        else if (rocket2.offsetTop+ROCKET_HEIGTH>TENNIS_SIZE_Y) {
+            rocket2.style.top = TENNIS_SIZE_Y - ROCKET_HEIGTH + 'px';
         }
 
         ball.style.left = (ballXnew - BALL_RADIUS) + 'px';
