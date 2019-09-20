@@ -1,98 +1,93 @@
-var drinkStorage;
 var drinkLocalStorage;
-var dishStorage;
 var dishLocalStorage;
 
 function run() {
   drinkLocalStorage = new LocStorage("drink");
-  drinkStorage = new HashStorage("", "");
-  var loadstorage = drinkLocalStorage.load();
-  if (loadstorage!=null) {drinkStorage.storage = loadstorage}
-
   dishLocalStorage = new LocStorage("dish");
-  dishStorage = new HashStorage("", "");
-  var loadstorage = dishLocalStorage.load();
-  if (loadstorage!=null) {dishStorage.storage = loadstorage}
 }
 
 function newDrink() {
   var drinkname = prompt("Укажите название напитка:");
   var drink = {};
-  drinkStorage.addValue(drinkname, drink);
-  drinkStorage.getValue(drinkname)["IsAlcohol"] = confirm("он алкогольный?");
-  drinkStorage.getValue(drinkname)["Recept"] = prompt("Укажите рецепт его приготовления");
-  saveLocalStorage(drinkLocalStorage, drinkStorage);
+  drink.IsAlcohol = confirm("он алкогольный?");
+  drink.Recept = prompt("Укажите рецепт его приготовления");
+  drinkLocalStorage.addValue(drinkname, drink);
 }
 
-function saveLocalStorage(thisLocalStorage, thisStorage) {
-  thisLocalStorage.save(thisStorage.storage);  
+function newdish() {
+  var dishname = prompt("Укажите название блюда:");
+  var dish = {};
+  dish.IsAlcohol = confirm("оно сладкое?");
+  dish.Recept = prompt("Укажите рецепт его приготовления");
+  dishLocalStorage.addValue(dishname, dish);
 }
 
 function getDrinkInfo() {
   var drinkname = prompt("Укажите название напитка:");
-  if (drinkStorage.getValue(drinkname)==undefined) {
+  var drink = drinkLocalStorage.getValue(drinkname);
+  if (drink==undefined) {
     alert("В списке нет напитка " + drinkname)
   }
   else {
     var msg = "Напиток " + drinkname + "\n";
-    msg = msg + "алкогольный: " + ((drinkStorage.getValue(drinkname)["IsAlcohol"])?"да":"нет") + "\n";
-    msg = msg + "рецепт приготовления:\n" + drinkStorage.getValue(drinkname)["Recept"]
+    msg = msg + "алкогольный: " + ((drink["IsAlcohol"])?"да":"нет") + "\n";
+    msg = msg + "рецепт приготовления:\n" + drink["Recept"]
+    alert(msg)
+  }
+}
+
+function getdishInfo() {
+  var dishname = prompt("Укажите название блюда:");
+  var dish = dishLocalStorage.getValue(dishname);
+  if (dish==undefined) {
+    alert("В списке нет блюда " + dishname)
+  }
+  else {
+    var msg = "Блюдо " + dishname + "\n";
+    msg = msg + "сладкое: " + ((dish["IsAlcohol"])?"да":"нет") + "\n";
+    msg = msg + "рецепт приготовления:\n" + dish["Recept"]
     alert(msg)
   }
 }
 
 function deleteDrink() {
   var drinkname = prompt("Укажите название напитка:");
-  if (drinkStorage.getValue(drinkname)==undefined) {
-    alert("В списке нет напитка " + drinkname)
-  }
-  else {
-    drinkStorage.deleteValue(drinkname);
-    saveLocalStorage(drinkLocalStorage, drinkStorage);
+  if (drinkLocalStorage.deleteValue(drinkname)) {
     alert("напиток " + drinkname + " удален")
   }
-}
-
-function getDrinkList() {
-  var keys = drinkStorage.getKeys();
-  alert(keys.join("\n"))
-}
-
-function newdish() {
-  var dishname = prompt("Укажите название блюда:");
-  var dish = {};
-  dishStorage.addValue(dishname, dish);
-  dishStorage.getValue(dishname)["IsAlcohol"] = confirm("оно сладкое?");
-  dishStorage.getValue(dishname)["Recept"] = prompt("Укажите рецепт его приготовления");
-  savedishs();
-}
-
-function getdishInfo() {
-  var dishname = prompt("Укажите название блюда:");
-  if (dishStorage.getValue(dishname)==undefined) {
-    alert("В списке нет блюда " + dishname)
-  }
   else {
-    var msg = "Блюдо " + dishname + "\n";
-    msg = msg + "сладкое: " + ((dishStorage.getValue(dishname)["IsAlcohol"])?"да":"нет") + "\n";
-    msg = msg + "рецепт приготовления:\n" + dishStorage.getValue(dishname)["Recept"]
-    alert(msg)
+    alert("В списке нет напитка " + drinkname)
   }
 }
 
 function deletedish() {
   var dishname = prompt("Укажите название блюда:");
-  if (dishStorage.getValue(dishname)==undefined) {
-    alert("В списке нет блюда " + dishname)
+  if (dishLocalStorage.deleteValue(dishname)) {
+    alert("блюдо " + dishname + " удалено")
   }
   else {
-    dishStorage.deleteValue(dishname);
-    saveLocalStorage(dishLocalStorage, dishStorage);
-    alert("блюдо " + dishname + " удалено")
+    alert("В списке нет блюда " + dishname)
   }
 }
 
+function getDrinkList() {
+  var keys = drinkLocalStorage.getKeys();
+  if (keys==null) {
+    alert("Перечень пуст!!!");
+  }
+  else {
+    alert(keys.join("\n"))
+  }
+  
+}
+
 function getdishList() {
-  var keys = dishStorage.getKeys();
-  alert(keys.join("\n"))
+  var keys = dishLocalStorage.getKeys();
+  if (keys==null) {
+    alert("Перечень пуст!!!");
+  }
+  else {
+    alert(keys.join("\n"))
+  }
+  
 }

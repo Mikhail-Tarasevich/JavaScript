@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>N57</title>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+    <script src="Clock.js"></script>
+    <script src="ClockViewDOM.js"></script>
+    <script src="ClockViewSVG.js"></script>
+    <script src="ClockViewCanvas.js"></script>
+    <script src="ClockControllerButtons.js"></script>
+    <script src="ClockRun.js"></script>
+    <script>
+      run ();
+    </script>
+
+      <div class="block0">
+        <div class="block1">
+            <div class="block2" id="buttons1">
+              <input class="block3" id="buttonStart" type="button" value="старт" onclick="start()"><input class="block3" id="buttonStop" type="button" value="стоп" onclick="stop()"><div class="block3" id="gmt">GMT+1</div>
+            </div>
+            <div class="clock" id="clock1">00:00:00</div>
+        </div><div class="block1">
+            <div class="block2" id="buttons2">
+              <input class="block3" id="buttonStart" type="button" value="старт" onclick="start()"><input class="block3" id="buttonStop" type="button" value="стоп" onclick="stop()"><div class="block3" id="gmt">GMT+2</div>
+            </div>
+            <div class="clock" id="clock2">00:00:00</div>
+        </div><div class="block1">
+            <div class="block2" id="buttons3">
+              <input class="block3" id="buttonStart" type="button" value="старт" onclick="start()"><input class="block3" id="buttonStop" type="button" value="стоп" onclick="stop()"><div class="block3" id="gmt">GMT+3</div>
+            </div>
+            <div class="clock" id="clock3">00:00:00</div>
+        </div>
+      </div>
+      <div class="block0">
+        <div class="block1">
+            <div class="block2" id="buttons4">
+              <input class="block3" id="buttonStart" type="button" value="старт" onclick="start()"><input class="block3" id="buttonStop" type="button" value="стоп" onclick="stop()"><div class="block3" id="gmt">GMT+4</div>
+          </div>
+          <div class="clock" id="clock4">00:00:00</div>
+        </div>
+        <div class="block1">
+            <div class="block2" id="buttons5">
+              <input class="block3" id="buttonStart" type="button" value="старт" onclick="start()"><input class="block3" id="buttonStop" type="button" value="стоп" onclick="stop()"><div class="block3" id="gmt">GMT+5</div>
+          </div>
+          <div class="clock" id="clock5">00:00:00</div>
+        </div>
+        <div class="block1">
+            <div class="block2" id="buttons6">
+              <input class="block3" id="buttonStart" type="button" value="старт" onclick="start()"><input class="block3" id="buttonStop" type="button" value="стоп" onclick="stop()"><div class="block3" id="gmt">GMT+6</div>
+          </div>
+          <div class="clock" id="clock6">00:00:00</div>
+        </div>
+      </div>
+  </body>
+</html>
