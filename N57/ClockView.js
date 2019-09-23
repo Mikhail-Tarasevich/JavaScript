@@ -1,5 +1,4 @@
-class ClockViewCanvas extends ClockView {
-    /*
+class ClockView {
     thisModel = null;
     thisView = null;
     Clock = null;
@@ -8,10 +7,8 @@ class ClockViewCanvas extends ClockView {
     ButtonStop = null;
     ButtonName = null;
     requestId = null;
-*/
+
     constructor(view, model) {
-        super(view, model);
-        /*
         this.thisModel = model;
         this.thisView = view;
         var el = view.firstElementChild
@@ -46,18 +43,5 @@ class ClockViewCanvas extends ClockView {
                 el = (this.ButtonStart!=null && this.ButtonStop!=null && this.ButtonName!=null)?null:el.nextElementSibling;
             }
         }
-        */
-    }
-
-    update() {
-        if (this.requestId!=null) {
-            cancelAnimationFrame(this.requestId);
-        };
-
-        this.thisModel.updateRealTime();
-        this.Clock.innerHTML = this.thisModel.ClockTime;
-        this.ButtonName.innerHTML = this.thisModel.ClockName + " (GMT" + ((this.thisModel.ClockOffset==0)?"":"+"+this.thisModel.ClockOffset) + ")";
-        
-        requestAnimationFrame(()=>this.update())
     }
 }

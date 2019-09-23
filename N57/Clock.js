@@ -5,14 +5,15 @@ class Clock {
     ClockOffset = 0; // смещение относительно utc в часах
     ClockRealTime = null; // актуальное время
     thisView = null;
+    thisModel = this;
 
     constructor(name, gmt, run, view) {
         this.thisView = view;
         this.ClockName = name;
-        this.isRun = run;
+        this.thisModel.isRun = run;
         this.ClockOffset = gmt;
-        ClockStart();
-        updateRealTime();
+        this.ClockStart();
+        this.updateRealTime();
     }
 
     // обновляет текущее время с учетем указанного часового пояса
@@ -24,14 +25,14 @@ class Clock {
         var utc = localTime + localOffset;
         // создаем новую дата-время с учетом смещения в часах
         this.ClockRealTime = new Date(utc + (3600000*this.ClockOffset));
-        if (isRun) {this.ClockTime = this.ClockRealTime.toLocaleString()};
+        if (this.isRun) {this.ClockTime = this.ClockRealTime.toLocaleString()};
     }
 
     ClockStart() {
-        this.isRun = true;
+        this.thisModel.isRun = true;
     }
 
     ClockStop() {
-        this.isRun = false;
+        this.thisModel.isRun = false;
     }
 }

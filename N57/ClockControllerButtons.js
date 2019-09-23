@@ -1,16 +1,18 @@
 class ClockControllerButtons {
-    var thisModel = null;
-    var thisView = null;
-    var buttonStart = null;
-    var buttonStop = null;
+    thisModel = null;
+    thisView = null;
+    ButtonStart = null;
+    ButtonStop = null;
 
     constructor(view, model) {
-        thisModel = model;
-        thisView = view;
+        this.thisModel = model;
+        this.thisView = view;
 
-        buttonStart = thisView.getElementById('buttonStart');
-        buttonStart.onclick = thisModel.ClockStart;
-        buttonStop = thisView.getElementById('buttonStop');
-        buttonStop.onclick = thisModel.ClockStart;
+        this.ButtonStart = this.thisView.ButtonStart;
+        this.ButtonStart.onclick = this.thisModel.ClockStart;
+        this.ButtonStart.thisModel = this.thisModel;
+        this.ButtonStop = this.thisView.ButtonStop;
+        this.ButtonStop.onclick = this.thisModel.ClockStop;
+        this.ButtonStop.thisModel = this.thisModel;
     }
 }
