@@ -6,8 +6,10 @@ class Clock {
     ClockRealTime = null; // актуальное время
     thisView = null;
     thisModel = this;
+    modelID = 0; // ID модели
 
-    constructor(name, gmt, run, view) {
+    constructor(name, gmt, run, view, id) {
+        this.modelID = id + "";
         this.thisView = view;
         this.ClockName = name;
         this.thisModel.isRun = run;
@@ -25,7 +27,7 @@ class Clock {
         var utc = localTime + localOffset;
         // создаем новую дата-время с учетом смещения в часах
         this.ClockRealTime = new Date(utc + (3600000*this.ClockOffset));
-        if (this.isRun) {this.ClockTime = this.ClockRealTime.toLocaleString()};
+        if (this.isRun) {this.ClockTime = this.ClockRealTime.getTime()}; // {this.ClockTime = this.ClockRealTime.toLocaleString()};
     }
 
     ClockStart() {
