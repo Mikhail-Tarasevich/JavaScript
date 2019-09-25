@@ -217,11 +217,7 @@ function run() {
                 ball.speedV = -ball.speedV;
             }
             else if (ball.x>=(TENNIS_SIZE_X-ROCKET_WIDTH-BALL_RADIUS-1) && (ball.speedG>0)) {  // правая стенка
-                if ((ball.y>(rocket2.y - (ROCKET_HEIGTH / 2))) && (ball.speedV>0)) { // попал в ракетку при движении мяча вниз
-                    ball.x = TENNIS_SIZE_Y-ROCKET_WIDTH-BALL_RADIUS-1;
-                    ball.speedG = -ball.speedG;
-                }
-                else if (ball.y>(rocket2.y - (ROCKET_HEIGTH / 2)) && (ball.speedV<0)) { // попал в ракетку при движении мяча вверх
+                if ((ball.y>(rocket2.y - (ROCKET_HEIGTH / 2))) && (ball.y<(rocket2.y + (ROCKET_HEIGTH / 2)))) { // попал в ракетку
                     ball.x = TENNIS_SIZE_Y-ROCKET_WIDTH-BALL_RADIUS-1;
                     ball.speedG = -ball.speedG;
                 }
@@ -240,11 +236,7 @@ function run() {
                 }
             }
             else if ((ball.x<=(ROCKET_WIDTH+BALL_RADIUS+1)) && (ball.speedG<0)) {  // левая стенка
-                if ((ball.y>(rocket1.y - (ROCKET_HEIGTH / 2))) && (ball.speedV>0)) { // попал в ракетку при движении мяча вниз
-                    ball.x = ROCKET_WIDTH + BALL_RADIUS + 1;
-                    ball.speedG = -ball.speedG;
-                }
-                else if (ball.y>(rocket1.y - (ROCKET_HEIGTH / 2)) && (ball.speedV<0)) { // попал в ракетку при движении мяча вверх
+                if ((ball.y>(rocket1.y - (ROCKET_HEIGTH / 2))) && (ball.y<(rocket1.y + (ROCKET_HEIGTH / 2)))) { // попал в ракетку
                     ball.x = ROCKET_WIDTH + BALL_RADIUS + 1;
                     ball.speedG = -ball.speedG;
                 }
