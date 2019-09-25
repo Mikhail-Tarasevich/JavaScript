@@ -17,7 +17,7 @@ class ClockView {
                 case "buttons":
                     this.Buttons = el;
                     break;
-                case "clock":
+                case "clock"+model.modelID:
                     this.Clock = el;
                     break;
                 default:
