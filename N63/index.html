@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>N63</title>
+    <style type="text/css">
+      .block1 { 
+       width: 250px; 
+       background: #ccc;
+       padding: 5px;
+       padding-right: 20px; 
+       border: solid 1px black; 
+       float: left;
+      }
+      .block2 { 
+       width: 250px; 
+       background: #fc0; 
+       padding: 5px;
+       padding-right: 20px; 
+       border: solid 1px black; 
+       float: left; 
+      }
+     </style> 
+  </head>
+  <body>
+    <script src="functions4page.js"></script>
+    <script src="AJAXStorage.js"></script>
+    <script>
+      run ();
+    </script>
+
+    <div class="block1">
+      <input type="button" value="ввод информации о напитке" onclick="newDrink()"><br><br>
+
+      <input type="button" value="получение информации о напитке" onclick="getDrinkInfo()"><br><br>
+  
+      <input type="button" value="удаление информации о напитке" onclick="deleteDrink()"><br><br>
+  
+      <input type="button" value="перечень всех напитков" onclick="getDrinkList()"><br><br>
+    </div>
+    
+    <div class="block2">
+      <input type="button" value="ввод информации о блюде" onclick="newdish()"><br><br>
+
+      <input type="button" value="получение информации о блюде" onclick="getdishInfo()"><br><br>
+  
+      <input type="button" value="удаление информации о блюде" onclick="deletedish()"><br><br>
+  
+      <input type="button" value="перечень всех блюд" onclick="getdishList()"><br><br>
+    </div>
+  </body>
+</html>

@@ -1,9 +1,7 @@
 function run() {
   var ajaxHandlerScript1="formDef1.json";
-  var ajaxHandlerScript2="formDef2.json";
 
   $.ajax(ajaxHandlerScript1, { type:'GET', dataType:'json', success:readFormDef1, error:errorHandler } );
-  $.ajax(ajaxHandlerScript2, { type:'GET', dataType:'json', success:readFormDef2, error:errorHandler } );
 }
 
 function setElements(form,elem) {
@@ -119,7 +117,9 @@ function setElements(form,elem) {
 }
 
 function readFormDef1(data) {
+  var ajaxHandlerScript2="formDef2.json";
   setElements(document.forms.form1,data);
+  $.ajax(ajaxHandlerScript2, { type:'GET', dataType:'json', success:readFormDef2, error:errorHandler } );
 }
 
 function readFormDef2(data) {

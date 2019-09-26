@@ -205,7 +205,7 @@ function run() {
             }
             else if (ball.x>=(TENNIS_SIZE_X-ROCKET_WIDTH-BALL_RADIUS-1) && (ball.speedG>0)) {  // правая стенка
                 if ((ball.y>(rocket2.y - (ROCKET_HEIGTH / 2))) && (ball.y<(rocket2.y + (ROCKET_HEIGTH / 2)))) { // попал в ракетку
-                    ball.x = TENNIS_SIZE_Y-ROCKET_WIDTH-BALL_RADIUS-1;
+                    ball.x = TENNIS_SIZE_X-ROCKET_WIDTH-BALL_RADIUS-1;
                     ball.speedG = -ball.speedG;
                 }
                 else { // гол правому игроку
