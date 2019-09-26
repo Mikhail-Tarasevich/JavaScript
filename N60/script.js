@@ -1,15 +1,9 @@
-var formDef1="";
-var formDef2="";
-
 function run() {
-  var ajaxHandlerScript1="FormDef1.json";
-  var ajaxHandlerScript2="FormDef2.json";
+  var ajaxHandlerScript1="formDef1.json";
+  var ajaxHandlerScript2="formDef2.json";
 
   $.ajax(ajaxHandlerScript1, { type:'GET', dataType:'json', success:readFormDef1, error:errorHandler } );
   $.ajax(ajaxHandlerScript2, { type:'GET', dataType:'json', success:readFormDef2, error:errorHandler } );
-  
-  setElements(document.forms.form1,formDef1);
-  setElements(document.forms.form2,formDef2);
 }
 
 function setElements(form,elem) {
@@ -125,11 +119,11 @@ function setElements(form,elem) {
 }
 
 function readFormDef1(data) {
-  formDef1 = data;
+  setElements(document.forms.form1,data);
 }
 
 function readFormDef2(data) {
-  formDef2 = data;
+  setElements(document.forms.form2,data);
 }
 
 function errorHandler(jqXHR,statusStr,errorStr) {
