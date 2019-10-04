@@ -1,0 +1,51 @@
+<div style="float: left; margin: 5px">
+    <br><h3>A</h3><br><input type="button" value="статья А1" onclick="switchToState({pagename:'Page_0_0'})"><br><input type="button" value="статья А2" onclick="switchToState({pagename:'Page_0_1'})"><br><input type="button" value="статья А3" onclick="switchToState({pagename:'Page_0_2'})"><br><br><h3>B</h3><br><input type="button" value="статья B1" onclick="switchToState({pagename:'Page_1_0'})"><br><input type="button" value="статья B2" onclick="switchToState({pagename:'Page_1_1'})"><br><input type="button" value="статья B3" onclick="switchToState({pagename:'Page_1_2'})"><br><br><h3>C</h3><br><input type="button" value="статья C1" onclick="switchToState({pagename:'Page_2_0'})"><br><input type="button" value="статья C2" onclick="switchToState({pagename:'Page_2_1'})"><br><input type="button" value="статья C3" onclick="switchToState({pagename:'Page_2_2'})"><br><br>
+</div>
+<div>
+    Создать проект ANKETA. Спросить у пользователя:
+<ul style='margin-top: 6px; margin-bottom: 6px'>
+<li>фамилию, имя, отчество РАЗДЕЛЬНО (оператором prompt)
+<li>возраст в годах (оператором prompt)
+<li>пол (оператором confirm, например, "ваш пол - мужской?")
+</ul>
+и вывести оператором alert анкету пользователя по примеру:
+<div style='margin-top: -5px; margin-bottom: 10px'>
+ваше ФИО: Иванов Иван Иванович
+ваш возраст в годах: 20
+ваш возраст в днях: 7300
+через 5 лет вам будет: 25
+ваш пол: мужской
+вы на пенсии: нет
+</div>
+Должен быть контроль корректности вводимых пользователем данных (например, фамилия не должна быть пустой, возраст должен быть корректной цифрой и т.д.).
+<div style='height: 8px'></div>
+Оператор alert в коде должен использоваться ровно один раз.
+        </div>
+
+      <hr style='margin: 20px 0 20px 0'>
+
+      <script>ComposeHeader('N.05 Домашнее задание TREESUM')</script>
+      <div>
+      Разработать &laquo;чистую&raquo; функцию treeSum, которая получает массив, 
+      элементы которого могут быть числами или снова массивами, и так до любого уровня.
+      <br>Функция должна рассчитать и вернуть сумму всех числовых элементов массива со всех уровней.
+      <br>При написании функции не описывать каких-либо вложенных в неё функций.
+      <br>Проверить работу функции можно на следующем массиве (сумма 50):
+      </div>
+      <code style='font-size: 15px; white-space: pre'>
+      [ 5, 7, 
+        [ 4, [2], 8, [1,3], 2 ], 
+        [ 9, [] ], 
+        1, 8
+      ]
+      </code>
+      <hr style='margin: 5px 0 20px 0'>
+
+      <script>ComposeHeader('N.07 Домашнее задание VOWELS')</script>
+      <div>
+      Написать &laquo;чистую&raquo; функцию для <b>эффективного</b> подсчёта количества русских гласных букв в строке.
+      <br>Регулярные выражения (кто умеет) не использовать.
+      <br>Спросить у пользователя строку. Вывести в консоль количество русских гласных букв в ней.
+      </div>
+</div>
+

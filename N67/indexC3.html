@@ -1,0 +1,80 @@
+<h1>N.23 Домашнее задание DYN_FORM</h1>
+
+
+      <div>
+      Создать проект DYN_FORM. Разработать функцию, которая в переданном ей теге &lt;form&gt; динамически строит элементы формы по переданному ей массиву.
+      <br>Вызвать эту функцию дважды с указанными ниже массивами, чтобы она построила на веб-странице две формы по указанным ниже образцам. Точном соответствия внешнего вида форм образцам добиваться не обязательно.
+      <br>В качестве скрипта, обрабатывающего данные форм (атрибут action тега form), можно указывать http://fe.it-academy.by/TestForm.php
+      <br>
+      </div>
+
+<hr style='margin: 15px 0 15px 0'>
+
+<pre>
+var formDef1=
+[
+  {label:'Название сайта:',kind:'longtext',name:'sitename'},
+  {label:'URL сайта:',kind:'longtext',name:'siteurl'},
+  {label:'Посетителей в сутки:',kind:'number',name:'visitors'},
+  {label:'E-mail для связи:',kind:'shorttext',name:'email'},
+  {label:'Рубрика каталога:',kind:'combo',name:'division',
+    variants:[{text:'здоровье',value:1},{text:'домашний уют',value:2},{text:'бытовая техника',value:3}]},
+  {label:'Размещение:',kind:'radio',name:'payment',
+    variants:[{text:'бесплатное',value:1},{text:'платное',value:2},{text:'VIP',value:3}]},
+  {label:'Разрешить отзывы:',kind:'check',name:'votes'},
+  {label:'Описание сайта:',kind:'memo',name:'description'},
+  {label:'Опубликовать:',kind:'submit'},
+];
+
+var formDef2=
+[
+  {label:'Фамилия:',kind:'longtext',name:'lastname'},
+  {label:'Имя:',kind:'longtext',name:'firstname'},
+  {label:'Отчество:',kind:'longtext',name:'secondname'},
+  {label:'Возраст:',kind:'number',name:'age'},
+  {label:'Зарегистрироваться:',kind:'submit'},
+];
+</pre>
+
+<hr style='margin: 20px 0 15px 0'>
+
+<style>
+  .SRadio8a { position: relative; top: -3px }
+</style>
+
+<form method='POST' action='TestForm.php' target='_blank'>
+<table>
+<tr><td>Название сайта:</td><td><input type='text' name='title' style='width: 453px'></td></tr>
+<tr><td>URL сайта:</td><td><input type='text' name='title' style='width: 453px'></td></tr>
+<tr><td>Посетителей в сутки:</td><td><input type='text' name='persons' style='width: 80px'></td></tr>
+<tr><td>E-mail для связи:</td><td><input type='text' name='title' style='width: 200px'></td></tr>
+<tr><td>Рубрика каталога:</td><td style='padding-left: 1px'>
+  <select name='rubric' style='width: 204px; margin-left: 2px'>
+  <option value=1>здоровье</option>
+  <option value=2>домашний уют</option>
+  <option value=3 selected>бытовая техника</option>
+  </select>
+</td></tr>
+<tr><td>Размещение:</td><td style='padding: 2px 0 2px 0'>
+  <input type='radio' name='public' value=1><span>бесплатное</span>
+  <input type='radio' name='public' value=2><span>платное</span>
+  <input type='radio' name='public' value=3><span>VIP</span>
+</td></tr>
+<tr><td style='padding: 2px 0 3px 3px'>Разрешить&nbsp;отзывы:</td><td><input type='checkbox' name='comments' checked></td></tr>
+<tr><td colspan=2>Описание сайта:<br />
+<textarea name='article' style='width: 608px; height: 50px'></textarea></td></tr>
+<tr><td><input type='submit' value='Опубликовать'></td><td></td></tr>
+</table>
+</form>
+
+<hr style='margin: 15px 0 15px 0'>
+
+<form method='POST' action='TestForm.php' target='_blank'>
+<table>
+<tr><td>Фамилия:</td><td><input type='text' name='title' style='width: 453px'></td></tr>
+<tr><td>Имя:</td><td><input type='text' name='title' style='width: 453px'></td></tr>
+<tr><td>Отчество:</td><td><input type='text' name='title' style='width: 453px'></td></tr>
+<tr><td>Возраст:</td><td><input type='text' name='persons' style='width: 80px'></td></tr>
+<tr><td><input type='submit' value='Зарегистрироваться'></td><td></td></tr>
+</table>
+    </div>
