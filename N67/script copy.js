@@ -2,8 +2,7 @@
 
 var SPAState={};
 var ContentsHTML = "";
-var articlesHTML = {};
-var articlesFile = {};
+var articlesFiles = {};
 
 function switchToMainPage() 
 {
@@ -27,7 +26,6 @@ function switchToStateFromURLHash() {
     // обновляем вариабельную часть страницы под текущее состояние
     // это реализация View из MVC - отображение состояния модели в HTML-код
     var pageHTML="";
-    var pagename = "";
     switch ( SPAState.pagename ) {
         case 'StartPage':
             pageHTML+="<h2>Энциклопедия</h2>";
@@ -40,30 +38,18 @@ function switchToStateFromURLHash() {
         default:
             // обработка Page_i_j
             if (SPAState.pagename.slice(0,5)=="Page_") {
-                pagename = "Page_" + SPAState.pagename.slice(5,6) + "_" + SPAState.pagename.slice(7,8);
-                pageHTML=articlesHTML[pagename]
+                pageHTML=articlesFiles["Page_" + SPAState.pagename.slice(5,6) + "_" + SPAState.pagename.slice(7,8)]
             }
             break;
     }
     document.getElementById('IPage').innerHTML=pageHTML;
-    if (pagename!="") {
-        document.getElementById('IPage2').innerHTML=articlesFile[pagename];
-    }
 }
 
 function switchToState(newState) {
     location.hash=encodeURIComponent(JSON.stringify(newState));
 }
 
-function readHTMLContents(data) {
-    let pagename = data.slice(4,12); // получаем название страницы <!--Page_0_0-->
-    console.log("загружено: " + pagename);
-    articlesFile[pagename] = data;
-}
-
 function readContents(data) {
-    console.log('Загрузка JSON:');
-    console.log(data);
     let value = JSON.parse(data);
     // код для страницы 2-го уровня
     ContentsHTML = "<h2>Оглавление</h2>";
@@ -85,8 +71,8 @@ function readContents(data) {
                 FileHTML+="<input type=button value='" + l.articles[k][0] + "' onclick=switchToState({pagename:'" + pagename2 + "'})>";
                 FileHTML+="<br>";
             }
-            FileHTML+=`</div><div style="float: left; width:auto"><div id='IPage2'></div></div>`;
-            articlesHTML[pagename] = FileHTML;
+            FileHTML+=`</div><div style="float: left; width:auto"><iframe src="` + l.articles[j][1] + `" width=500px height=500px"></iframe></div>`;
+            articlesFiles[pagename] = FileHTML;
         }
         ContentsHTML+="<br>";
     }
@@ -98,16 +84,10 @@ function errorHandler(jqXHR,statusStr,errorStr) {
  
 
 function run() {
-    $.ajax("Contents.json", { type:'GET', dataType:'json', success:readContents, error:errorHandler } );
-    $.ajax("indexA1.html", { type:'GET', dataType:'html', success:readHTMLContents, error:errorHandler } );
-    $.ajax("indexA2.html", { type:'GET', dataType:'html', success:readHTMLContents, error:errorHandler } );
-    $.ajax("indexA3.html", { type:'GET', dataType:'html', success:readHTMLContents, error:errorHandler } );
-    $.ajax("indexB1.html", { type:'GET', dataType:'html', success:readHTMLContents, error:errorHandler } );
-    $.ajax("indexB2.html", { type:'GET', dataType:'html', success:readHTMLContents, error:errorHandler } );
-    $.ajax("indexB3.html", { type:'GET', dataType:'html', success:readHTMLContents, error:errorHandler } );
-    $.ajax("indexC1.html", { type:'GET', dataType:'html', success:readHTMLContents, error:errorHandler } );
-    $.ajax("indexC2.html", { type:'GET', dataType:'html', success:readHTMLContents, error:errorHandler } );
-    $.ajax("indexC3.html", { type:'GET', dataType:'html', success:readHTMLContents, error:errorHandler } );
+//    $.ajax("Contents.json", { type:'GET', dataType:'json', success:readContents, error:errorHandler } );
+//    var data = `{        "Contents": [          {            "letter": "A",            "articles": [              [                "статья А1",                "indexA1.html"              ],              [                "статья А2",                "indexA2.html"              ],              [                "статья А3",                "indexA3.html"              ]            ]          },          {            "letter": "B",            "articles": [              [                "статья B1",                "indexB1.html"              ],              [                "статья B2",                "indexB2.html"              ],              [                "статья B3",                "indexB3.html"              ]            ]          },          {            "letter": "C",            "articles": [              [                "статья C1",               "indexC1.html"              ],              [                "статья C2",                "indexC2.html"              ],              [                "статья C3",                "indexC3.html"              ]            ]          }        ]      }`;
+    var data = `{        "Contents": [          {            "letter": "A",            "articles": [              [                "статья А1",                "indexA1.html"              ],              [                "статья А2",                "indexA2.html"              ],              [                "статья А3",                "indexA3.html"              ]            ]          },          {            "letter": "B",            "articles": [              [                "статья B1",                "indexB1.html"              ],              [                "статья B2",                "indexB2.html"              ],              [                "статья B3",                "indexB3.html"              ]            ]          },          {            "letter": "C",            "articles": [              [                "статья C1",               "indexC1.html"              ],              [                "статья C2",                "indexC2.html"              ],              [                "статья C3",                "indexC3.html"              ]            ]          }        ]      }`;
+    readContents(data);
 
     window.onhashchange=switchToStateFromURLHash;
     switchToStateFromURLHash();

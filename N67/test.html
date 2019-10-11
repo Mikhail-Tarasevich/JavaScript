@@ -1,8 +1,15 @@
 <div style="float: left; margin: 5px">
-    <br><h3>A</h3><br><input type="button" value="статья А1" onclick="switchToState({pagename:'Page_0_0'})"><br><input type="button" value="статья А2" onclick="switchToState({pagename:'Page_0_1'})"><br><input type="button" value="статья А3" onclick="switchToState({pagename:'Page_0_2'})"><br><br><h3>B</h3><br><input type="button" value="статья B1" onclick="switchToState({pagename:'Page_1_0'})"><br><input type="button" value="статья B2" onclick="switchToState({pagename:'Page_1_1'})"><br><input type="button" value="статья B3" onclick="switchToState({pagename:'Page_1_2'})"><br><br><h3>C</h3><br><input type="button" value="статья C1" onclick="switchToState({pagename:'Page_2_0'})"><br><input type="button" value="статья C2" onclick="switchToState({pagename:'Page_2_1'})"><br><input type="button" value="статья C3" onclick="switchToState({pagename:'Page_2_2'})"><br><br>
-</div>
-<div>
-    Создать проект ANKETA. Спросить у пользователя:
+  <div style="float: left; width:100px">
+    <h3>State A</h3>
+        <br>
+<input type=button value='State A' onclick=switchToState({pagename:'Page0_1'})>
+<input type=button value='State B' onclick=switchToState({pagename:'Page0_2'})>
+<input type=button value='State C' onclick=switchToState({pagename:'Page0_3'})>
+        <br>
+  </div>
+  <div style="float: left; width:auto">
+    <h1>Создать проект ANKETA.</h1>
+Спросить у пользователя:
 <ul style='margin-top: 6px; margin-bottom: 6px'>
 <li>фамилию, имя, отчество РАЗДЕЛЬНО (оператором prompt)
 <li>возраст в годах (оператором prompt)
@@ -24,7 +31,7 @@
 
       <hr style='margin: 20px 0 20px 0'>
 
-      <script>ComposeHeader('N.05 Домашнее задание TREESUM')</script>
+      <h1>N.05 Домашнее задание TREESUM</h1>
       <div>
       Разработать &laquo;чистую&raquo; функцию treeSum, которая получает массив, 
       элементы которого могут быть числами или снова массивами, и так до любого уровня.
@@ -41,11 +48,12 @@
       </code>
       <hr style='margin: 5px 0 20px 0'>
 
-      <script>ComposeHeader('N.07 Домашнее задание VOWELS')</script>
+      <h1>N.07 Домашнее задание VOWELS</h1>
       <div>
       Написать &laquo;чистую&raquo; функцию для <b>эффективного</b> подсчёта количества русских гласных букв в строке.
       <br>Регулярные выражения (кто умеет) не использовать.
       <br>Спросить у пользователя строку. Вывести в консоль количество русских гласных букв в ней.
       </div>
 </div>
-
+  </div>
+</div>
