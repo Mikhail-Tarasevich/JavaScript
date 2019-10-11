@@ -1,0 +1,42 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+<form method='POST' action='http://fe.it-academy.by/TestForm.php' target='_blank'>
+<table class='SNoBorders'>
+<tr><td>Разработчики:</td><td><input type='text' id='razr' name='author' style='width: 453px'></td><td><span class="error" id='errorrazr'></span></td></tr>
+<tr><td>Название сайта:</td><td><input type='text' id='sitename' name='title' style='width: 453px'></td><td><span class="error"  id='errorsitename'></span></td></tr>
+<tr><td>URL сайта:</td><td><input type='text' id='siteurl' name='title' style='width: 300px'></td><td><span class="error"  id='errorsiteurl'></span></td></tr>
+<tr><td>Дата запуска сайта:</td><td><input type='text' id='sitedate' name='startdate' style='width: 80px'></td><td><span class="error"  id='errorsitedate'></span></td></tr>
+<tr><td>Посетителей в сутки:</td><td><input type='text' id='sitestat' name='persons' style='width: 80px'></td><td><span class="error"  id='errorsitestat'></span></td></tr>
+<tr><td>E-mail для связи:</td><td><input type='text' id='siteemail' name='title' style='width: 200px'></td><td><span class="error"  id='errorsiteemail'></span></td></tr>
+<tr><td>Рубрика каталога:</td><td style='padding-left: 1px'>
+  <select name='rubric' id='catalog' style='width: 204px; margin-left: 2px'>
+  <option value=0></option>
+  <option value=1>здоровье</option>
+  <option value=2>домашний уют</option>
+  <option value=3>бытовая техника</option>
+  </select>
+</td><td><span class="error"  id='errorcatalog'></span></td></tr>
+<tr><td>Размещение:</td><td style='padding: 2px 0 2px 0'>
+  <input type='radio' name='public' id='radio1' value=1><span class='SRadio8a'>бесплатное</span>
+  <input type='radio' name='public' id='radio2' value=2><span class='SRadio8a'>платное</span>
+  <input type='radio' name='public' id='radio3' value=3><span class='SRadio8a'>VIP</span></span>
+</td><td><span class="error"  id='errorradio'></td></tr>
+<tr><td style='padding: 2px 0 3px 3px'>Разрешить&nbsp;отзывы:</td><td><input type='checkbox' id='checkcomment' name='comments'></td><td><span class="error"  id='errorcheckcomment'></span></td></tr>
+<tr><td colspan=2>Описание сайта:<br />
+<textarea name='article' id='sitecomment' style='width: 608px; height: 50px'></textarea></td><td><span class="error"  id='errorsitecomment'></span></td></tr>
+<tr><td><input type='submit' id='submit' value='Опубликовать'></td><td></td><td></td></tr>
+</table>
+</form>
+
+  <script src='http://fe.it-academy.by/JQ/jquery.js'></script>
+  <script src="script.js"></script>
+  <script>run()</script>
+</body>
+</html>
