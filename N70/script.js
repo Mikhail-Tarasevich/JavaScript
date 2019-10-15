@@ -1,15 +1,9 @@
 ﻿"use strict";
 
-/*
-TODO
-1) не сделана задача: Домен извлекать из поля «URL сайта» с помощью регулярного выражения.
-2) сделать накопление проверенных доменов в списке
-если домен проверяли, то повторно не проверять
-этим решится проблема повторной проверки и ожидания при нажатии на кнопку Отправить
-*/
-
 var ajaxHandlerScript="http://fe.it-academy.by/TestAjax3.php";
-var isDomainCheck = false;
+var DomainCheck = []; // список доменов, прошедших проверку
+var DomainCheckTemp = "";
+var isDomainCheck = false; // флаг, что ajax-запрос отработал и домен корректен -> можно отправлять форму 
 
 function run() {
   var elem=document.getElementById('razr');
@@ -123,21 +117,39 @@ function validSiteURL(setfocus) {
   var errorCount = 0;
   var Reg61 = new RegExp("^(http|https):\/\/", "i"); // строка должна начинаться с http:// или https:// независимо от регистра
   var errtext = '';
-  isDomainCheck = false;
   if (elem.value=='') { 
     errtext = 'Не заполнено поле!';
     errorCount++;
   }
-//  else if (!Reg61.test(elem.value)) {
-  //  errtext = 'Неправильный адрес сайта!'
-    //errorCount++;
-  //}
+  else if (!Reg61.test(elem.value)) {
+    errtext = 'Неправильный адрес сайта!'
+    errorCount++;
+  }
   else {
-    errtext = "идет проверка домена "+elem.value+"...";
-    $.ajax(ajaxHandlerScript,
-      { type:'GET', dataType:'text', data:{func:'GET_DOMAIN_IP',domain:elem.value},
-            success: loaded, error:errorHandler }
-    );
+    var Reg61 = new RegExp("^(?:((?:https?|s?ftp):)\/\/)([^:\/\s]+)", "i"); 
+    var array1 = Reg61.exec(elem.value);
+    if (array1!==null) {
+      if (DomainCheck.indexOf(array1[2])>=0) { // этот домен уже проверяли
+        isDomainCheck = true;
+        var errtext = ''
+        error.className = "error";
+        error.innerHTML = errtext;
+        console.log('этот домен уже проверяли: '+array1[2]);
+      }
+      else {
+        isDomainCheck = false;
+        DomainCheckTemp = array1[2]; // запоминаем для передачи в loaded
+        errtext = "идет проверка домена "+array1[2]+"...";
+        $.ajax(ajaxHandlerScript,
+          { type:'GET', dataType:'text', data:{func:'GET_DOMAIN_IP',domain:array1[2]},
+                success: loaded, error:errorHandler }
+        )
+      }
+    }
+    else {
+      errtext = 'Неправильный адрес сайта!'
+      errorCount++;
+    }
   }
 
   error.className = "error";
@@ -155,12 +167,16 @@ function loaded(data) {
     setErrorToURL()
   }
   else {
+    console.log('проверка успешно пройдена: '+DomainCheckTemp);
+    isDomainCheck = true;
+    if (DomainCheckTemp!=="") {
+      DomainCheck.push(DomainCheckTemp);
+      DomainCheckTemp = "";
+    }
     var error = document.getElementById('errorsiteurl');
     var errtext = ''
     error.className = "error";
     error.innerHTML = errtext;
-    isDomainCheck = true;
-    console.log('проверка успешно пройдена');
   }
 }
 
