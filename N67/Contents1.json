@@ -1,0 +1,55 @@
+{
+    "Contents": [
+      {
+        "letter": "A",
+        "articles": [
+          [
+            "статья А1",
+            "indexA1.html"
+          ],
+          [
+            "статья А2",
+            "indexA2.html"
+          ],
+          [
+            "статья А3",
+            "indexA3.html"
+          ]
+        ]
+      },
+      {
+        "letter": "B",
+        "articles": [
+          [
+            "статья B1",
+            "indexB1.html"
+          ],
+          [
+            "статья B2",
+            "indexB2.html"
+          ],
+          [
+            "статья B3",
+            "indexB3.html"
+          ]
+        ]
+      },
+      {
+        "letter": "C",
+        "articles": [
+          [
+            "статья C1",
+            "indexC11.html"
+          ],
+          [
+            "статья C2",
+            "indexC22.html"
+          ],
+          [
+            "статья C3",
+            "indexC33.html"
+          ]
+        ]
+      }
+    ]
+  }
