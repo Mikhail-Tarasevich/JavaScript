@@ -1,0 +1,42 @@
+.Shop
+{
+    border: double gray 3px;
+    width: 600px;
+    padding: 3px 7px;
+    background-color: #F0F0F0;
+}
+
+.Shop .Name
+{
+    font-weight: bold;
+}
+
+.Shop .Goods
+{
+    padding: 2px 0;
+}
+
+.Shop .Goods .Name
+{
+    font-weight: normal;
+    color: green;
+}
+
+.Shop .Goods .Fotos
+{
+    font-weight: normal;
+    color: cornflowerblue;
+}
+
+.Shop .Goods .Count
+{
+    font-weight: normal;
+    color: blue;
+}
+
+.Shop .Goods .Price
+{
+    font-weight: normal;
+    color: red;
+}
+
