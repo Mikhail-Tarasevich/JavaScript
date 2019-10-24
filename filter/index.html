@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta charset="utf-8" />
+  <title>Фильтр</title>
+</head> 
+<body> 
+  <div id="container"></div> 
+      
+  <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script> 
+      
+  <script src="Filter.js"></script>
+  <link rel="stylesheet" type="text/css" href="Filter.css" />
+
+  <script>
+    var strListText = ["111","222","333"];
+
+    ReactDOM.render(
+      React.createElement(Filter,{strList:strListText}), 
+      document.getElementById('container') 
+    );
+
+  </script>
+
+</body> 
+</html>
