@@ -17,7 +17,7 @@ var Filter = React.createClass({
 
     btnReset: function(EO) {
         this.setState( (prevState, props) => { 
-            var newArr = props.strList;
+            var newArr = this.props.strList;
             return {checkbox: false, strListS: newArr, strListPrev: newArr, isReset: true, textvalue: ""}; 
         } );
     },
@@ -28,12 +28,12 @@ var Filter = React.createClass({
             var prevArr = [];
             var newArr = [];
             if (checked) {
-                prevArr = prevState.strListS.slice();; 
-                newArr = prevState.strListS.sort();;
+                prevArr = prevState.strListS.slice(); 
+                newArr = prevState.strListS.slice().sort();
             }
             else {
-                prevArr = prevState.strListPrev;
-                newArr = prevState.strListPrev;
+                prevArr = this.props.strList;
+                newArr = this.props.strList;
             }
             return {checkbox: checked, strListS: newArr, strListPrev: prevArr}; 
         } );
