@@ -42,15 +42,20 @@ var Filter = React.createClass({
     inpChange: function(EO) {
         var strStart = EO.target.value;
         this.setState( (prevState, props) => { 
-            var newArr = [];
-            if (strStart=="") {
-                newArr = props.strList;
-            }
-            else {
-                newArr = prevState.strListS.filter(v => v.indexOf(strStart)>-1);
-            }
+            var newArr = this.filter(strStart, props.strList, prevState.strListS);
             return {strListS: newArr, textvalue: strStart}; 
         } );
+    },
+
+    filter: function(strStart, arrDefault, arrFilter) {
+        var newArr = [];
+        if (strStart=="") {
+            newArr = arrDefault.slice(); // props.strList;
+        }
+        else {
+            newArr = arrFilter.filter(v => v.indexOf(strStart)>-1); // prevState.strListS.filter(v => v.indexOf(strStart)>-1);
+        }
+        return newArr; 
     },
 
     render: function() {
