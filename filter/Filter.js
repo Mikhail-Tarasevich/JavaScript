@@ -10,7 +10,6 @@ var Filter = React.createClass({
             textvalue: "", // содержимое поля для ввода текстового фильтра
             isReset: false, // флаг нажатия кнопки Сброс
             checkbox: false, // состояние чекбокса
-            strListPrev: this.props.strList, // предыдущее состояние списка
             strListS: this.props.strList,  // текущее состояние списка
         };
       },
@@ -18,24 +17,25 @@ var Filter = React.createClass({
     btnReset: function(EO) {
         this.setState( (prevState, props) => { 
             var newArr = this.props.strList;
-            return {checkbox: false, strListS: newArr, strListPrev: newArr, isReset: true, textvalue: ""}; 
+            return {checkbox: false, strListS: newArr, isReset: true, textvalue: ""}; 
         } );
     },
 
     chbSort: function(EO) {
         var checked = EO.target.checked;
         this.setState( (prevState, props) => { 
-            var prevArr = [];
             var newArr = [];
             if (checked) {
-                prevArr = prevState.strListS.slice(); 
-                newArr = prevState.strListS.slice().sort();
+  //              prevArr = prevState.strListS.slice(); 
+    //            newArr = prevState.strListS.slice().sort();
+                newArr = this.filter(prevState.textvalue, props.strList, prevState.strListS).sort();
             }
             else {
-                prevArr = this.props.strList;
-                newArr = this.props.strList;
+//                prevArr = this.props.strList;
+  //              newArr = this.props.strList;
+                newArr = this.filter(prevState.textvalue, props.strList, props.strList);
             }
-            return {checkbox: checked, strListS: newArr, strListPrev: prevArr}; 
+            return {checkbox: checked, strListS: newArr}; 
         } );
     },
 
