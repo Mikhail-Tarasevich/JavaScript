@@ -3,26 +3,24 @@ var Good = React.createClass({
   displayName: 'Good',
 
   propTypes: {
-    startWorkMode: React.PropTypes.number.isRequired,
-    deffreeanswertext: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string,
+    count: React.PropTypes.number,
+    price: React.PropTypes.number,
   },
 
   getInitialState: function() {
-    return { 
-      selectedAnswerCode: null,
-      freeanswertext:this.props.deffreeanswertext,
-      workMode:this.props.startWorkMode,
+    return {
+      name: this.props.name,
+      count: this.props.count,
+      price: this.props.price,
     };
   },
 
   render: function() {
+    var goodline  = Object.assign({}, this.state);
 
-    return React.DOM.div( {className:'VotesBlock'}, 
-      React.createElement(VotesQuestion, {question:this.props.question} ),
-      React.DOM.div( {className:'Answers'}, answersCode ),
-      ((this.state.workMode==1)&&this.state.selectedAnswerCode)
-        ?React.DOM.input( {type:'button',value:'проголосовать',onClick:this.vote} )
-        :null
+    return React.DOM.div( {className:'Good'}, 
+      goodline.name,
     );
 
   },

@@ -10,8 +10,8 @@
   <script src="https://unpkg.com/react@15/dist/react.js"></script> 
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script> 
       
-  <script src="Shop.js"></script>
-  <link rel="stylesheet" type="text/css" href="shop.css" />
+  <script src="Good.js"></script>
+  <link rel="stylesheet" type="text/css" href="Good.css" />
 
   <script>
 
@@ -22,7 +22,7 @@
       {id: '1282237', name: 'Гироскутер 350W, 36V 4.4A, колеса 6.5", 10 км/ч, Bluetooth, подсветка, до 80 кг',	count: 1,	price: 7500}, 
       {id: '1282238', name: 'Гироскутер 350W, 36V 4.4A, колеса 6.5", 10 км/ч, Bluetooth, подсветка, до 80 кг',	count: 1,	price: 7500}, 
       {id: '1383314', name: 'Гироскутер 350W, 36V 4.4A, колеса 6.5", 10 км/ч, Bluetooth, подсветка, до 80 кг',	count: 1,	price: 7500}, 
-      {id: '1383317', name: 'Гироскутер 350W,36V 4.4A Bluetooth,подсв,кол 6.5 дюйм,10 км/ч, вес пол.до120 кг,цв.белый',	count: 8, price: 8500}, 
+      {id: '1383317', name: 'Гироскутер 350W, 36V 4.4A, Bluetooth,подсв,кол 6.5 дюйм,10 км/ч, вес пол.до120 кг,цв.белый',	count: 8, price: 8500}, 
       {id: '2858009', name: 'Гироскутер 350W, 36V 4.4А, 6,5", Самобаланс,Тао-Тао,Bluetooth,подсветка, с ручкой',	count: 1,	price: 7999}, 
       {id: '2858010', name: 'Гироскутер 350W, 36V 4.4А, 6,5", Самобаланс,Тао-Тао,Bluetooth,подсветка, с ручкой',	count: 5,	price: 7999}, 
       {id: '2858011', name: 'Гироскутер 350W, 36V 4.4А, 6,5", Самобаланс,Тао-Тао,Bluetooth,подсветка, с ручкой',	count: 1,	price: 7999}, 
@@ -43,8 +43,14 @@
       {id: '2858029', name: 'Гироскутер 350W, 36V 4.4А, 8,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 13999}, 
     ];
 
+    var elements=goods.map( v =>
+      React.createElement(Good, {key:v.id,
+        name:v.name, count:v.count, price:v.price, 
+      })
+    );
+
     ReactDOM.render(
-      React.createElement(Shop,{shopname:shop,shopgoods:goods}), 
+      React.DOM.div({className:'Goods'}, elements),
       document.getElementById('container') 
     );
 
