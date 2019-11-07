@@ -10,47 +10,52 @@ var Filter = React.createClass({
             textvalue: "", // содержимое поля для ввода текстового фильтра
             isReset: false, // флаг нажатия кнопки Сброс
             checkbox: false, // состояние чекбокса
-            strListPrev: this.props.strList, // предыдущее состояние списка
             strListS: this.props.strList,  // текущее состояние списка
         };
       },
 
     btnReset: function(EO) {
         this.setState( (prevState, props) => { 
-            var newArr = props.strList;
-            return {checkbox: false, strListS: newArr, strListPrev: newArr, isReset: true, textvalue: ""}; 
+            var newArr = this.props.strList;
+            return {checkbox: false, strListS: newArr, isReset: true, textvalue: ""}; 
         } );
     },
 
     chbSort: function(EO) {
         var checked = EO.target.checked;
         this.setState( (prevState, props) => { 
-            var prevArr = [];
             var newArr = [];
             if (checked) {
-                prevArr = prevState.strListS.slice();; 
-                newArr = prevState.strListS.sort();;
+  //              prevArr = prevState.strListS.slice(); 
+    //            newArr = prevState.strListS.slice().sort();
+                newArr = this.filter(prevState.textvalue, props.strList, prevState.strListS).sort();
             }
             else {
-                prevArr = prevState.strListPrev;
-                newArr = prevState.strListPrev;
+//                prevArr = this.props.strList;
+  //              newArr = this.props.strList;
+                newArr = this.filter(prevState.textvalue, props.strList, props.strList);
             }
-            return {checkbox: checked, strListS: newArr, strListPrev: prevArr}; 
+            return {checkbox: checked, strListS: newArr}; 
         } );
     },
 
     inpChange: function(EO) {
         var strStart = EO.target.value;
         this.setState( (prevState, props) => { 
-            var newArr = [];
-            if (strStart=="") {
-                newArr = props.strList;
-            }
-            else {
-                newArr = prevState.strListS.filter(v => v.indexOf(strStart)>-1);
-            }
+            var newArr = this.filter(strStart, props.strList, prevState.strListS);
             return {strListS: newArr, textvalue: strStart}; 
         } );
+    },
+
+    filter: function(strStart, arrDefault, arrFilter) {
+        var newArr = [];
+        if (strStart=="") {
+            newArr = arrDefault.slice(); // props.strList;
+        }
+        else {
+            newArr = arrFilter.filter(v => v.indexOf(strStart)>-1); // prevState.strListS.filter(v => v.indexOf(strStart)>-1);
+        }
+        return newArr; 
     },
 
     render: function() {
