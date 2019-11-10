@@ -1,17 +1,59 @@
-.td1
+.tdName
 {
-  width: 400px;
+  width: 380px;
   background-color: cyan;
 }
 
-.td2
+.tdNameH
+{
+  width: 380px;
+  background-color: gray;
+}
+
+.tdCount
+{
+  width: 60px;
+  background-color: cyan;
+}
+
+.tdCountH
+{
+  width: 60px;
+  background-color:gray;
+}
+
+.tdPrice
 {
   width: 50px;
   background-color: cyan;
 }
 
-.td3
+.tdPriceH
 {
-  width: 80px;
+  width: 50px;
+  background-color:gray;
+}
+
+.tdURL
+{
+  width: 200px;
   background-color: cyan;
+}
+
+.tdURLH
+{
+  width: 200px;
+  background-color:gray;
+}
+
+.tdControl
+{
+  width: 70px;
+  background-color: cyan;
+}
+
+.tdControlH
+{
+  width: 70px;
+  background-color:gray;
 }

@@ -17,40 +17,58 @@
 
     var shop='Магазин Огонёк';
     var goods=[ 
-      {id: '1282235', name: 'Гироскутер 350W, 36V 4.4A, колеса 6.5", 10 км/ч, Bluetooth, подсветка, с ручкой',	count: 1,	price: 8450}, 
-      {id: '1282236', name: 'Гироскутер 350W, 36V 4.4A, колеса 6.5", 10 км/ч, Bluetooth, подсветка, с ручкой',	count: 1, price: 7500}, 
-      {id: '1282237', name: 'Гироскутер 350W, 36V 4.4A, колеса 6.5", 10 км/ч, Bluetooth, подсветка, до 80 кг',	count: 1,	price: 7500}, 
-      {id: '1282238', name: 'Гироскутер 350W, 36V 4.4A, колеса 6.5", 10 км/ч, Bluetooth, подсветка, до 80 кг',	count: 1,	price: 7500}, 
-      {id: '1383314', name: 'Гироскутер 350W, 36V 4.4A, колеса 6.5", 10 км/ч, Bluetooth, подсветка, до 80 кг',	count: 1,	price: 7500}, 
-      {id: '1383317', name: 'Гироскутер 350W, 36V 4.4A, Bluetooth,подсв,кол 6.5 дюйм,10 км/ч, вес пол.до120 кг,цв.белый',	count: 8, price: 8500}, 
-      {id: '2858009', name: 'Гироскутер 350W, 36V 4.4А, 6,5", Самобаланс,Тао-Тао,Bluetooth,подсветка, с ручкой',	count: 1,	price: 7999}, 
-      {id: '2858010', name: 'Гироскутер 350W, 36V 4.4А, 6,5", Самобаланс,Тао-Тао,Bluetooth,подсветка, с ручкой',	count: 5,	price: 7999}, 
-      {id: '2858011', name: 'Гироскутер 350W, 36V 4.4А, 6,5", Самобаланс,Тао-Тао,Bluetooth,подсветка, с ручкой',	count: 1,	price: 7999}, 
-      {id: '2858013', name: 'Гироскутер 350W, 36V 4.4А, 6,5"+ Самобаланс+Тао-Тао+Bluetooth+свет, цвет абстракция',	count: 9, price: 9999}, 
-      {id: '2858014', name: 'Гироскутер 350W, 36V 4.4А, 6,5"+ Самобаланс+Тао-Тао+Bluetooth+свет, цвет космос',	count: 4,		price: 9999}, 
-      {id: '2858015', name: 'Гироскутер 350W, 36V 4.4А, 8,5", Самобаланс,Тао-Тао,Bluetooth,подсв, с ручкой, чехол',	count: 5,	price: 9999}, 
-      {id: '2858016', name: 'Гироскутер 350W, 36V 4.4А, 8,5", Самобаланс,Тао-Тао,Bluetooth,подсв, с ручкой, чехол',	count: 1,	price: 9999}, 
-      {id: '2858017', name: 'Гироскутер 350W, 36V 4.4А, 8,5", Самобаланс,Тао-Тао,Bluetooth,подсв, с ручкой, чехол',	count: 1,	price: 9999}, 
-      {id: '2858019', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 9,	price: 10800}, 
-      {id: '2858020', name: 'Гироскутер 350W, 36V 4.4А, 10", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 2,	price: 10999}, 
-      {id: '2858021', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 12200}, 
-      {id: '2858022', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 12200}, 
-      {id: '2858023', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 12200}, 
-      {id: '2858024', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 11999}, 
-      {id: '2858025', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 12200}, 
-      {id: '2858026', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 12200}, 
-      {id: '2858028', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 12500}, 
-      {id: '2858029', name: 'Гироскутер 350W, 36V 4.4А, 8,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 13999}, 
+      {id: '1282235', name: 'Гироскутер 350W, 36V 4.4A, колеса 6.5", 10 км/ч, Bluetooth, подсветка, с ручкой',	count: 1,	price: 8450, action: null}, 
+      {id: '1282236', name: 'Гироскутер 350W, 36V 4.4A, колеса 6.5", 10 км/ч, Bluetooth, подсветка, с ручкой',	count: 1, price: 7500, action: null}, 
+      {id: '1282237', name: 'Гироскутер 350W, 36V 4.4A, колеса 6.5", 10 км/ч, Bluetooth, подсветка, до 80 кг',	count: 1,	price: 7500, action: null}, 
+      {id: '1282238', name: 'Гироскутер 350W, 36V 4.4A, колеса 6.5", 10 км/ч, Bluetooth, подсветка, до 80 кг',	count: 1,	price: 7500, action: null}, 
+      {id: '1383314', name: 'Гироскутер 350W, 36V 4.4A, колеса 6.5", 10 км/ч, Bluetooth, подсветка, до 80 кг',	count: 1,	price: 7500, action: null}, 
+      {id: '1383317', name: 'Гироскутер 350W, 36V 4.4A, Bluetooth,подсв,кол 6.5 дюйм,10 км/ч, вес пол.до120 кг,цв.белый',	count: 8, price: 8500, action: null}, 
+      {id: '2858009', name: 'Гироскутер 350W, 36V 4.4А, 6,5", Самобаланс,Тао-Тао,Bluetooth,подсветка, с ручкой',	count: 1,	price: 7999, action: null}, 
+      {id: '2858010', name: 'Гироскутер 350W, 36V 4.4А, 6,5", Самобаланс,Тао-Тао,Bluetooth,подсветка, с ручкой',	count: 5,	price: 7999, action: null}, 
+      {id: '2858011', name: 'Гироскутер 350W, 36V 4.4А, 6,5", Самобаланс,Тао-Тао,Bluetooth,подсветка, с ручкой',	count: 1,	price: 7999, action: null}, 
+      {id: '2858013', name: 'Гироскутер 350W, 36V 4.4А, 6,5"+ Самобаланс+Тао-Тао+Bluetooth+свет, цвет абстракция',	count: 9, price: 9999, action: null}, 
+      {id: '2858014', name: 'Гироскутер 350W, 36V 4.4А, 6,5"+ Самобаланс+Тао-Тао+Bluetooth+свет, цвет космос',	count: 4,		price: 9999, action: null}, 
+      {id: '2858015', name: 'Гироскутер 350W, 36V 4.4А, 8,5", Самобаланс,Тао-Тао,Bluetooth,подсв, с ручкой, чехол',	count: 5,	price: 9999, action: null}, 
+      {id: '2858016', name: 'Гироскутер 350W, 36V 4.4А, 8,5", Самобаланс,Тао-Тао,Bluetooth,подсв, с ручкой, чехол',	count: 1,	price: 9999, action: null}, 
+      {id: '2858017', name: 'Гироскутер 350W, 36V 4.4А, 8,5", Самобаланс,Тао-Тао,Bluetooth,подсв, с ручкой, чехол',	count: 1,	price: 9999, action: null}, 
+      {id: '2858019', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 9,	price: 10800, action: null}, 
+      {id: '2858020', name: 'Гироскутер 350W, 36V 4.4А, 10", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 2,	price: 10999, action: null}, 
+      {id: '2858021', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 12200, action: null}, 
+      {id: '2858022', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 12200, action: null}, 
+      {id: '2858023', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 12200, action: null}, 
+      {id: '2858024', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 11999, action: null}, 
+      {id: '2858025', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 12200, action: null}, 
+      {id: '2858026', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 12200, action: null}, 
+      {id: '2858028', name: 'Гироскутер 350W, 36V 4.4А, 10,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 12500, action: null}, 
+      {id: '2858029', name: 'Гироскутер 350W, 36V 4.4А, 8,5", Самобаланс,Тао-Тао,Bluetooth,подсветка',	count: 1,	price: 13999, action: null}, 
     ];
 
+//    var header={id: '0', name: 'Name',	price: 'Price', url: 'URL',	count: 'Quantity',	action: 'Control'};
+
     var elements=goods.map( v =>
-      React.createElement(Good, {key:v.id,
-        name:v.name, count:v.count, price:v.price, 
+      React.createElement(Good, {key:v.id, id:v.id,
+        name:v.name, count:v.count, price:v.price, url: 'http://ishop2/'+v.id
       })
     );
 
     ReactDOM.render(
-      React.DOM.div({className:'Goods'}, elements),
+
+      React.DOM.div(null, 
+//      React.createElement("Table", 
+        React.DOM.table({className: "GoodHeader"}, 
+          React.DOM.thead(null, 
+            React.DOM.tr(null,
+              React.DOM.td({className: "tdNameH"}, 'Name'), 
+              React.DOM.td({className: "tdPriceH"}, 'Price'), 
+              React.DOM.td({className: "tdURLH"}, 'URL'), 
+              React.DOM.td({className: "tdCountH"}, 'Quantity'), 
+              React.DOM.td({className: "tdControlH"}, 'Control'),
+            ),
+          ),
+        ),
+  //    ),
+
+      React.DOM.div({className:'Goods'}, elements),),
       document.getElementById('container') 
     );
 
