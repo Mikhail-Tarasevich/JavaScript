@@ -3,6 +3,7 @@ var Good = React.createClass({
   displayName: 'Good',
 
   propTypes: {
+    isSelect: React.PropTypes.bool,
     url: React.PropTypes.string,
     name: React.PropTypes.string,
     count: React.PropTypes.oneOfType([
@@ -17,6 +18,7 @@ var Good = React.createClass({
 
   getInitialState: function() {
     return {
+      isSelect: false,
       id: this.props.id,
       url: this.props.url,
       name: this.props.name,
@@ -29,12 +31,21 @@ var Good = React.createClass({
     console.log('actionDelete: ' + this.props.id);
   },
 
+  trOnClick: function() {
+    console.log('trOnClick: ' + this.props.id);
+    this.setState( (prevState, props) => { 
+      var newIsSelect = !this.state.isSelect;
+      return {isSelect: newIsSelect}; 
+    } );
+  },
+
   render: function() {
     var goodline  = Object.assign({}, this.state);
+    var style = this.state.isSelect ? { backgroundColor: 'red'} : { backgroundColor: 'cyan'};
 
     return  React.DOM.table({className: "GoodLine"}, 
       React.DOM.thead(null, 
-        React.DOM.tr(null,
+        React.DOM.tr({onClick:this.trOnClick, style: style}, 
           React.DOM.td({className: "tdName"}, goodline.name), 
           React.DOM.td({className: "tdPrice"}, goodline.price), 
           React.DOM.td({className: "tdURL"}, goodline.url), 
@@ -43,23 +54,6 @@ var Good = React.createClass({
         ),
       )
     );
-    
-      /*    
-    React.DOM.div( {className:'Good1'},
-        React.DOM.span({className:'Name'},goodline.name),
-        React.DOM.span({className:'Count'},goodline.count),
-        React.DOM.span({className:'Price'},goodline.price),
-      );
-
-      <div>
-        <tr>
-            <td>{goodline.name}</td>
-            <td>{goodline.count}</td>
-            <td>{goodline.price}</td>
-        </tr>
-      </div>
-      */
-
   },
 
 });
