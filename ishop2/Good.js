@@ -3,6 +3,7 @@ var Good = React.createClass({
   displayName: 'Good',
 
   propTypes: {
+    cdDelete: React.PropTypes.func,
     isSelect: React.PropTypes.bool,
     url: React.PropTypes.string,
     name: React.PropTypes.string,
@@ -18,6 +19,7 @@ var Good = React.createClass({
 
   getInitialState: function() {
     return {
+      cdDelete: this.props.cdDelete,
       isSelect: false,
       id: this.props.id,
       url: this.props.url,
@@ -27,15 +29,14 @@ var Good = React.createClass({
     };
   },
 
-  actionDelete: function() {
-    console.log('actionDelete: ' + this.props.id);
+  actionDelete: function(event) {
+    this.state.cdDelete(this.props.id);
+    event.stopPropagation();
   },
 
   trOnClick: function() {
-    console.log('trOnClick: ' + this.props.id);
     this.setState( (prevState, props) => { 
-      var newIsSelect = !this.state.isSelect;
-      return {isSelect: newIsSelect}; 
+      return {isSelect: !this.state.isSelect}; 
     } );
   },
 
