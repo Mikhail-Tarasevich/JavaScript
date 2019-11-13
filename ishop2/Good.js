@@ -4,6 +4,7 @@ var Good = React.createClass({
 
   propTypes: {
     cdDelete: React.PropTypes.func,
+    cdSelect: React.PropTypes.func,
     isSelect: React.PropTypes.bool,
     url: React.PropTypes.string,
     name: React.PropTypes.string,
@@ -20,7 +21,8 @@ var Good = React.createClass({
   getInitialState: function() {
     return {
       cdDelete: this.props.cdDelete,
-      isSelect: false,
+      cdSelect: this.props.cdSelect,
+      isSelect: this.props.isSelect,
       id: this.props.id,
       url: this.props.url,
       name: this.props.name,
@@ -35,14 +37,12 @@ var Good = React.createClass({
   },
 
   trOnClick: function() {
-    this.setState( (prevState, props) => { 
-      return {isSelect: !this.state.isSelect}; 
-    } );
+    this.state.cdSelect(this.props.id);
   },
 
   render: function() {
     var goodline  = Object.assign({}, this.state);
-    var style = this.state.isSelect ? { backgroundColor: 'red'} : { backgroundColor: 'cyan'};
+    var style = this.props.isSelect ? { backgroundColor: 'red'} : { backgroundColor: 'cyan'};
 
     return  React.DOM.table({className: "GoodLine"}, 
       React.DOM.thead(null, 

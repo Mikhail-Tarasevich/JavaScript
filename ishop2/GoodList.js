@@ -10,7 +10,7 @@ var GoodList = React.createClass({
     getInitialState: function() {
         var elements = this.props.goods.map( v =>
           React.createElement(Good, {key:v.id, id:v.id,
-            name:v.name, count:v.count, price:v.price, url: 'http://ishop2/'+v.id, cdDelete: this.deleteGood
+            name:v.name, count:v.count, price:v.price, url: 'http://ishop2/'+v.id, cdDelete: this.deleteGood, cdSelect: this.selectGood, isSelect: false,
           })
         );
 
@@ -20,16 +20,31 @@ var GoodList = React.createClass({
     }, 
 
     deleteGood: function(id) {
-        if (confirm("Удалить товар?")) {
-          var newGoodsList = this.state.goodsReact.filter(good => good.props.id != id);
-          this.setState( (prevState, props) => { 
-            return {goodsReact: newGoodsList}; 
-          }         );
-        }
-        else {
-          return;
-        }
-      },
+      if (confirm("Удалить товар?")) {
+        var newGoodsList = this.state.goodsReact.filter(good => good.props.id != id);
+        this.setState( (prevState, props) => { 
+          return {goodsReact: newGoodsList}; 
+        }         );
+      }
+      else {
+        return;
+      }
+    },
+
+    selectGood: function(id) {
+      var newGoodsList = this.state.goodsReact.map(function(v) {
+        var newIsSelect = (v.props.id==id);
+        var obj = React.createElement(Good, {key:v.props.id, id:v.props.id,
+          name:v.props.name, count:v.props.count, price:v.props.price, url: 'http://ishop2/'+v.props.id, cdDelete: this.deleteGood, cdSelect: this.selectGood, isSelect: newIsSelect,
+        });
+
+        return obj;
+      }, this);
+
+      this.setState( (prevState, props) => { 
+        return {goodsReact: newGoodsList}; 
+      }         );
+    },
 
     render: function() {
         var renderGoods = this.state.goodsReact;
