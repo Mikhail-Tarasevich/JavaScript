@@ -20,11 +20,15 @@ var GoodList = React.createClass({
     }, 
 
     deleteGood: function(id) {
-        var newGoodsList = this.state.goodsReact.filter(good => good.props.id != id);
-
-        this.setState( (prevState, props) => { 
+        if (confirm("Удалить товар?")) {
+          var newGoodsList = this.state.goodsReact.filter(good => good.props.id != id);
+          this.setState( (prevState, props) => { 
             return {goodsReact: newGoodsList}; 
-          } );
+          }         );
+        }
+        else {
+          return;
+        }
       },
 
     render: function() {
