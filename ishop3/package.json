@@ -9,10 +9,15 @@
   "author": "Tarasevich Mikhail",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/node": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "babel-install": "^2.1.0",
     "lite-server": "^2.3.0",
     "webpack": "^4.41.2"
   },
   "dependencies": {
-    "babel-install": "^2.1.0"
+    "prop-types": "^15.7.2"
   }
 }

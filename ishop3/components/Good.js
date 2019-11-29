@@ -1,25 +1,27 @@
-var Good = React.createClass({
+import React from 'react';
+import PropTypes from 'prop-types';
 
-  displayName: 'Good',
+import './GoodList.css';
 
-  propTypes: {
-    cdDelete: React.PropTypes.func,
-    cdSelect: React.PropTypes.func,
-    isSelect: React.PropTypes.bool,
-    url: React.PropTypes.string,
-    name: React.PropTypes.string,
-    count: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
+class Good extends React.Component {
+
+  static propTypes = {
+    cdDelete: PropTypes.func,
+    cdSelect: PropTypes.func,
+    isSelect: PropTypes.bool,
+    url: PropTypes.string,
+    name: PropTypes.string,
+    count: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
     ]),
-    price: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
+    price: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
     ]),
-  },
+  };
 
-  getInitialState: function() {
-    return {
+  state = {
       cdDelete: this.props.cdDelete,
       cdSelect: this.props.cdSelect,
       isSelect: this.props.isSelect,
@@ -28,19 +30,18 @@ var Good = React.createClass({
       name: this.props.name,
       count: this.props.count,
       price: this.props.price,
-    };
-  },
+  };
 
-  actionDelete: function(event) {
+  actionDelete(event) {
     this.state.cdDelete(this.props.id);
     event.stopPropagation();
-  },
+  };
 
-  trOnClick: function() {
+  trOnClick() {
     this.state.cdSelect(this.props.id);
-  },
+  };
 
-  render: function() {
+  render() {
     var goodline  = Object.assign({}, this.state);
     var style = this.props.isSelect ? { backgroundColor: 'red'} : { backgroundColor: 'cyan'};
 
@@ -55,6 +56,8 @@ var Good = React.createClass({
         ),
       )
     );
-  },
+  };
 
-});
+};
+
+export default Good;

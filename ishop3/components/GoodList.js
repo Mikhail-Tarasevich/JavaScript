@@ -1,25 +1,25 @@
-var GoodList = React.createClass({
+import React from 'react';
+import PropTypes from 'prop-types';
 
-    displayName: 'GoodList',
+import './GoodList.css';
 
-    propTypes: {
-        goodsReact: React.PropTypes.arrayOf(React.PropTypes.element),
-        goods: React.PropTypes.array,
-    },
+import Good from './Good';
+
+class GoodList extends React.Component {
+    static propTypes = {
+        goodsReact: PropTypes.arrayOf(PropTypes.element),
+        goods: PropTypes.array,
+    };
   
-    getInitialState: function() {
-        var elements = this.props.goods.map( v =>
+    state = {
+      goodsReact: = this.props.goods.map( v =>
           React.createElement(Good, {key:v.id, id:v.id,
             name:v.name, count:v.count, price:v.price, url: 'http://ishop2/'+v.id, cdDelete: this.deleteGood, cdSelect: this.selectGood, isSelect: false,
           })
-        );
+        )
+    };
 
-        return {
-          goodsReact: elements,
-        };
-    }, 
-
-    deleteGood: function(id) {
+    deleteGood(id) {
       if (confirm("Удалить товар?")) {
         var newGoodsList = this.state.goodsReact.filter(good => good.props.id != id);
         this.setState( (prevState, props) => { 
@@ -29,9 +29,9 @@ var GoodList = React.createClass({
       else {
         return;
       }
-    },
+    };
 
-    selectGood: function(id) {
+    selectGood(id) {
       var newGoodsList = this.state.goodsReact.map(function(v) {
         var newIsSelect = (v.props.id==id);
         var obj = React.createElement(Good, {key:v.props.id, id:v.props.id,
@@ -44,9 +44,9 @@ var GoodList = React.createClass({
       this.setState( (prevState, props) => { 
         return {goodsReact: newGoodsList}; 
       }         );
-    },
+    };
 
-    render: function() {
+    render() {
         var renderGoods = this.state.goodsReact;
 
         return  React.DOM.div(null, 
@@ -63,5 +63,7 @@ var GoodList = React.createClass({
             ),
 
             React.DOM.div({className:'goods23'}, renderGoods),);
-    },
-});
+    };
+};
+
+export default GoodList;
