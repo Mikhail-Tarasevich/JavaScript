@@ -5,13 +5,10 @@ import ReactDOM from 'react-dom';
 
 import RainbowFrame from './components/RainbowFrame';
 
-// let colors = ['red','orange', 'yellow','green', '#00BFFF', 'blue', 'purple'];
-// <ColorFrame color="red">
-// array1.forEach(element => console.log(element));
-let colors = 'red';
+let colors = ['red','orange', 'yellow','green', '#00BFFF', 'blue', 'purple'];
 
 ReactDOM.render(
-    <RainbowFrame color={colors}>
+    <RainbowFrame colors={colors}>
       Hello!
     </RainbowFrame>
   , document.getElementById('container') 
