@@ -1,6 +1,8 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
 
+import "./BR2JSX.css";
+
 class BR2JSX extends React.Component {
 
   static propTypes = {
@@ -9,13 +11,13 @@ class BR2JSX extends React.Component {
   
   render() {
     let match = [];
-    let i = 0;
 
-    this.props.text.split(/<br\s*\/*>/).forEach(function(line) {
-      i++;
-      match.push(<span key={i.toString()}>{line}</span>);
-      match.push(<br/>);
+    this.props.text.split(/<br\s*\/*>/).forEach(function(line,index) {
+      match.push(line);
+      match.push(<br key={"b"+index}/>);
     });
+
+    match.pop();
 
     return (
             <div>

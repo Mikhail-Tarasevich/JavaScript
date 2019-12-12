@@ -1008,7 +1008,7 @@ var _BR2JSX2 = _interopRequireDefault(_BR2JSX);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var text = "первый2<br>второй<br/>третий<br />последний";
+var text = "первый<br>второй<br/>третий<br />последний";
 
 _reactDom2.default.render(_react2.default.createElement(_BR2JSX2.default, { text: text }), document.getElementById('container'));
 
@@ -21221,20 +21221,17 @@ var BR2JSX = function (_React$Component) {
       var i = 0;
 
       this.props.text.split(/<br\s*\/*>/).forEach(function (line) {
-        i++;
         match.push(_react2.default.createElement(
           'span',
           { key: i.toString() },
           line
         ));
         match.push(_react2.default.createElement('br', null));
-        //    match.push();
+        i++;
       });
 
-      //    let res = "";
-      //  match.forEach(element => (res = res + element))
+      match.pop();
 
-      // debugger;
       return _react2.default.createElement(
         'div',
         null,

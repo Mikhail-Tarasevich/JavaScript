@@ -25,6 +25,9 @@ module.exports = {
                 use: extractCSS.extract({
                     use: ["css-loader"]
                 })
+
+//                test: /\.css$/,
+  //              use: ["style-loader", "css-loader"]
             }            
         ] 
     },
