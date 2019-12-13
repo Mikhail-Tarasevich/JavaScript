@@ -13,24 +13,22 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Scales = /** @class */ (function () {
     function Scales() {
-        this.Products = [];
-        this.pIndex = 0;
+        this.products = [];
     }
     Scales.prototype.add = function (p) {
-        this.Products[this.pIndex] = p;
-        this.pIndex++;
+        this.products.push(p);
     };
     Scales.prototype.getSumScale = function () {
         var sum = 0;
-        this.Products.forEach(function (element) {
-            sum = sum + element.getScale();
+        this.products.forEach(function (element) {
+            var e = element;
+            sum = sum + e.getScale();
         });
         return sum;
     };
     Scales.prototype.getNameList = function () {
-        return this.Products.map(function (p) {
-            var ret = p.getName();
-            return ret;
+        return this.products.map(function (p) {
+            return p.getName();
         });
     };
     return Scales;
@@ -40,12 +38,6 @@ var Product = /** @class */ (function () {
         this.name = _name;
         this.scale = _scale;
     }
-    Product.prototype.getScale = function () {
-        return this.scale;
-    };
-    Product.prototype.getName = function () {
-        return this.name;
-    };
     return Product;
 }());
 var Apple = /** @class */ (function (_super) {
@@ -53,6 +45,12 @@ var Apple = /** @class */ (function (_super) {
     function Apple(_name, _scale) {
         return _super.call(this, _name, _scale) || this;
     }
+    Apple.prototype.getScale = function () {
+        return this.scale;
+    };
+    Apple.prototype.getName = function () {
+        return this.name;
+    };
     return Apple;
 }(Product));
 var Tomato = /** @class */ (function (_super) {
@@ -60,6 +58,12 @@ var Tomato = /** @class */ (function (_super) {
     function Tomato(_name, _scale) {
         return _super.call(this, _name, _scale) || this;
     }
+    Tomato.prototype.getScale = function () {
+        return this.scale;
+    };
+    Tomato.prototype.getName = function () {
+        return this.name;
+    };
     return Tomato;
 }(Product));
 var scl = new Scales();

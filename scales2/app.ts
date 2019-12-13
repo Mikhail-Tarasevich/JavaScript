@@ -7,32 +7,29 @@ interface IScalable {
 
 class Scales {
 
-    Products:Product[];
-    pIndex:number;
+    products:Product[];
 
     constructor() {
-        this.Products = [];
-        this.pIndex = 0;
+        this.products = [];
     }
 
     add(p:Product):void {
-        this.Products[this.pIndex] = p;
-        this.pIndex++;
+        this.products.push(p);
     }
 
     getSumScale():number {
-        let sum = 0;
-        this.Products.forEach(element => {
-            sum = sum + element.getScale()
+        let sum:number = 0;
+        this.products.forEach(element => {
+            let e:Apple|Tomato = <Apple|Tomato>element;
+            sum = sum + e.getScale()
         });
 
         return sum;
     }
     
-    getNameList():any {
-        return this.Products.map(function(p) { 
-            var ret:any = <any>p.getName();
-            return ret;
+    getNameList():string[] {
+        return this.products.map(function(p:Apple|Tomato) { 
+            return p.getName();
         })
     }
 }
