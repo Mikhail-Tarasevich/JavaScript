@@ -13,21 +13,24 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Scales = /** @class */ (function () {
     function Scales() {
-        this.products = [];
+        this.Products = [];
+        this.pIndex = 0;
     }
     Scales.prototype.add = function (p) {
-        this.products.push(p);
+        this.Products[this.pIndex] = p;
+        this.pIndex++;
     };
     Scales.prototype.getSumScale = function () {
         var sum = 0;
-        this.products.forEach(function (element) {
+        this.Products.forEach(function (element) {
             sum = sum + element.getScale();
         });
         return sum;
     };
     Scales.prototype.getNameList = function () {
-        return this.products.map(function (p) {
-            return p.getName();
+        return this.Products.map(function (p) {
+            var ret = p.getName();
+            return ret;
         });
     };
     return Scales;
