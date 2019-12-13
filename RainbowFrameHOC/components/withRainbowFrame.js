@@ -1,33 +1,16 @@
 import React from 'react';
 
-let withRainbowFrame = colors => Component => props =>
+let withRainbowFrame = colors => Component => props => {
+
+    let element = <Component {...props} />;
+
     colors.forEach(function(color) {
-        <div style={{border:"solid 5px "+color,padding:"10px"}}>
-            <Component/>
+        element = <div style={{border:"solid 5px "+color,padding:"10px"}}>
+            {element}
         </div>
     })
-;
 
-/*
-function withRainbowFrame(colors) {
-    return function(Component) {
-        return (
-            colors.forEach(function(color) {
-                <div style={{border:"solid 5px "+color,padding:"10px"}}>
-                      <Component/>
-                </div>
-              })
-          );
-        }
+    return element;  
 }
-*/
-
-/*
-let withColorBackground = color => Component => props =>
-    <div style={{backgroundColor:color}}>
-      <Component {...props} />
-    </div>
-;
-*/
 
 export { withRainbowFrame };

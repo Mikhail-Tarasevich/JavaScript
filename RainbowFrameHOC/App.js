@@ -8,7 +8,6 @@ import { withRainbowFrame } from './components/withRainbowFrame';
 import "./App.css";
 
 let colors = ['red','orange', 'yellow','green', '#00BFFF', 'blue', 'purple'];
-debugger;
 let FramedFragment=withRainbowFrame(colors)(Fragment);
 
 ReactDOM.render(
