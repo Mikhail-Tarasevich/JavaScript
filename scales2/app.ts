@@ -7,20 +7,20 @@ interface IScalable {
 
 class Scales {
 
-    products:Apple[]|Tomato[];
+    products:IScalable[];
 
     constructor() {
         this.products = [];
     }
 
-    add(p:Apple|Tomato):void {
+    add(p:IScalable):void {
         this.products.push(p);
     }
 
     getSumScale():number {
         let sum:number = 0;
         this.products.forEach(element => {
-            let e:Apple|Tomato = <Apple|Tomato>element;
+            let e:IScalable = <IScalable>element;
             sum = sum + e.getScale()
         });
 
@@ -28,7 +28,7 @@ class Scales {
     }
     
     getNameList():string[] {
-        return this.products.map(function(p:Apple|Tomato) { 
+        return this.products.map(function(p:IScalable) { 
             return p.getName();
         })
     }
