@@ -1,16 +1,3 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Scales = /** @class */ (function () {
     function Scales() {
         this.products = [];
@@ -33,17 +20,10 @@ var Scales = /** @class */ (function () {
     };
     return Scales;
 }());
-var Product = /** @class */ (function () {
-    function Product(_name, _scale) {
+var Apple = /** @class */ (function () {
+    function Apple(_name, _scale) {
         this.name = _name;
         this.scale = _scale;
-    }
-    return Product;
-}());
-var Apple = /** @class */ (function (_super) {
-    __extends(Apple, _super);
-    function Apple(_name, _scale) {
-        return _super.call(this, _name, _scale) || this;
     }
     Apple.prototype.getScale = function () {
         return this.scale;
@@ -52,11 +32,11 @@ var Apple = /** @class */ (function (_super) {
         return this.name;
     };
     return Apple;
-}(Product));
-var Tomato = /** @class */ (function (_super) {
-    __extends(Tomato, _super);
+}());
+var Tomato = /** @class */ (function () {
     function Tomato(_name, _scale) {
-        return _super.call(this, _name, _scale) || this;
+        this.name = _name;
+        this.scale = _scale;
     }
     Tomato.prototype.getScale = function () {
         return this.scale;
@@ -65,7 +45,7 @@ var Tomato = /** @class */ (function (_super) {
         return this.name;
     };
     return Tomato;
-}(Product));
+}());
 var scl = new Scales();
 var apl1 = new Apple("Антоновка", 100);
 var apl2 = new Apple("Антоновка белая", 120);

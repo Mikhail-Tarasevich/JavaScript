@@ -7,13 +7,13 @@ interface IScalable {
 
 class Scales {
 
-    products:Product[];
+    products:Apple[]|Tomato[];
 
     constructor() {
         this.products = [];
     }
 
-    add(p:Product):void {
+    add(p:Apple|Tomato):void {
         this.products.push(p);
     }
 
@@ -34,7 +34,7 @@ class Scales {
     }
 }
 
-class Product{
+class Apple implements IScalable{
 
     name:string;
     scale:number;
@@ -42,14 +42,6 @@ class Product{
     constructor(_name:string, _scale:number) {
         this.name = _name;
         this.scale = _scale;
-    }
-
-}
-
-class Apple extends Product implements IScalable{
-
-    constructor(_name:string, _scale:number) {
-        super(_name, _scale);
     }
 
     getScale():number {
@@ -62,10 +54,14 @@ class Apple extends Product implements IScalable{
 
 }
 
-class Tomato extends Product implements IScalable{
+class Tomato implements IScalable{
+
+    name:string;
+    scale:number;
 
     constructor(_name:string, _scale:number) {
-        super(_name, _scale);
+        this.name = _name;
+        this.scale = _scale;
     }
 
     getScale():number {
