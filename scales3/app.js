@@ -11,6 +11,37 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var StorageEngine = /** @class */ (function () {
+    function StorageEngine() {
+    }
+    StorageEngine.prototype.addItem = function (item) {
+    };
+    StorageEngine.prototype.getItem = function (index) {
+        var p;
+        return p;
+    };
+    StorageEngine.prototype.getCount = function () {
+        var count;
+        return count;
+    };
+    return StorageEngine;
+}());
+var ScalesStorageEngineArray = /** @class */ (function (_super) {
+    __extends(ScalesStorageEngineArray, _super);
+    function ScalesStorageEngineArray() {
+        var _this = _super.call(this) || this;
+        _this.items = [];
+        return _this;
+    }
+    return ScalesStorageEngineArray;
+}(StorageEngine));
+var ScalesStorageEngineLocalStorage = /** @class */ (function (_super) {
+    __extends(ScalesStorageEngineLocalStorage, _super);
+    function ScalesStorageEngineLocalStorage() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return ScalesStorageEngineLocalStorage;
+}(StorageEngine));
 var Scales = /** @class */ (function () {
     function Scales() {
         this.products = [];

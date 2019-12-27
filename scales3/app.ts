@@ -42,7 +42,7 @@ class ScalesStorageEngineLocalStorage extends StorageEngine { // для хран
 
 }
 
-class Scales {
+class Scales<StorageEngine> {
 
     products:Product[];
 
@@ -103,7 +103,7 @@ class Tomato extends Product{
     }
 }
 
-let scl:Scales=new Scales();
+let scl:Scales<StorageEngine>=new Scales();
 
 let apl1:Apple=new Apple("Антоновка", 100);
 let apl2:Apple=new Apple("Антоновка белая", 120);
