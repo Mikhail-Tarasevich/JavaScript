@@ -12,7 +12,10 @@ class MobileCompany extends React.PureComponent {
     clients:PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
-        fio: PropTypes.string.isRequired,
+        name_f: PropTypes.string.isRequired,
+        name_n: PropTypes.string.isRequired,
+        name_o: PropTypes.string.isRequired,
+        status: PropTypes.string.isRequired,
         balance: PropTypes.number.isRequired,
       })
     ),
