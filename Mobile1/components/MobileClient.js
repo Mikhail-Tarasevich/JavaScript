@@ -33,27 +33,43 @@ class MobileClient extends React.PureComponent {
     var clients  = Object.assign({}, this.state);
     var style = this.props.isSelect ? { backgroundColor: 'red'} : { backgroundColor: 'cyan'};
 
-    return  ReactDOM.table({className: "MobileClient"}, 
-      ReactDOM.thead(null, 
-        ReactDOM.tr({onClick:this.trOnClick, style: style}, 
-          ReactDOM.td({className: "MobileClientBalance"}, clients.info.balance), 
-          ReactDOM.td({className: "MobileClientF"}, clients.info.name_f), 
-          ReactDOM.td({className: "MobileClientN"}, clients.info.name_n), 
-          ReactDOM.td({className: "MobileClientO"}, clients.info.name_o), 
-          ReactDOM.td({className: "MobileClientStatus"}, clients.info.status), 
-        ),
-      )
-    );
+    return ReactDOM.table({className: "MobileClient"}, 
+ReactDOM.thead(null, 
+  ReactDOM.tr({onClick:this.trOnClick, style: style}, 
+    ReactDOM.td({className: "MobileClientBalance"}, clients.info.balance), 
+    ReactDOM.td({className: "MobileClientF"}, clients.info.name_f), 
+    ReactDOM.td({className: "MobileClientN"}, clients.info.name_n), 
+    ReactDOM.td({className: "MobileClientO"}, clients.info.name_o), 
+    ReactDOM.td({className: "MobileClientStatus"}, clients.info.status), 
+  ),
+)
+);
     
-//    return (
-//      <div className='MobileClient'>
-//        <span className='MobileClientBalance'>{this.state.info.balance}</span>
-//        <span className='MobileClientF'>{this.state.info.name_f}</span>
-//        <span className='MobileClientI'>{this.state.info.name_n}</span>
-//        <span className='MobileClientO'>{this.state.info.name_o}</span>
-//        <span className='MobileClientStatus'>{this.state.info.status}</span>
-//      </div>
-//    );
+    /*
+    return (
+      <div className='MobileClient'>
+        <span className='MobileClientBalance'>{this.state.info.balance}</span>
+        <span className='MobileClientF'>{this.state.info.name_f}</span>
+        <span className='MobileClientI'>{this.state.info.name_n}</span>
+        <span className='MobileClientO'>{this.state.info.name_o}</span>
+        <span className='MobileClientStatus'>{this.state.info.status}</span>
+      </div>
+    );
+    */
+
+/*
+return ReactDOM.table({className: "MobileClient"}, 
+ReactDOM.thead(null, 
+  ReactDOM.tr({onClick:this.trOnClick, style: style}, 
+    ReactDOM.td({className: "MobileClientBalance"}, clients.info.balance), 
+    ReactDOM.td({className: "MobileClientF"}, clients.info.name_f), 
+    ReactDOM.td({className: "MobileClientN"}, clients.info.name_n), 
+    ReactDOM.td({className: "MobileClientO"}, clients.info.name_o), 
+    ReactDOM.td({className: "MobileClientStatus"}, clients.info.status), 
+  ),
+)
+);
+*/
 
   }
 
