@@ -85,6 +85,21 @@ class MobileCompany extends React.PureComponent {
         <input type="button" value="=МТС" onClick={this.setName1} />
         <input type="button" value="=Velcom" onClick={this.setName2} />
         <div className='MobileCompanyName'>Компания &laquo;{this.state.name}&raquo;</div>
+        <div className='MobileCompanyClientsHeader'>
+          <table className='MobileClientTableHeader'>
+            <thead>
+              <tr>
+                <th width='100px'>Фамилия</th>
+                <th width='100px'>Имя</th>
+                <th width='100px'>Отчество</th>
+                <th width='70px'>Баланс</th>
+                <th width='70px'>Статус</th>
+                <th width='100px'>Редактировать</th>
+                <th width='100px'>Удалить</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
         <div className='MobileCompanyClients'>
           {clientsCode}
         </div>
@@ -95,7 +110,6 @@ class MobileCompany extends React.PureComponent {
     ;
 
   }
-
 }
 
 export default MobileCompany;

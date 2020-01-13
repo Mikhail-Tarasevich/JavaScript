@@ -33,6 +33,25 @@ class MobileClient extends React.PureComponent {
     var clients  = Object.assign({}, this.state);
     var style = this.props.isSelect ? { backgroundColor: 'red'} : { backgroundColor: 'cyan'};
 
+    return (
+      <div className='MobileClient'>
+        <table className='MobileClientTable'>
+          <thead>
+            <tr>
+              <td className='MobileClientF' align='left' width='100px'>{clients.info.name_f}</td>
+              <td className='MobileClientN' align='left' width='100px'>{clients.info.name_n}</td>
+              <td className='MobileClientO' align='left' width='100px'>{clients.info.name_o}</td>
+              <td className='MobileClientStatus' align='center' width='70px'>{clients.info.status}</td>
+              <td className='MobileClientBalance' align='center' width='70px'>{clients.info.balance}</td>
+              <td className='MobileClientEdit' align='center' width='100px'>-</td>
+              <td className='MobileClientDelete' align='center' width='100px'>-</td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    );
+
+    /*
     return ReactDOM.table({className: "MobileClient"}, 
 ReactDOM.thead(null, 
   ReactDOM.tr({onClick:this.trOnClick, style: style}, 
@@ -45,7 +64,7 @@ ReactDOM.thead(null,
 )
 );
     
-    /*
+    
     return (
       <div className='MobileClient'>
         <span className='MobileClientBalance'>{this.state.info.balance}</span>
