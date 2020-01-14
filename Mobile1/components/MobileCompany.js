@@ -71,6 +71,22 @@ class MobileCompany extends React.PureComponent {
   setBalance2 = () => {
     this.setBalance(105,250);
   };
+
+  clientAdd = () => {
+    console.log("clientAdd");
+  };
+
+  filterAll = () => {
+    console.log("filterAll");
+  };
+  
+  filterActive = () => {
+    console.log("filterActive");
+  };
+  
+  filterBlock = () => {
+    console.log("filterBlock");
+  };
   
   render() {
 
@@ -85,6 +101,11 @@ class MobileCompany extends React.PureComponent {
         <input type="button" value="=МТС" onClick={this.setName1} />
         <input type="button" value="=Velcom" onClick={this.setName2} />
         <div className='MobileCompanyName'>Компания &laquo;{this.state.name}&raquo;</div>
+        <div className='MobileCompanyButtonsHeader'>
+          <input type="button" value="Все" onClick={this.filterAll} />
+          <input type="button" value="Активные" onClick={this.filterActive} />
+          <input type="button" value="Заблокированные" onClick={this.filterBlock} />
+        </div>
         <div className='MobileCompanyClientsHeader'>
           <table className='MobileClientTableHeader'>
             <thead>
@@ -103,8 +124,7 @@ class MobileCompany extends React.PureComponent {
         <div className='MobileCompanyClients'>
           {clientsCode}
         </div>
-        <input type="button" value="Сидоров=230" onClick={this.setBalance1} />
-        <input type="button" value="Сидоров=250" onClick={this.setBalance2} />
+        <input type="button" value="Добавить клиента" onClick={this.clientAdd} />
       </div>
     )
     ;

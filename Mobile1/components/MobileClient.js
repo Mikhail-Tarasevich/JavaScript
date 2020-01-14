@@ -21,6 +21,14 @@ class MobileClient extends React.PureComponent {
     info: this.props.info,
   };
 
+  clientDelete = () => {
+    console.log("clientDelete id="+this.state.info.id);
+  };
+
+  clientEdit = () => {
+    console.log("clientEdit id="+this.state.info.id);
+  };
+
   componentWillReceiveProps = (newProps) => {
     console.log("MobileClient id="+this.props.info.id+" componentWillReceiveProps");
     this.setState({info:newProps.info});
@@ -43,8 +51,8 @@ class MobileClient extends React.PureComponent {
               <td className='MobileClientO' align='left' width='100px'>{clients.info.name_o}</td>
               <td className='MobileClientStatus' align='center' width='70px'>{clients.info.status}</td>
               <td className='MobileClientBalance' align='center' width='70px'>{clients.info.balance}</td>
-              <td className='MobileClientEdit' align='center' width='100px'>-</td>
-              <td className='MobileClientDelete' align='center' width='100px'>-</td>
+              <td className='MobileClientEdit' align='center' width='100px'><input type="button" value="Редактировать" onClick={this.clientEdit}/></td>
+              <td className='MobileClientDelete' align='center' width='100px'><input type="button" value="Удалить" onClick={this.clientDelete}/></td>
             </tr>
           </thead>
         </table>
