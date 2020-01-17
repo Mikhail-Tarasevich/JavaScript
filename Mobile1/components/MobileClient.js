@@ -39,7 +39,7 @@ class MobileClient extends React.PureComponent {
     console.log("MobileClient id="+this.state.info.id+" render");
 
     var clients  = Object.assign({}, this.state);
-    var style = (clients.info.status=="active") ? 'green' : 'red';
+    var clientStatusBGColor = (clients.info.status=="active") ? 'green' : 'red';
 
     return (
       <div className='MobileClient'>
@@ -49,7 +49,7 @@ class MobileClient extends React.PureComponent {
               <td className='MobileClientF' align='left' width='100px'>{clients.info.name_f}</td>
               <td className='MobileClientN' align='left' width='100px'>{clients.info.name_n}</td>
               <td className='MobileClientO' align='left' width='100px'>{clients.info.name_o}</td>
-              <td className='MobileClientStatus' align='center' width='70px' bgcolor={style}>{clients.info.status}</td>
+              <td className='MobileClientStatus' align='center' width='70px' bgcolor={clientStatusBGColor}>{clients.info.status}</td>
               <td className='MobileClientBalance' align='center' width='70px'>{clients.info.balance}</td>
               <td className='MobileClientEdit' align='center' width='100px'><input type="button" value="Редактировать" onClick={this.clientEdit}/></td>
               <td className='MobileClientDelete' align='center' width='100px'><input type="button" value="Удалить" onClick={this.clientDelete}/></td>

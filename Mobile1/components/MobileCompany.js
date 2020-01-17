@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types';
 
 import MobileClient from './MobileClient';
+import {MobileEvents} from './events';
 
 import './MobileCompany.css';
 
@@ -26,12 +27,26 @@ class MobileCompany extends React.PureComponent {
     clients: this.props.clients,
   };
 
+  componentDidMount = () => {
+    MobileEvents.addListener('ChangeCompanyName',this.setCompanyName);
+  };
+
+  componentWillUnmount = () => {
+    MobileEvents.removeListener('ChangeCompanyName',this.setCompanyName);
+  };
+
+  setCompanyName = (cname) => {
+    this.setState({name: cname});
+  };
+
   setName1 = () => {
-    this.setState({name:'МТС'});
+//    this.setState({name:'МТС'});
+    MobileEvents.emit('ChangeCompanyName', 'МТС');
   };
 
   setName2 = () => {
-    this.setState({name:'Velcom'});
+//    this.setState({name:'Velcom'});
+    MobileEvents.emit('ChangeCompanyName', 'Velcom');
   };
   
   setBalance = (clientId,newBalance) => {
@@ -89,7 +104,6 @@ class MobileCompany extends React.PureComponent {
   };
   
   render() {
-
     console.log("MobileCompany render");
 
     var clientsCode=this.state.clients.map( client =>
@@ -100,7 +114,7 @@ class MobileCompany extends React.PureComponent {
       <div className='MobileCompany'>
         <input type="button" value="=МТС" onClick={this.setName1} />
         <input type="button" value="=Velcom" onClick={this.setName2} />
-        <div className='MobileCompanyName'>Компания &laquo;{this.state.name}&raquo;</div>
+        <div className='MobileCompanyName' ref='r1'>Компания &laquo;{this.state.name}&raquo;</div>
         <div className='MobileCompanyButtonsHeader'>
           <input type="button" value="Все" onClick={this.filterAll} />
           <input type="button" value="Активные" onClick={this.filterActive} />
