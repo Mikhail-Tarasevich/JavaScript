@@ -10,6 +10,7 @@ class MobileCompany extends React.PureComponent {
 
   static propTypes = {
     name: PropTypes.string.isRequired,
+    filter: PropTypes.string,
     clients:PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -24,6 +25,7 @@ class MobileCompany extends React.PureComponent {
 
   state = {
     name: this.props.name,
+    filter: 'all',
     clients: this.props.clients,
   };
 
@@ -49,6 +51,7 @@ class MobileCompany extends React.PureComponent {
 
   setCompanyFilter = (fname) => {
     console.log("set filter "+fname);
+    this.setState({filter: fname});
   };
 
   setName1 = () => {
@@ -74,31 +77,6 @@ class MobileCompany extends React.PureComponent {
     this.setState({clients:newClients});
   };
 
-  /*
-  setBalance = (clientId,newBalance) => {
-    let changed=false;
-    let newClients=[...this.state.clients]; // копия самого массива клиентов
-    newClients.forEach( (c,i) => {
-      if ( c.id==clientId && c.balance!=newBalance ) {
-        let newClient={...c}; // копия хэша изменившегося клиента
-        newClient.balance=newBalance;
-        newClients[i]=newClient;
-        changed=true;
-      }
-    } );
-    if ( changed )
-      this.setState({clients:newClients});
-  };
-  */
-  
-  setBalance1 = () => {
-    this.setBalance(105,230);
-  };
-
-  setBalance2 = () => {
-    this.setBalance(105,250);
-  };
-
   clientAdd = () => {
     MobileEvents.emit('AddClient');
   };
@@ -112,13 +90,15 @@ class MobileCompany extends React.PureComponent {
   };
   
   filterBlock = () => {
-    MobileEvents.emit('ChangeFilter', 'block');
+    MobileEvents.emit('ChangeFilter', 'blocked');
   };
   
   render() {
     console.log("MobileCompany render");
 
-    var clientsCode=this.state.clients.map( client =>
+    var clientsWithFilter = this.state.clients.filter(x => (x.status === this.state.filter) || (this.state.filter === 'all'));
+
+    var clientsCode=clientsWithFilter.map( client =>
       <MobileClient key={client.id} info={client}  />
     );
 
