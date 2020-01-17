@@ -29,14 +29,26 @@ class MobileCompany extends React.PureComponent {
 
   componentDidMount = () => {
     MobileEvents.addListener('ChangeCompanyName',this.setCompanyName);
+    MobileEvents.addListener('ChangeFilter',this.setCompanyFilter);
+    MobileEvents.addListener('AddClient',this.addClient);
   };
 
   componentWillUnmount = () => {
     MobileEvents.removeListener('ChangeCompanyName',this.setCompanyName);
+    MobileEvents.removeListener('ChangeFilter',this.setCompanyFilter);
+    MobileEvents.removeListener('AddClient',this.addClient);
+  };
+
+  addClient = () => {
+    console.log("add client");
   };
 
   setCompanyName = (cname) => {
     this.setState({name: cname});
+  };
+
+  setCompanyFilter = (fname) => {
+    console.log("set filter "+fname);
   };
 
   setName1 = () => {
@@ -88,19 +100,19 @@ class MobileCompany extends React.PureComponent {
   };
 
   clientAdd = () => {
-    console.log("clientAdd");
+    MobileEvents.emit('AddClient');
   };
 
   filterAll = () => {
-    console.log("filterAll");
+    MobileEvents.emit('ChangeFilter', 'all');
   };
   
   filterActive = () => {
-    console.log("filterActive");
+    MobileEvents.emit('ChangeFilter', 'active');
   };
   
   filterBlock = () => {
-    console.log("filterBlock");
+    MobileEvents.emit('ChangeFilter', 'block');
   };
   
   render() {

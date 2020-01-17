@@ -2,6 +2,8 @@
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
+import {MobileEvents} from './events';
+
 import './MobileClient.css';
 
 class MobileClient extends React.PureComponent {
@@ -21,12 +23,30 @@ class MobileClient extends React.PureComponent {
     info: this.props.info,
   };
 
+  componentDidMount = () => {
+    MobileEvents.addListener('EditClient',this.clientEditProcess);
+    MobileEvents.addListener('DeleteClient',this.clientDeleteProcess);
+  };
+
+  componentWillUnmount = () => {
+    MobileEvents.removeListener('EditClient',this.clientEditProcess);
+    MobileEvents.removeListener('DeleteClient',this.clientDeleteProcess);
+  };
+
+  clientEditProcess = (cid) => {
+    console.log("Edit client id="+cid);
+  };
+
+  clientDeleteProcess = (cid) => {
+    console.log("Delete client id="+cid);
+  };
+
   clientDelete = () => {
-    console.log("clientDelete id="+this.state.info.id);
+    MobileEvents.emit('DeleteClient', this.state.info.id);
   };
 
   clientEdit = () => {
-    console.log("clientEdit id="+this.state.info.id);
+    MobileEvents.emit('EditClient', this.state.info.id);
   };
 
   componentWillReceiveProps = (newProps) => {
