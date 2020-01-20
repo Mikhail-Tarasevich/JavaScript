@@ -3,6 +3,12 @@
   padding: 2px 0;
 }
 
+.cellText
+{
+  border: 10px;
+  width: 100px;
+}
+
 span.MobileClientBalance
 {
   float: right;
