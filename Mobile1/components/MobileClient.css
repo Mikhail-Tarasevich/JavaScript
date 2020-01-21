@@ -9,6 +9,12 @@
   width: 100px;
 }
 
+.cellNumber
+{
+  border: 10px;
+  width: 70px;
+}
+
 span.MobileClientBalance
 {
   float: right;
