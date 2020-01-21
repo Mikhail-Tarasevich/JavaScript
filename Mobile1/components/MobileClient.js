@@ -13,6 +13,7 @@ class MobileClient extends React.PureComponent {
   static propTypes = {
     info:PropTypes.shape({
       id: PropTypes.number.isRequired,
+      editmode: PropTypes.bool.isRequired,
       name_f: PropTypes.string.isRequired,
       name_n: PropTypes.string.isRequired,
       name_o: PropTypes.string.isRequired,
@@ -23,6 +24,11 @@ class MobileClient extends React.PureComponent {
 
   state = {
     info: this.props.info,
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.setState({ value: inputRef.current.value})
   };
 
   componentDidMount = () => {
@@ -37,6 +43,20 @@ class MobileClient extends React.PureComponent {
 
   clientEditProcess = (cid) => {
     console.log("Edit client id="+cid);
+
+    //var client = Object.assign({}, this.state);
+
+    var client1 = Immutable.Map(Object.assign({}, this.state));
+     client1.get('info').editmode = (client1.get('info').id==cid) ? true : false;
+//    if (client.info.id==cid) {
+  //    client.info.editmode = true;
+    //} else {
+//      client.info.editmode = false;
+  //  };
+
+var client2 = client1.set('info', client1.get('info'))
+
+    this.setState({info: client2.get('info')})
   };
 
   clientDeleteProcess = (cid) => {
@@ -64,19 +84,19 @@ class MobileClient extends React.PureComponent {
     
     console.log("MobileClient id="+this.state.info.id+" render");
 
-    var clients = Immutable.Map(Object.assign({}, this.state));
-    var clientStatusBGColor = (clients.get('info').status=="active") ? 'green' : 'red';
+    var client = Immutable.Map(Object.assign({}, this.state));
+    var clientStatusBGColor = (client.get('info').status=="active") ? 'green' : 'red';
 
     return (
       <div className='MobileClient'>
         <table className='MobileClientTable'>
           <thead>
             <tr>
-              <td align='left'><div><input className='cellText' type="text" readOnly={true} defaultValue={clients.get('info').name_f}/></div></td>
-              <td align='left'><div><input className='cellText' type="text" readOnly={true} defaultValue={clients.get('info').name_n}/></div></td>
-              <td align='left'><div><input className='cellText' type="text" readOnly={true} defaultValue={clients.get('info').name_o}/></div></td>
-              <td className='MobileClientStatus' align='center' width='70px' bgcolor={clientStatusBGColor}>{clients.get('info').status}</td>
-              <td className='MobileClientBalance' align='center' width='70px'>{clients.get('info').balance}</td>
+              <td align='left'><div><input className='cellText' type="text" readOnly={!client.get('info').editmode} defaultValue={client.get('info').name_f}/></div></td>
+              <td align='left'><div><input className='cellText' type="text" readOnly={!client.get('info').editmode} defaultValue={client.get('info').name_n}/></div></td>
+              <td align='left'><div><input className='cellText' type="text" readOnly={!client.get('info').editmode} defaultValue={client.get('info').name_o}/></div></td>
+              <td className='MobileClientStatus' align='center' width='70px' bgcolor={clientStatusBGColor}>{client.get('info').status}</td>
+              <td className='MobileClientBalance' align='center' width='70px'>{client.get('info').balance}</td>
               <td className='MobileClientEdit' align='center' width='100px'><input type="button" value="Редактировать" onClick={this.clientEdit}/></td>
               <td className='MobileClientDelete' align='center' width='100px'><input type="button" value="Удалить" onClick={this.clientDelete}/></td>
 
@@ -87,25 +107,6 @@ class MobileClient extends React.PureComponent {
         </table>
       </div>
     );
-    /*
-    return (
-      <div className='MobileClient'>
-        <table className='MobileClientTable'>
-          <thead>
-            <tr>
-              <td className='MobileClientF' align='left' width='100px'>{clients.get('info').name_f}</td>
-              <td className='MobileClientN' align='left' width='100px'>{clients.get('info').name_n}</td>
-              <td className='MobileClientO' align='left' width='100px'>{clients.get('info').name_o}</td>
-              <td className='MobileClientStatus' align='center' width='70px' bgcolor={clientStatusBGColor}>{clients.get('info').status}</td>
-              <td className='MobileClientBalance' align='center' width='70px'>{clients.get('info').balance}</td>
-              <td className='MobileClientEdit' align='center' width='100px'><input type="button" value="Редактировать" onClick={this.clientEdit}/></td>
-              <td className='MobileClientDelete' align='center' width='100px'><input type="button" value="Удалить" onClick={this.clientDelete}/></td>
-            </tr>
-          </thead>
-        </table>
-      </div>
-    );
-*/
   }
 
 }

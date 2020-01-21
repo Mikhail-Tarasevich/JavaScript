@@ -14,6 +14,7 @@ class MobileCompany extends React.PureComponent {
     clients:PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
+        editmode: PropTypes.bool.isRequired,
         name_f: PropTypes.string.isRequired,
         name_n: PropTypes.string.isRequired,
         name_o: PropTypes.string.isRequired,
@@ -27,6 +28,7 @@ class MobileCompany extends React.PureComponent {
     name: this.props.name,
     filter: 'all',
     clients: this.props.clients,
+    value: '',
   };
 
   componentDidMount = () => {
@@ -43,6 +45,26 @@ class MobileCompany extends React.PureComponent {
 
   addClient = () => {
     console.log("add client");
+    let newClients=[...this.state.clients]; // копия самого массива клиентов
+
+    let newID = newClients[0].id;
+    newClients.forEach( (c,i) => {
+      if ( c.id>newID ) {
+        newID = c.id 
+      }
+    } );
+    newID++;
+    
+    newClients.push({
+      id: newID,
+      editmode: true,
+      name_f: "",
+      name_n: "",
+      name_o: "",
+      status: "active",
+      balance: 0,
+    });
+    this.setState({clients: newClients});
   };
 
   setCompanyName = (cname) => {
@@ -127,7 +149,7 @@ class MobileCompany extends React.PureComponent {
             </thead>
           </table>
         </div>
-        <div className='MobileCompanyClients'>
+        <div className='MobileCompanyClients' ref={this.inputRef}>
           {clientsCode}
         </div>
         <input type="button" value="Добавить клиента" onClick={this.clientAdd} />
