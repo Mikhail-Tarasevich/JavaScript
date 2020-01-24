@@ -51,13 +51,16 @@ class MobileClient extends React.PureComponent {
 
   clientSetStatus = (cid) => {
     console.log("Status client id="+cid);
+//    версия 1
 //    var client1 = {...this.state.info}; // копия самого массива клиентов
 //    client1.status = (client1.status=='active') ? 'blocked' : 'active';
 
+//    версия 2
 //    var client1 = Object.assign({}, this.state);
 //    var client2 = client1.set('info', client1.get('info'))
 //    this.setState({info: client2.get('info')})
 
+//    версия 3
     var client1 = Immutable.Map(Object.assign({}, this.state));
     var newstatus = (client1.get('info').status=='active') ? 'blocked' : 'active';
     var newinfo = client1.get('info');
