@@ -20,10 +20,16 @@ class MobileClient extends React.PureComponent {
       status: PropTypes.string.isRequired,
       balance: PropTypes.number.isRequired,
     }),
+    cdUpdate: PropTypes.func,
   };
 
   state = {
     info: this.props.info,
+    cdUpdate: this.props.cdUpdate,
+  };
+
+  actionUpdate = () => {
+    this.state.cdUpdate();
   };
 
   handleSubmit = e => {
@@ -45,13 +51,21 @@ class MobileClient extends React.PureComponent {
 
   clientSetStatus = (cid) => {
     console.log("Status client id="+cid);
+//    var client1 = {...this.state.info}; // копия самого массива клиентов
+//    client1.status = (client1.status=='active') ? 'blocked' : 'active';
 
-    var client1 = Object.assign({}, this.state);
-    client1.info.status = (client1.info.status=='active') ? 'blocked' : 'active';
+//    var client1 = Object.assign({}, this.state);
 //    var client2 = client1.set('info', client1.get('info'))
-
 //    this.setState({info: client2.get('info')})
-      this.setState({info: client1.info})
+
+    var client1 = Immutable.Map(Object.assign({}, this.state));
+    var newstatus = (client1.get('info').status=='active') ? 'blocked' : 'active';
+    var newinfo = client1.get('info');
+    newinfo.status = newstatus;
+    var client2 = client1.set('info', newinfo);
+
+      this.setState({info: client2});
+      this.actionUpdate();
   };
 
   clientEditProcess = (cid) => {
@@ -69,12 +83,14 @@ class MobileClient extends React.PureComponent {
 
 var client2 = client1.set('info', client1.get('info'))
 
-    this.setState({info: client2.get('info')})
+    this.setState({info: client2.get('info')});
+    this.actionUpdate();
   };
 
   clientDeleteProcess = (cid) => {
     console.log("Delete client id="+cid);
     this.setState({status:'delete'});
+    this.actionUpdate();
   };
 
   clientDelete = () => {

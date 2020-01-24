@@ -28,7 +28,6 @@ class MobileCompany extends React.PureComponent {
     name: this.props.name,
     filter: 'all',
     clients: this.props.clients,
-    value: '',
   };
 
   componentDidMount = () => {
@@ -99,6 +98,11 @@ class MobileCompany extends React.PureComponent {
     this.setState({clients:newClients});
   };
 
+  updateClient = () => {
+    let newClients=[...this.state.clients]; // копия самого массива клиентов
+    this.setState({clients:newClients});
+  }
+
   clientAdd = () => {
     MobileEvents.emit('AddClient');
   };
@@ -121,7 +125,7 @@ class MobileCompany extends React.PureComponent {
     var clientsWithFilter = this.state.clients.filter(x => (x.status === this.state.filter) || (this.state.filter === 'all'));
 
     var clientsCode=clientsWithFilter.map( client =>
-      <MobileClient key={client.id} info={client}  />
+      <MobileClient key={client.id} info={client} cdUpdate={this.updateClient} />
     );
 
     return (

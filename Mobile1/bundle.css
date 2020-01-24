@@ -1,0 +1,48 @@
+div.MobileClient
+{
+  padding: 2px 0;
+}
+
+.cellText
+{
+  border: 10px;
+  width: 100px;
+}
+
+.cellNumber
+{
+  border: 10px;
+  width: 70px;
+}
+
+span.MobileClientBalance
+{
+  float: right;
+  width: 30px;
+  font-weight: bold;
+  text-align: right;
+}
+
+span.MobileClientFIO
+{
+  margin-right: 30px;
+}
+.MobileCompany
+{
+  border: double gray 3px;
+  width: 1000px;
+  padding: 3px 7px;
+  background-color: lightyellow;
+}
+
+.MobileCompanyName
+{
+  font-weight: bold;
+}
+
+.MobileCompanyClients
+{
+  padding-top: 5px;
+}
+
+/*# sourceMappingURL=bundle.css.map*/
