@@ -100,13 +100,17 @@ class MobileCompany extends React.PureComponent {
     this.setState({clients:newClients});
   };
 
-  updateClient = () => {
+  updateClient = (clientId,fieldname,newvalue) => {
+    var newInfo = {clientId: clientId,fieldname: fieldname, newvalue: newvalue};
     let newClients=[...this.state.clients]; // копия самого массива клиентов
-    this.setState({clients:newClients});
 
-//    var client1 = Immutable.Map(Object.assign({}, this.state.clients));
-//    var newClients = client1.toArray();
-//    this.setState({clients:newClients});
+    for (var i=0; i<newClients.length; i++) {
+        if (newClients[i].id==clientId) {
+          newClients[i][fieldname] = newvalue;  
+        }
+    }
+
+    this.setState({clients:newClients});
   }
 
   clientAdd = () => {
