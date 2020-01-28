@@ -29,31 +29,35 @@ class MobileClient extends React.PureComponent {
   };
 
   actionUpdate = () => {
+    console.log("actionUpdate");
     this.state.cdUpdate();
   };
 
   handleSubmit = e => {
+    console.log("handleSubmit");
     e.preventDefault();
     this.setState({ value: inputRef.current.value})
   };
 
   componentDidMount = () => {
+    console.log("componentDidMount");
     MobileEvents.addListener('EditClient',this.clientEditProcess);
     MobileEvents.addListener('DeleteClient',this.clientDeleteProcess);
     MobileEvents.addListener('StatusClient',this.clientSetStatus);
   };
 
   componentWillUnmount = () => {
+    console.log("componentWillUnmount");
     MobileEvents.removeListener('EditClient',this.clientEditProcess);
     MobileEvents.removeListener('DeleteClient',this.clientDeleteProcess);
     MobileEvents.removeListener('StatusClient',this.clientSetStatus);
   };
 
   clientSetStatus = (cid) => {
-    console.log("Status client id="+cid);
+    console.log("clientSetStatus id="+cid);
 //    версия 1
-//    var client1 = {...this.state.info}; // копия самого массива клиентов
-//    client1.status = (client1.status=='active') ? 'blocked' : 'active';
+    var client1 = {...this.state.info}; // копия самого массива клиентов
+    client1.status = (client1.status=='active') ? 'blocked' : 'active';
 
 //    версия 2
 //    var client1 = Object.assign({}, this.state);
@@ -61,55 +65,51 @@ class MobileClient extends React.PureComponent {
 //    this.setState({info: client2.get('info')})
 
 //    версия 3
+/*
     var client1 = Immutable.Map(Object.assign({}, this.state));
     var newstatus = (client1.get('info').status=='active') ? 'blocked' : 'active';
     var newinfo = client1.get('info');
     newinfo.status = newstatus;
     var client2 = client1.set('info', newinfo);
-
-      this.setState({info: client2});
+*/
+      this.setState({info: client1});
       this.actionUpdate();
   };
 
   clientEditProcess = (cid) => {
-    console.log("Edit client id="+cid);
-
-    //var client = Object.assign({}, this.state);
+    console.log("clientEditProcess id="+cid);
 
     var client1 = Immutable.Map(Object.assign({}, this.state));
-     client1.get('info').editmode = (client1.get('info').id==cid) ? true : false;
-//    if (client.info.id==cid) {
-  //    client.info.editmode = true;
-    //} else {
-//      client.info.editmode = false;
-  //  };
-
-var client2 = client1.set('info', client1.get('info'))
+    client1.get('info').editmode = (client1.get('info').id==cid) ? true : false;
+    var client2 = client1.set('info', client1.get('info'))
 
     this.setState({info: client2.get('info')});
     this.actionUpdate();
   };
 
   clientDeleteProcess = (cid) => {
-    console.log("Delete client id="+cid);
+    console.log("clientDeleteProcess id="+cid);
     this.setState({status:'delete'});
     this.actionUpdate();
   };
 
   clientDelete = () => {
+    console.log("clientDelete");
     MobileEvents.emit('DeleteClient', this.state.info.id);
   };
 
   clientEdit = () => {
+    console.log("clientEdit");
     MobileEvents.emit('EditClient', this.state.info.id);
   };
 
   clientChangeStatus = () => {
+    console.log("clientChangeStatus");
     MobileEvents.emit('StatusClient', this.state.info.id);
   };
   
   componentWillReceiveProps = (newProps) => {
-    console.log("MobileClient id="+this.props.info.id+" componentWillReceiveProps");
+    console.log("componentWillReceiveProps id="+this.props.info.id);
     this.setState({info:newProps.info});
   };
 
@@ -118,7 +118,7 @@ var client2 = client1.set('info', client1.get('info'))
     const { defaultValue, value, onChange } = this.props
     const nothing = () => {}
     
-    console.log("MobileClient id="+this.state.info.id+" render");
+    console.log("render MobileClient id="+this.state.info.id);
 
     var client = Immutable.Map(Object.assign({}, this.state));
     var clientStatusBGColor = (client.get('info').status=="active") ? 'green' : 'red';

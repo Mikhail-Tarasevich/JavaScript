@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import MobileClient from './MobileClient';
 import {MobileEvents} from './events';
 
+import Immutable from 'immutable';
+
 import './MobileCompany.css';
 
 class MobileCompany extends React.PureComponent {
@@ -101,6 +103,10 @@ class MobileCompany extends React.PureComponent {
   updateClient = () => {
     let newClients=[...this.state.clients]; // копия самого массива клиентов
     this.setState({clients:newClients});
+
+//    var client1 = Immutable.Map(Object.assign({}, this.state.clients));
+//    var newClients = client1.toArray();
+//    this.setState({clients:newClients});
   }
 
   clientAdd = () => {
@@ -123,8 +129,33 @@ class MobileCompany extends React.PureComponent {
     console.log("MobileCompany render");
 
     var clientsWithFilter = this.state.clients.filter(x => (x.status === this.state.filter) || (this.state.filter === 'all'));
+/*
+    var client2 = clientsWithFilter.map(client => client);
+{
+        id: PropTypes.number.isRequired,
+        editmode: PropTypes.bool.isRequired,
+        name_f: PropTypes.string.isRequired,
+        name_n: PropTypes.string.isRequired,
+        name_o: PropTypes.string.isRequired,
+        status: PropTypes.string.isRequired,
+        balance: PropTypes.number.isRequired,
+      }
+    */
+    
+    var client2 = [];
+    for(var i=0; i<clientsWithFilter.length; i++) {
+      var cl = {id: clientsWithFilter[i].id, 
+                editmode: clientsWithFilter[i].editmode, 
+                name_f: clientsWithFilter[i].name_f, 
+                name_n: clientsWithFilter[i].name_n, 
+                name_o: clientsWithFilter[i].name_o, 
+                status: clientsWithFilter[i].status, 
+                balance: clientsWithFilter[i].balance};
+      client2[i] = cl;
+    }
 
-    var clientsCode=clientsWithFilter.map( client =>
+
+    var clientsCode=client2.map( client =>
       <MobileClient key={client.id} info={client} cdUpdate={this.updateClient} />
     );
 
