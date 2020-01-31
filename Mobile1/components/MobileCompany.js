@@ -110,6 +110,8 @@ class MobileCompany extends React.PureComponent {
         }
     }
 
+    newClients = newClients.filter(x => (x.status != 'delete'));
+
     this.setState({clients:newClients});
   }
 
