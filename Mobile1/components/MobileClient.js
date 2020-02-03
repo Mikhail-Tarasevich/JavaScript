@@ -9,7 +9,6 @@ import Immutable from 'immutable';
 import styles from './MobileClient.css';
 
 class MobileClient extends React.PureComponent {
-
   static propTypes = {
     info:PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -44,6 +43,7 @@ class MobileClient extends React.PureComponent {
     MobileEvents.addListener('EditClient',this.clientEditProcess);
     MobileEvents.addListener('DeleteClient',this.clientDeleteProcess);
     MobileEvents.addListener('StatusClient',this.clientSetStatus);
+//    MobileEvents.addListener('ChangeClient',this.clientChange);
   };
 
   componentWillUnmount = () => {
@@ -51,6 +51,25 @@ class MobileClient extends React.PureComponent {
     MobileEvents.removeListener('EditClient',this.clientEditProcess);
     MobileEvents.removeListener('DeleteClient',this.clientDeleteProcess);
     MobileEvents.removeListener('StatusClient',this.clientSetStatus);
+//    MobileEvents.removeListener('ChangeClient',this.clientChange);
+  };
+
+  clientChange = (cid) => {
+    console.log("clientChange id="+cid);
+    var client1 = {...this.state.info}; // копия самого массива клиентов
+    if (client1.id==cid) {
+      
+      this.setState({info: client1});
+      this.actionUpdate(client1.id, 'balance', client1.balance);
+    }
+  };
+
+  clientChangeEnd = () => {
+    console.log("clientChangeEnd");
+    var client1 = {...this.state.info}; // копия самого массива клиентов
+    client1.editmode = false;
+    this.setState({info: client1});
+    this.actionUpdate(client1.id, 'editmode', client1.editmode);
   };
 
   clientSetStatus = (cid) => {
@@ -66,18 +85,29 @@ class MobileClient extends React.PureComponent {
   clientEditProcess = (cid) => {
     console.log("clientEditProcess id="+cid);
 
-    var client1 = Immutable.Map(Object.assign({}, this.state));
-    client1.get('info').editmode = (client1.get('info').id==cid) ? true : false;
-    var client2 = client1.set('info', client1.get('info'))
-
-    this.setState({info: client2.get('info')});
-    this.actionUpdate(client2.id, 'editmode', client2.editmode);
+    var client1 = {...this.state.info}; // копия самого массива клиентов
+    if (client1.id==cid) {
+      client1.editmode = !client1.editmode;
+      this.setState({info: client1});
+      this.actionUpdate(client1.id, 'editmode', client1.editmode);
+    }
   };
 
   clientDeleteProcess = (cid) => {
     console.log("clientDeleteProcess id="+cid);
     this.setState({status:'delete'});
     this.actionUpdate(cid, 'status','delete');
+  };
+
+  clientChange = () => {
+    console.log("clientChange");
+//    MobileEvents.emit('ChangeClient', this.state.info.id);
+    var client1 = {...this.state.info}; // копия самого массива клиентов
+    if (client1.id==this.state.info.id) {
+      client1.status = (client1.status=='active') ? 'blocked' : 'active';
+      this.setState({info: client1});
+      this.actionUpdate(client1.id, 'status', client1.status);
+    }
   };
 
   clientDelete = () => {
@@ -100,6 +130,12 @@ class MobileClient extends React.PureComponent {
     this.setState({info:newProps.info});
   };
 
+  newBalanceRef = null;
+
+  setNewBalance = (ref) => {
+    this.newBalanceRef=ref;
+  };
+
   render() {
     console.log("render MobileClient id="+this.state.info.id);
 
@@ -113,8 +149,8 @@ class MobileClient extends React.PureComponent {
               <td align='left'><div><input className='cellText' type="text" readOnly={!this.state.info.editmode} defaultValue={this.state.info.name_f}/></div></td>
               <td align='left'><div><input className='cellText' type="text" readOnly={!this.state.info.editmode} defaultValue={this.state.info.name_n}/></div></td>
               <td align='left'><div><input className='cellText' type="text" readOnly={!this.state.info.editmode} defaultValue={this.state.info.name_o}/></div></td>
+              <td align='center'><div><input className='cellNumber' type="text" readOnly={!this.state.info.editmode} onBlur={this.clientChangeEnd}  onChange={this.clientChange} defaultValue={this.state.info.balance}  ref={this.setNewBalance}/></div></td>
               <td className='MobileClientStatus' align='center' width='70px' bgcolor={clientStatusBGColor} onClick={this.clientChangeStatus}>{this.state.info.status}</td>
-              <td align='center'><div><input className='cellNumber' type="text" readOnly={!this.state.info.editmode} defaultValue={this.state.info.balance}/></div></td>
               <td className='MobileClientEdit' align='center' width='100px'><input type="button" value="Редактировать" onClick={this.clientEdit}/></td>
               <td className='MobileClientDelete' align='center' width='100px'><input type="button" value="Удалить" onClick={this.clientDelete}/></td>
             </tr>
