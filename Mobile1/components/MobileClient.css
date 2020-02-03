@@ -7,9 +7,23 @@
 {
   border: 10px;
   width: 100px;
+  background-color: lightyellow; 
+}
+
+.cellTextEdit
+{
+  border: 10px;
+  width: 100px;
 }
 
 .cellNumber
+{
+  border: 10px;
+  width: 70px;
+  background-color: lightyellow; 
+}
+
+.cellNumberEdit
 {
   border: 10px;
   width: 70px;

@@ -130,16 +130,18 @@ class MobileClient extends React.PureComponent {
     console.log("render MobileClient id="+this.state.info.id);
 
     var clientStatusBGColor = (this.state.info.status=="active") ? 'green' : 'red';
+    var clientClassNameInputText = (this.state.info.editmode) ? 'cellTextEdit' : 'cellText';
+    var clientClassNameInputNumber = (this.state.info.editmode) ? 'cellNumberEdit' : 'cellNumber';
 
     return (
       <div className='MobileClient'>
         <table className='MobileClientTable'>
           <thead>
             <tr>
-              <td align='left'><div><input className='cellText' type="text" readOnly={!this.state.info.editmode} defaultValue={this.state.info.name_f}/></div></td>
-              <td align='left'><div><input className='cellText' type="text" readOnly={!this.state.info.editmode} defaultValue={this.state.info.name_n}/></div></td>
-              <td align='left'><div><input className='cellText' type="text" readOnly={!this.state.info.editmode} defaultValue={this.state.info.name_o}/></div></td>
-              <td align='center'><div><input className='cellNumber' type="text" readOnly={!this.state.info.editmode} onBlur={this.clientChangeEnd}  onChange={this.clientChange} defaultValue={this.state.info.balance}  ref={this.setNewBalance}/></div></td>
+              <td align='left'><div><input className={clientClassNameInputText} type="text" readOnly={!this.state.info.editmode} defaultValue={this.state.info.name_f}/></div></td>
+              <td align='left'><div><input className={clientClassNameInputText} type="text" readOnly={!this.state.info.editmode} defaultValue={this.state.info.name_n}/></div></td>
+              <td align='left'><div><input className={clientClassNameInputText} type="text" readOnly={!this.state.info.editmode} defaultValue={this.state.info.name_o}/></div></td>
+              <td align='center'><div><input className={clientClassNameInputNumber} type="text" readOnly={!this.state.info.editmode} onBlur={this.clientChangeEnd}  onChange={this.clientChange} defaultValue={this.state.info.balance}  ref={this.setNewBalance}/></div></td>
               <td className='MobileClientStatus' align='center' width='70px' bgcolor={clientStatusBGColor} onClick={this.clientChangeStatus}>{this.state.info.status}</td>
               <td className='MobileClientEdit' align='center' width='100px'><input type="button" value="Редактировать" onClick={this.clientEdit}/></td>
               <td className='MobileClientDelete' align='center' width='100px'><input type="button" value="Удалить" onClick={this.clientDelete}/></td>
