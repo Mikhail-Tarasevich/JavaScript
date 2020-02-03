@@ -67,6 +67,7 @@ class MobileClient extends React.PureComponent {
   clientChangeEnd = () => {
     console.log("clientChangeEnd");
     var client1 = {...this.state.info}; // копия самого массива клиентов
+    console.log("ID="+client1.id+", STATUS " + client1.status);
     client1.editmode = false;
     this.setState({info: client1});
     this.actionUpdate(client1.id, 'editmode', client1.editmode);
@@ -97,17 +98,6 @@ class MobileClient extends React.PureComponent {
     console.log("clientDeleteProcess id="+cid);
     this.setState({status:'delete'});
     this.actionUpdate(cid, 'status','delete');
-  };
-
-  clientChange = () => {
-    console.log("clientChange");
-//    MobileEvents.emit('ChangeClient', this.state.info.id);
-    var client1 = {...this.state.info}; // копия самого массива клиентов
-    if (client1.id==this.state.info.id) {
-      client1.status = (client1.status=='active') ? 'blocked' : 'active';
-      this.setState({info: client1});
-      this.actionUpdate(client1.id, 'status', client1.status);
-    }
   };
 
   clientDelete = () => {
