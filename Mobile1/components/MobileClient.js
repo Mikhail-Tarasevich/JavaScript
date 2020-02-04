@@ -43,7 +43,6 @@ class MobileClient extends React.PureComponent {
     MobileEvents.addListener('EditClient',this.clientEditProcess);
     MobileEvents.addListener('DeleteClient',this.clientDeleteProcess);
     MobileEvents.addListener('StatusClient',this.clientSetStatus);
-//    MobileEvents.addListener('ChangeClient',this.clientChange);
   };
 
   componentWillUnmount = () => {
@@ -51,7 +50,6 @@ class MobileClient extends React.PureComponent {
     MobileEvents.removeListener('EditClient',this.clientEditProcess);
     MobileEvents.removeListener('DeleteClient',this.clientDeleteProcess);
     MobileEvents.removeListener('StatusClient',this.clientSetStatus);
-//    MobileEvents.removeListener('ChangeClient',this.clientChange);
   };
 
   clientChange = (cid) => {
@@ -67,8 +65,7 @@ class MobileClient extends React.PureComponent {
   clientChangeEnd = () => {
     console.log("clientChangeEnd");
     var client1 = {...this.state.info}; // копия самого массива клиентов
-    console.log("ID="+client1.id+", STATUS " + client1.status);
-    client1.editmode = false;
+    client1.editmode = (this.name_f_Ref.value=='' | this.name_o_Ref.value=='' | this.name_n_Ref.value=='' | this.newBalanceRef.value=='') ? true : false;
     this.setState({info: client1});
     this.actionUpdate(client1.id, 'editmode', client1.editmode);
   };
@@ -121,9 +118,24 @@ class MobileClient extends React.PureComponent {
   };
 
   newBalanceRef = null;
+  name_o_Ref = null;
+  name_f_Ref = null;
+  name_n_Ref = null;
 
   setNewBalance = (ref) => {
     this.newBalanceRef=ref;
+  };
+
+  getName_F = (ref) => {
+    this.name_f_Ref=ref;
+  };
+
+  getName_N = (ref) => {
+    this.name_n_Ref=ref;
+  };
+
+  getName_O = (ref) => {
+    this.name_o_Ref=ref;
   };
 
   render() {
@@ -138,9 +150,9 @@ class MobileClient extends React.PureComponent {
         <table className='MobileClientTable'>
           <thead>
             <tr>
-              <td align='left'><div><input className={clientClassNameInputText} type="text" readOnly={!this.state.info.editmode} defaultValue={this.state.info.name_f}/></div></td>
-              <td align='left'><div><input className={clientClassNameInputText} type="text" readOnly={!this.state.info.editmode} defaultValue={this.state.info.name_n}/></div></td>
-              <td align='left'><div><input className={clientClassNameInputText} type="text" readOnly={!this.state.info.editmode} defaultValue={this.state.info.name_o}/></div></td>
+              <td align='left'><div><input className={clientClassNameInputText} type="text" readOnly={!this.state.info.editmode} onBlur={this.clientChangeEnd} defaultValue={this.state.info.name_f}  ref={this.getName_F}/></div></td>
+              <td align='left'><div><input className={clientClassNameInputText} type="text" readOnly={!this.state.info.editmode} onBlur={this.clientChangeEnd} defaultValue={this.state.info.name_n}  ref={this.getName_N}/></div></td>
+              <td align='left'><div><input className={clientClassNameInputText} type="text" readOnly={!this.state.info.editmode} onBlur={this.clientChangeEnd} defaultValue={this.state.info.name_o}  ref={this.getName_O}/></div></td>
               <td align='center'><div><input className={clientClassNameInputNumber} type="text" readOnly={!this.state.info.editmode} onBlur={this.clientChangeEnd}  onChange={this.clientChange} defaultValue={this.state.info.balance}  ref={this.setNewBalance}/></div></td>
               <td className='MobileClientStatus' align='center' width='70px' bgcolor={clientStatusBGColor} onClick={this.clientChangeStatus}>{this.state.info.status}</td>
               <td className='MobileClientEdit' align='center' width='100px'><input type="button" value="Редактировать" onClick={this.clientEdit}/></td>
