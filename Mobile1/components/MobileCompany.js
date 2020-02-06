@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import MobileClient from './MobileClient';
 import {MobileEvents} from './events';
 
-import Immutable from 'immutable';
-
 import './MobileCompany.css';
 
 class MobileCompany extends React.PureComponent {
@@ -46,26 +44,27 @@ class MobileCompany extends React.PureComponent {
 
   addClient = () => {
     console.log("add client");
-    let newClients=[...this.state.clients]; // копия самого массива клиентов
+    let client1=[...this.state.clients]; // копия самого массива клиентов
 
-    let newID = newClients[0].id;
-    newClients.forEach( (c,i) => {
+    let newID = client1[0].id;
+    client1.forEach( (c,i) => {
       if ( c.id>newID ) {
         newID = c.id 
       }
     } );
     newID++;
-    
-    newClients.push({
+
+    client1.push({
       id: newID,
       editmode: true,
       name_f: "",
       name_n: "",
       name_o: "",
       status: "active",
-      balance: 0,
+      balance: "",
     });
-    this.setState({clients: newClients});
+
+    this.setState({clients: client1});
   };
 
   setCompanyName = (cname) => {
@@ -78,12 +77,10 @@ class MobileCompany extends React.PureComponent {
   };
 
   setName1 = () => {
-//    this.setState({name:'МТС'});
     MobileEvents.emit('ChangeCompanyName', 'МТС');
   };
 
   setName2 = () => {
-//    this.setState({name:'Velcom'});
     MobileEvents.emit('ChangeCompanyName', 'Velcom');
   };
   
@@ -91,7 +88,6 @@ class MobileCompany extends React.PureComponent {
     let newClients=[...this.state.clients]; // копия самого массива клиентов
     newClients.forEach( (c,i) => {
       if ( c.id==clientId ) {
-      //if ( c.id==clientId && c.balance!=newBalance ) {
         let newClient={...c}; // копия хэша изменившегося клиента
         newClient.balance=newBalance;
         newClients[i]=newClient;
@@ -135,19 +131,6 @@ class MobileCompany extends React.PureComponent {
     console.log("MobileCompany render");
 
     var clientsWithFilter = this.state.clients.filter(x => (x.status === this.state.filter) || (this.state.filter === 'all'));
-/*
-    var client2 = clientsWithFilter.map(client => client);
-{
-        id: PropTypes.number.isRequired,
-        editmode: PropTypes.bool.isRequired,
-        name_f: PropTypes.string.isRequired,
-        name_n: PropTypes.string.isRequired,
-        name_o: PropTypes.string.isRequired,
-        status: PropTypes.string.isRequired,
-        balance: PropTypes.number.isRequired,
-      }
-    */
-    
     var client2 = [];
     for(var i=0; i<clientsWithFilter.length; i++) {
       var cl = {id: clientsWithFilter[i].id, 
@@ -159,7 +142,6 @@ class MobileCompany extends React.PureComponent {
                 balance: clientsWithFilter[i].balance};
       client2[i] = cl;
     }
-
 
     var clientsCode=client2.map( client =>
       <MobileClient key={client.id} info={client} cdUpdate={this.updateClient} />

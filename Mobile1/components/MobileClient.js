@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import {MobileEvents} from './events';
 
-import Immutable from 'immutable';
+import u from 'updeep';
 
 import styles from './MobileClient.css';
 
@@ -54,40 +54,45 @@ class MobileClient extends React.PureComponent {
 
   clientChange = (cid) => {
     console.log("clientChange id="+cid);
-    var client1 = {...this.state.info}; // копия самого массива клиентов
+    var client1 = Object.assign({}, this.state.info);
     if (client1.id==cid) {
-      
-      this.setState({info: client1});
+      var client2 = u(client1, client1);
+      this.setState({info: client2});
       this.actionUpdate(client1.id, 'balance', client1.balance);
     }
   };
 
   clientChangeEnd = () => {
     console.log("clientChangeEnd");
-    var client1 = {...this.state.info}; // копия самого массива клиентов
-    client1.editmode = (this.name_f_Ref.value=='' | this.name_o_Ref.value=='' | this.name_n_Ref.value=='' | this.newBalanceRef.value=='') ? true : false;
-    this.setState({info: client1});
-    this.actionUpdate(client1.id, 'editmode', client1.editmode);
+
+    var client1 = Object.assign({}, this.state.info);
+    var newEditMode = (this.name_f_Ref.value=='' | this.name_o_Ref.value=='' | this.name_n_Ref.value=='' | this.newBalanceRef.value=='') ? true : false;
+
+    var client2 = u({'editmode': newEditMode}, client1);
+    this.setState({info: client2});
+    this.actionUpdate(client1.id, 'editmode', newEditMode);
   };
 
   clientSetStatus = (cid) => {
     console.log("clientSetStatus id="+cid);
-    var client1 = {...this.state.info}; // копия самого массива клиентов
+    var client1 = Object.assign({}, this.state.info);
     if (client1.id==cid) {
-      client1.status = (client1.status=='active') ? 'blocked' : 'active';
-      this.setState({info: client1});
-      this.actionUpdate(client1.id, 'status', client1.status);
+      var newStatus = (client1.status=='active') ? 'blocked' : 'active';
+      var client2 = u({'status': newStatus}, client1);
+      this.setState({info: client2});
+      this.actionUpdate(client1.id, 'status', newStatus);
     }
   };
 
   clientEditProcess = (cid) => {
     console.log("clientEditProcess id="+cid);
 
-    var client1 = {...this.state.info}; // копия самого массива клиентов
+    var client1 = Object.assign({}, this.state.info);
     if (client1.id==cid) {
-      client1.editmode = !client1.editmode;
-      this.setState({info: client1});
-      this.actionUpdate(client1.id, 'editmode', client1.editmode);
+      var newEditmode = !client1.editmode;
+      var client2 = u({'editmode': newEditmode}, client1);
+      this.setState({info: client2});
+      this.actionUpdate(client1.id, 'editmode', newEditmode);
     }
   };
 
