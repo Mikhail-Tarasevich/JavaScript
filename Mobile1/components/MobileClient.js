@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import {MobileEvents} from './events';
 
-import u from 'updeep';
+import u from 'updeep'; 
 
 import styles from './MobileClient.css';
 
