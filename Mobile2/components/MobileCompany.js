@@ -128,13 +128,25 @@ class MobileCompany extends React.PureComponent {
   };
   
   render() {
-    console.log("render MobileCompany");
+    console.log("MobileCompany render");
 
     var clientsWithFilter = this.state.clients.filter(x => (x.status === this.state.filter) || (this.state.filter === 'all'));
-    var clientsCode=clientsWithFilter.map( client =>
+    var client2 = [];
+    for(var i=0; i<clientsWithFilter.length; i++) {
+      var cl = {id: clientsWithFilter[i].id, 
+                editmode: clientsWithFilter[i].editmode, 
+                name_f: clientsWithFilter[i].name_f, 
+                name_n: clientsWithFilter[i].name_n, 
+                name_o: clientsWithFilter[i].name_o, 
+                status: clientsWithFilter[i].status, 
+                balance: clientsWithFilter[i].balance};
+      client2[i] = cl;
+    }
+
+    var clientsCode=client2.map( client =>
       <MobileClient key={client.id} info={client} cdUpdate={this.updateClient} />
     );
-    
+
     return (
       <div className='MobileCompany'>
         <input type="button" value="=МТС" onClick={this.setName1} />

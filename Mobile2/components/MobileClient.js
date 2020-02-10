@@ -39,14 +39,14 @@ class MobileClient extends React.PureComponent {
   };
 
   componentDidMount = () => {
-//    console.log("componentDidMount");
+    console.log("componentDidMount");
     MobileEvents.addListener('EditClient',this.clientEditProcess);
     MobileEvents.addListener('DeleteClient',this.clientDeleteProcess);
     MobileEvents.addListener('StatusClient',this.clientSetStatus);
   };
 
   componentWillUnmount = () => {
-  //  console.log("componentWillUnmount");
+    console.log("componentWillUnmount");
     MobileEvents.removeListener('EditClient',this.clientEditProcess);
     MobileEvents.removeListener('DeleteClient',this.clientDeleteProcess);
     MobileEvents.removeListener('StatusClient',this.clientSetStatus);
@@ -118,6 +118,7 @@ class MobileClient extends React.PureComponent {
   };
   
   componentWillReceiveProps = (newProps) => {
+    console.log("componentWillReceiveProps id="+this.props.info.id);
     this.setState({info:newProps.info});
   };
 
