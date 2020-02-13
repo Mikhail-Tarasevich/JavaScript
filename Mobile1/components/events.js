@@ -6,5 +6,6 @@ let MobileEvents=new EventEmitter();
 // AddClient - в список добавлен новый клиент
 // DeleteClient - удален клиент
 // EditClient - изменен клиент
+// StatusClient - изменен статус клиента
 
 export {MobileEvents};
