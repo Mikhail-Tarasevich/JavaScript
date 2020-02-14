@@ -69,26 +69,6 @@ class MobileCompany extends React.PureComponent {
     }
   };
 
-  /*
-
-  clientEditProcessEnd = (cid) => {
-    console.log("clientEditProcessEnd id="+cid);
-
-    let newClients=[...this.state.clients]; // копия самого массива клиентов
-
-    for (var i=0; i<newClients.length; i++) {
-        if (newClients[i].id==cid) {
-          var client1 = Object.assign({}, newClients);
-          var client2 = u({i: client1}, client1[i]);
-          client2 = u({'editmode': false}, client2);
-          newClients[i] = client2;
-          this.setState({clients: newClients});
-          break;
-        }
-    }
-  };
-  */
-
   clientEditProcessEnd = (client) => {
     console.log("clientEditProcessEnd id="+client.id);
 
@@ -179,18 +159,6 @@ class MobileCompany extends React.PureComponent {
     MobileEvents.emit('ChangeCompanyName', 'Velcom');
   };
 
-  updateClient = (clientId,fieldname,newvalue) => {
-    let newClients=[...this.state.clients]; // копия самого массива клиентов
-
-    for (var i=0; i<newClients.length; i++) {
-        if (newClients[i].id==clientId) {
-          newClients[i][fieldname] = newvalue;  
-        }
-    }
-
-    this.setState({clients:newClients});
-  }
-
   clientAdd = () => {
     MobileEvents.emit('AddClient');
   };
@@ -212,7 +180,7 @@ class MobileCompany extends React.PureComponent {
 
     var clientsWithFilter = this.state.clients.filter(x => ((x.status != 'delete') && ((x.status === this.state.filter) || (this.state.filter === 'all'))));
     var clientsCode=clientsWithFilter.map( client =>
-      <MobileClient key={client.id} info={client} cdUpdate={this.updateClient} />
+      <MobileClient key={client.id} info={client}/>
     );
     
     return (

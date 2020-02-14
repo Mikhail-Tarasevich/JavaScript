@@ -19,17 +19,10 @@ class MobileClient extends React.PureComponent {
       status: PropTypes.string.isRequired,
       balance: PropTypes.string.isRequired,
     }),
-    cdUpdate: PropTypes.func,
   };
 
   state = {
     info: this.props.info,
-    cdUpdate: this.props.cdUpdate,
-  };
-
-  actionUpdate = (clientId,fieldname,newvalue) => {
-    console.log("actionUpdate");
-    this.state.cdUpdate(clientId,fieldname,newvalue);
   };
 
   handleSubmit = e => {
