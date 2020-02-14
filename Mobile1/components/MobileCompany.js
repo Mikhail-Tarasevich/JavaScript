@@ -37,6 +37,7 @@ class MobileCompany extends React.PureComponent {
     MobileEvents.addListener('ChangeFilter',this.setCompanyFilter);
     MobileEvents.addListener('AddClient',this.addClient);
     MobileEvents.addListener('EditClient',this.clientEditProcess);
+    MobileEvents.addListener('EditClientEnd',this.clientEditProcessEnd);
     MobileEvents.addListener('DeleteClient',this.clientDeleteProcess);
     MobileEvents.addListener('StatusClient',this.clientSetStatus);
   };
@@ -46,6 +47,7 @@ class MobileCompany extends React.PureComponent {
     MobileEvents.removeListener('ChangeFilter',this.setCompanyFilter);
     MobileEvents.removeListener('AddClient',this.addClient);
     MobileEvents.removeListener('EditClient',this.clientEditProcess);
+    MobileEvents.removeListener('EditClientEnd',this.clientEditProcessEnd);
     MobileEvents.removeListener('DeleteClient',this.clientDeleteProcess);
     MobileEvents.removeListener('StatusClient',this.clientSetStatus);
   };
@@ -60,6 +62,41 @@ class MobileCompany extends React.PureComponent {
           var client1 = Object.assign({}, newClients);
           var newEditMode = !client1[i].editmode;
           var client2 = u({'editmode': newEditMode}, client1[i]);
+          newClients[i] = client2;
+          this.setState({clients: newClients});
+          break;
+        }
+    }
+  };
+
+  /*
+
+  clientEditProcessEnd = (cid) => {
+    console.log("clientEditProcessEnd id="+cid);
+
+    let newClients=[...this.state.clients]; // копия самого массива клиентов
+
+    for (var i=0; i<newClients.length; i++) {
+        if (newClients[i].id==cid) {
+          var client1 = Object.assign({}, newClients);
+          var client2 = u({i: client1}, client1[i]);
+          client2 = u({'editmode': false}, client2);
+          newClients[i] = client2;
+          this.setState({clients: newClients});
+          break;
+        }
+    }
+  };
+  */
+
+  clientEditProcessEnd = (client) => {
+    console.log("clientEditProcessEnd id="+client.id);
+
+    let newClients=[...this.state.clients]; // копия самого массива клиентов
+
+    for (var i=0; i<newClients.length; i++) {
+        if (newClients[i].id==client.id) {
+          var client2 = u({'editmode': false}, client);
           newClients[i] = client2;
           this.setState({clients: newClients});
           break;

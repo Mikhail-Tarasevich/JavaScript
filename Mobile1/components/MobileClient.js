@@ -42,7 +42,14 @@ class MobileClient extends React.PureComponent {
     console.log("clientChangeEnd");
     // если клиент находится в режиме редактирования и все поля заполнены, то завершаем редактирование - переводим клиента в режим чтения
     if (this.state.info.editmode==true && !(this.name_f_Ref.value=='' | this.name_o_Ref.value=='' | this.name_n_Ref.value=='' | this.newBalanceRef.value=='')) {
-      MobileEvents.emit('EditClient', this.state.info.id);
+      // обновляем поля клиента данными из input
+      var newValue = this.state.info;
+      newValue.name_f = this.name_f_Ref.value;
+      newValue.name_n = this.name_n_Ref.value;
+      newValue.name_o = this.name_o_Ref.value;
+      newValue.balance = this.newBalanceRef.value;
+      this.setState({info: newValue});
+      MobileEvents.emit('EditClientEnd', this.state.info);
     }
   };
 
@@ -91,7 +98,6 @@ class MobileClient extends React.PureComponent {
 
     var clientStatusBGColor = (this.state.info.status=="active") ? 'green' : 'red';
     var clientClassNameInputText = (this.state.info.editmode) ? 'cellTextEdit' : 'cellText';
-    var clientClassNameInputNumber = (this.state.info.editmode) ? 'cellNumberEdit' : 'cellNumber';
 
     return (
       <div className='MobileClient'>

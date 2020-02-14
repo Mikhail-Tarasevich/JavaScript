@@ -5,7 +5,8 @@ let MobileEvents=new EventEmitter();
 // ChangeFilter - фильтр компаний изменен
 // AddClient - в список добавлен новый клиент
 // DeleteClient - удален клиент
-// EditClient - изменен клиент
+// EditClient - нажата кнопка изменения клиента
+// EditClientEnd - изменения клиента завершены
 // StatusClient - изменен статус клиента
 
 export {MobileEvents};
