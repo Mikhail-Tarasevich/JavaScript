@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import MobileClient from './MobileClient';
 import {MobileEvents} from './events';
 
+import u from 'updeep'; 
+
 import './MobileCompany.css';
 
 class MobileCompany extends React.PureComponent {
@@ -19,7 +21,7 @@ class MobileCompany extends React.PureComponent {
         name_n: PropTypes.string.isRequired,
         name_o: PropTypes.string.isRequired,
         status: PropTypes.string.isRequired,
-        balance: PropTypes.number.isRequired,
+        balance: PropTypes.string.isRequired,
       })
     ),
   };
@@ -34,12 +36,85 @@ class MobileCompany extends React.PureComponent {
     MobileEvents.addListener('ChangeCompanyName',this.setCompanyName);
     MobileEvents.addListener('ChangeFilter',this.setCompanyFilter);
     MobileEvents.addListener('AddClient',this.addClient);
+    MobileEvents.addListener('EditClient',this.clientEditProcess);
+    MobileEvents.addListener('EditClientEnd',this.clientEditProcessEnd);
+    MobileEvents.addListener('DeleteClient',this.clientDeleteProcess);
+    MobileEvents.addListener('StatusClient',this.clientSetStatus);
   };
 
   componentWillUnmount = () => {
     MobileEvents.removeListener('ChangeCompanyName',this.setCompanyName);
     MobileEvents.removeListener('ChangeFilter',this.setCompanyFilter);
     MobileEvents.removeListener('AddClient',this.addClient);
+    MobileEvents.removeListener('EditClient',this.clientEditProcess);
+    MobileEvents.removeListener('EditClientEnd',this.clientEditProcessEnd);
+    MobileEvents.removeListener('DeleteClient',this.clientDeleteProcess);
+    MobileEvents.removeListener('StatusClient',this.clientSetStatus);
+  };
+
+  clientEditProcess = (cid) => {
+    console.log("clientEditProcess id="+cid);
+
+    let newClients=[...this.state.clients]; // копия самого массива клиентов
+
+    for (var i=0; i<newClients.length; i++) {
+        if (newClients[i].id==cid) {
+          var client1 = Object.assign({}, newClients);
+          var newEditMode = !client1[i].editmode;
+          var client2 = u({'editmode': newEditMode}, client1[i]);
+          newClients[i] = client2;
+          this.setState({clients: newClients});
+          break;
+        }
+    }
+  };
+
+  clientEditProcessEnd = (client) => {
+    console.log("clientEditProcessEnd id="+client.id);
+
+    let newClients=[...this.state.clients]; // копия самого массива клиентов
+
+    for (var i=0; i<newClients.length; i++) {
+        if (newClients[i].id==client.id) {
+          var client2 = u({'editmode': false}, client);
+          newClients[i] = client2;
+          this.setState({clients: newClients});
+          break;
+        }
+    }
+  };
+
+  clientSetStatus = (cid) => {
+    console.log("clientSetStatus id="+cid);
+
+    let newClients=[...this.state.clients]; // копия самого массива клиентов
+
+    for (var i=0; i<newClients.length; i++) {
+        if (newClients[i].id==cid) {
+          var client1 = Object.assign({}, newClients);
+          var newStatus = (client1[i].status=='active') ? 'blocked' : 'active';
+          var client2 = u({'status': newStatus}, client1[i]);
+          newClients[i] = client2;
+          this.setState({clients: newClients});
+          break;
+        }
+    }
+  };
+
+  clientDeleteProcess = (cid) => {
+    console.log("clientDeleteProcess id="+cid);
+    let newClients=[...this.state.clients]; // копия самого массива клиентов
+
+    for (var i=0; i<newClients.length; i++) {
+        if (newClients[i].id==cid) {
+          var client1 = Object.assign({}, newClients);
+          var newStatus = (client1[i].status=='active') ? 'blocked' : 'active';
+          var client2 = u({'status': 'delete'}, client1[i]);
+          newClients[i] = client2;
+          this.setState({clients: newClients});
+          break;
+        }
+    }
   };
 
   addClient = () => {
@@ -83,33 +158,6 @@ class MobileCompany extends React.PureComponent {
   setName2 = () => {
     MobileEvents.emit('ChangeCompanyName', 'Velcom');
   };
-  
-  setBalance = (clientId,newBalance) => {
-    let newClients=[...this.state.clients]; // копия самого массива клиентов
-    newClients.forEach( (c,i) => {
-      if ( c.id==clientId ) {
-        let newClient={...c}; // копия хэша изменившегося клиента
-        newClient.balance=newBalance;
-        newClients[i]=newClient;
-      }
-    } );
-    this.setState({clients:newClients});
-  };
-
-  updateClient = (clientId,fieldname,newvalue) => {
-    var newInfo = {clientId: clientId,fieldname: fieldname, newvalue: newvalue};
-    let newClients=[...this.state.clients]; // копия самого массива клиентов
-
-    for (var i=0; i<newClients.length; i++) {
-        if (newClients[i].id==clientId) {
-          newClients[i][fieldname] = newvalue;  
-        }
-    }
-
-    newClients = newClients.filter(x => (x.status != 'delete'));
-
-    this.setState({clients:newClients});
-  }
 
   clientAdd = () => {
     MobileEvents.emit('AddClient');
@@ -128,25 +176,13 @@ class MobileCompany extends React.PureComponent {
   };
   
   render() {
-    console.log("MobileCompany render");
+    console.log("render MobileCompany");
 
-    var clientsWithFilter = this.state.clients.filter(x => (x.status === this.state.filter) || (this.state.filter === 'all'));
-    var client2 = [];
-    for(var i=0; i<clientsWithFilter.length; i++) {
-      var cl = {id: clientsWithFilter[i].id, 
-                editmode: clientsWithFilter[i].editmode, 
-                name_f: clientsWithFilter[i].name_f, 
-                name_n: clientsWithFilter[i].name_n, 
-                name_o: clientsWithFilter[i].name_o, 
-                status: clientsWithFilter[i].status, 
-                balance: clientsWithFilter[i].balance};
-      client2[i] = cl;
-    }
-
-    var clientsCode=client2.map( client =>
-      <MobileClient key={client.id} info={client} cdUpdate={this.updateClient} />
+    var clientsWithFilter = this.state.clients.filter(x => ((x.status != 'delete') && ((x.status === this.state.filter) || (this.state.filter === 'all'))));
+    var clientsCode=clientsWithFilter.map( client =>
+      <MobileClient key={client.id} info={client}/>
     );
-
+    
     return (
       <div className='MobileCompany'>
         <input type="button" value="=МТС" onClick={this.setName1} />
