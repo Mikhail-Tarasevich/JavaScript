@@ -42,19 +42,9 @@ class Good extends React.Component {
   };
 
   render() {
-    var goodline  = Object.assign({}, this.state);
-    var style = this.props.isSelect ? { backgroundColor: 'red'} : { backgroundColor: 'cyan'};
 
-    return  React.DOM.table({className: "GoodLine"}, 
-      React.DOM.thead(null, 
-        React.DOM.tr({onClick:this.trOnClick, style: style}, 
-          React.DOM.td({className: "tdName"}, goodline.name), 
-          React.DOM.td({className: "tdPrice"}, goodline.price), 
-          React.DOM.td({className: "tdURL"}, goodline.url), 
-          React.DOM.td({className: "tdCount"}, goodline.count), 
-          React.DOM.td({className: "tdControl"}, React.DOM.input({type:'button',value:'Delete',onClick:this.actionDelete}))
-        ),
-      )
+    return(
+<div>{this.props.name}</div>
     );
   };
 

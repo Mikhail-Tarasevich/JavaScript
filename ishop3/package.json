@@ -1,23 +1,36 @@
 {
-  "name": "ishop3",
+  "name": "mobile",
   "version": "1.0.0",
-  "description": "Интернет-магазин",
-  "main": "GoodList.js",
+  "description": "мобильная компания",
+  "main": "App.js",
   "scripts": {
-    "start": ".\\node_modules\\.bin\\lite-server"
+    "build": ".\\node_modules\\.bin\\webpack",
+    "livebuild": ".\\node_modules\\.bin\\webpack-dev-server --progress --colors"
   },
-  "author": "Tarasevich Mikhail",
+  "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.7.4",
-    "@babel/core": "^7.7.4",
-    "@babel/node": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "babel-install": "^2.1.0",
-    "lite-server": "^2.3.0",
-    "webpack": "^4.41.2"
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "style-loader": "^1.1.2",
+    "webpack": "^3.12.0",
+    "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
-    "prop-types": "^15.7.2"
+    "immutable": "^4.0.0-rc.12",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "updeep": "^1.2.0"
   }
 }
