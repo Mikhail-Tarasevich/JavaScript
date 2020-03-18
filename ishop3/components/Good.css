@@ -22,3 +22,9 @@
 {
   width: 70px;
 }
+
+.cellText
+{
+  border: 10px;
+  background-color: lightyellow;   
+}
