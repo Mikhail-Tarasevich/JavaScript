@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import './GoodList.css';
 
 import Good from './Good';
+import GoodInfo from './GoodInfo';
+
 import {ShopEvents} from './events';
 import u from 'updeep'; 
 
@@ -75,9 +77,17 @@ class GoodList extends React.PureComponent {
     render() {
       console.log("render GoodList ");
 
-      var goods=this.state.goods.map( g =>
+      var goods = this.state.goods.map( g =>
         <Good key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url} isSelect={g.isSelect}/>
       );
+      var goodbottom = this.state.goods.filter(g => g.isSelect);
+      if (goodbottom.length>0) {
+        var g = goodbottom[0];
+        goodbottom = <GoodInfo key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url}/>
+      }
+      else {
+        goodbottom = "";
+      }
 
       return (
         <div className='Shop'>
@@ -97,7 +107,8 @@ class GoodList extends React.PureComponent {
         <div className='Goods'>
           {goods}
         </div>
-        <input type="button" value="New Product" onClick={this.clientAdd} />
+        <div className='NewProduct'><input type="button" value="New Product" onClick={this.clientAdd} /></div>
+        <div className='GoodBottom'>{goodbottom}</div>
       </div>
       )
     };
