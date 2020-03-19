@@ -5,10 +5,13 @@ import './GoodList.css';
 import {ShopEvents} from './events';
 
 class Good extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state.isDelete = false;
+  };
 
   static propTypes = {
-    cdDelete: PropTypes.func,
-    cdSelect: PropTypes.func,
+    isDelete: PropTypes.bool,
     isSelect: PropTypes.bool,
     url: PropTypes.string,
     name: PropTypes.string,
@@ -23,8 +26,7 @@ class Good extends React.PureComponent {
   };
 
   state = {
-      cdDelete: this.props.cdDelete,
-      cdSelect: this.props.cdSelect,
+      isDelete: this.props.isDelete,
       isSelect: this.props.isSelect,
       id: this.props.id,
       url: this.props.url,
@@ -34,14 +36,20 @@ class Good extends React.PureComponent {
   };
 
   actionDelete = () => {
+    console.log("delete Good "+this.props.id);
+    this.state.isDelete = true;
     ShopEvents.emit('DeleteGood', this.state.id);
   };
 
   actionSelect = () => {
-    ShopEvents.emit('SelectGood', this.state.id);
+    if (!this.state.isDelete) {
+      console.log("select Good "+this.props.id);
+      ShopEvents.emit('SelectGood', this.state.id);
+    }
   };
 
   render() {
+    console.log("render Good "+this.props.id);
     var style = this.props.isSelect ? { backgroundColor: 'red'} : { backgroundColor: 'cyan'};
 
     return(

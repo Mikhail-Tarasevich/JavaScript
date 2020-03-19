@@ -44,6 +44,7 @@ class GoodList extends React.PureComponent {
           if (newGoods[i].id==cid) {
             newGoods.splice(i,1);
             this.setState({goods: newGoods});
+            console.log("GoodList delete Good "+cid);
             break;
           }
       }
@@ -59,17 +60,21 @@ class GoodList extends React.PureComponent {
             var good2 = u({'isSelect': newStatus}, good1[i]);
             newGoods[i] = good2;
             this.setState({goods: newGoods});
+            console.log("GoodList select Good "+cid);
           }
           else if (newGoods[i].isSelect) {
             var good1 = Object.assign({}, newGoods);
             var good2 = u({'isSelect': false}, good1[i]);
             newGoods[i] = good2;
             this.setState({goods: newGoods});
+            console.log("GoodList unselect Good "+i);
           }
       }
     };
   
     render() {
+      console.log("render GoodList ");
+
       var goods=this.state.goods.map( g =>
         <Good key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url} isSelect={g.isSelect}/>
       );
