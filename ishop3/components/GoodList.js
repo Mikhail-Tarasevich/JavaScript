@@ -5,6 +5,7 @@ import './GoodList.css';
 
 import Good from './Good';
 import GoodInfo from './GoodInfo';
+import GoodEdit from './GoodEdit';
 
 import {ShopEvents} from './events';
 import u from 'updeep'; 
@@ -107,6 +108,7 @@ class GoodList extends React.PureComponent {
         <div className='Goods'>
           {goods}
         </div>
+        <br></br>
         <div className='NewProduct'><input type="button" value="New Product" onClick={this.clientAdd} /></div>
         <div className='GoodBottom'>{goodbottom}</div>
       </div>
