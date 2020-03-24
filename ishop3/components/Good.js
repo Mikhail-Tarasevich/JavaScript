@@ -35,6 +35,11 @@ class Good extends React.PureComponent {
       price: this.props.price,
   };
 
+  actionEdit = () => {
+    console.log("edit Good "+this.props.id);
+    ShopEvents.emit('EditGood', this.state.id);
+  };
+
   actionDelete = () => {
     console.log("delete Good "+this.props.id);
     this.state.isDelete = true;
@@ -61,7 +66,7 @@ class Good extends React.PureComponent {
               <td><div><input className='cellText' size='5' type="text" readOnly={true} defaultValue={this.state.price}/></div></td>
               <td><div><input className='cellText' size='20' type="text" readOnly={true} defaultValue={this.state.url}/></div></td>
               <td><div><input className='cellText' size='5' type="text" readOnly={true} defaultValue={this.state.count}/></div></td>
-              <td className='GoodEdit' align='center' width='100px'><input type="button" value="Edit" onClick={this.actionDelete}/></td>
+              <td className='GoodEdit' align='center' width='100px'><input type="button" value="Edit" onClick={this.actionEdit}/></td>
               <td className='GoodDelete' align='center' width='100px'><input type="button" value="Delete" onClick={this.actionDelete}/></td>
             </tr>
           </thead>
