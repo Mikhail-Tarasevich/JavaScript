@@ -68,10 +68,17 @@ class GoodList extends React.PureComponent {
       for (var i=0; i<newGoods.length; i++) {
         if (newGoods[i].id==cid) {
           var good1 = Object.assign({}, newGoods);
-          var good2 = u({'mode': "edit"}, good1[i]);
+          var good2 = u({'mode': "edit", 'isSelect': true}, good1[i]);
           newGoods[i] = good2;
           this.setState({goods: newGoods});
           console.log("GoodList edit Good "+cid);
+        }
+        else if (newGoods[i].isSelect) {
+          var good1 = Object.assign({}, newGoods);
+          var good2 = u({'mode': "info", 'isSelect': false}, good1[i]);
+          newGoods[i] = good2;
+          this.setState({goods: newGoods});
+          console.log("GoodList edit unselect Good "+i);
         }
       }
     };
@@ -80,7 +87,7 @@ class GoodList extends React.PureComponent {
       let newGoods=[...this.state.goods]; // копия самого массива товаров
   
       for (var i=0; i<newGoods.length; i++) {
-          if (newGoods[i].id==cid) {
+          if (newGoods[i].id==cid && !newGoods[i].isSelect) {
             var good1 = Object.assign({}, newGoods);
             var newStatus = !good1[i].isSelect;
             var good2 = u({'isSelect': newStatus}, good1[i]);
@@ -108,23 +115,21 @@ class GoodList extends React.PureComponent {
         <Good key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url} isSelect={g.isSelect}/>
       );
 
-//      if (this.state.showAddGood) {
-  //      maxID++;
-    //    goodbottom = <GoodEdit mode='new' key={String(maxID)} name='' id={String(maxID)} count='' price='' url=''/>
-      //}
-//      else {
+        var buttonNewProduct = <div className='NewProduct'><input type="button" value="New Product" onClick={this.goodAdd} /></div>
         var goodbottom = this.state.goods.filter(g => g.isSelect);
-        if (goodbottom.mode=='edit') {
-          goodbottom = <GoodInfo mode='edit' key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url}/>
+        var g = goodbottom[0];
+        if (g!=undefined) {
+          if (g.mode=='edit') {
+            goodbottom = <GoodEdit key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url}/>
+            buttonNewProduct = "";
+          }
+          else if (goodbottom.length>0) {
+            goodbottom = <GoodInfo key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url}/>
+          }
+          else {
+            goodbottom = "";
+          }
         }
-        else if (goodbottom.length>0) {
-          var g = goodbottom[0];
-          goodbottom = <GoodInfo key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url}/>
-        }
-        else {
-          goodbottom = "";
-        }
-  //    }
 
       return (
         <div className='Shop'>
@@ -145,7 +150,7 @@ class GoodList extends React.PureComponent {
           {goods}
         </div>
         <br></br>
-        <div className='NewProduct'><input type="button" value="New Product" onClick={this.goodAdd} /></div>
+        {buttonNewProduct}
         <div className='GoodBottom'>{goodbottom}</div>
       </div>
       )

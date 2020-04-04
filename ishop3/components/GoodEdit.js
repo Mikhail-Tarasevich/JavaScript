@@ -5,7 +5,6 @@ import './GoodEdit.css';
 
 class GoodEdit extends React.PureComponent {
     static propTypes = {
-      mode: PropTypes.string,
       url: PropTypes.string,
       name: PropTypes.string,
       count: PropTypes.oneOfType([
@@ -19,7 +18,6 @@ class GoodEdit extends React.PureComponent {
     };
     
     state = {
-      mode: this.props.mode,
       id: this.props.id,
       url: this.props.url,
       name: this.props.name,
@@ -37,14 +35,15 @@ class GoodEdit extends React.PureComponent {
     
         return(
           <div className='GoodEdit'>
-            <br></br>
+            <p><b>Edit existing product</b></p>
+
             <table className='GoodTable'>
               <thead>
                 <tr><td><div>ID: {this.state.id}</div></td></tr>
-                <tr><td><div><input className='cellText' size='85' type="text" readOnly={true} defaultValue={this.state.name}/></div></td></tr>
-                <tr><td><div><input className='cellText' size='5' type="text" readOnly={true} defaultValue={this.state.price}/></div></td></tr>
-                <tr><td><div><input className='cellText' size='20' type="text" readOnly={true} defaultValue={this.state.url}/></div></td></tr>
-                <tr><td><div><input className='cellText' size='5' type="text" readOnly={true} defaultValue={this.state.count}/></div></td></tr>
+                <tr><td><div><input className='cellText' size='85' type="text" defaultValue={this.state.name}/></div></td></tr>
+                <tr><td><div><input className='cellText' size='5' type="text" defaultValue={this.state.price}/></div></td></tr>
+                <tr><td><div><input className='cellText' size='20' type="text" defaultValue={this.state.url}/></div></td></tr>
+                <tr><td><div><input className='cellText' size='5' type="text" defaultValue={this.state.count}/></div></td></tr>
                 <tr><td className='GoodEditButtons' width='100px'>{buttons}</td></tr>
               </thead>
             </table>

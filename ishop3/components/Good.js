@@ -37,6 +37,7 @@ class Good extends React.PureComponent {
 
   actionEdit = () => {
     console.log("edit Good "+this.props.id);
+    this.state.isSelect = true;
     ShopEvents.emit('EditGood', this.state.id);
   };
 
@@ -47,7 +48,7 @@ class Good extends React.PureComponent {
   };
 
   actionSelect = () => {
-    if (!this.state.isDelete) {
+    if (!this.state.isDelete && !this.state.isSelect) {
       console.log("select Good "+this.props.id);
       ShopEvents.emit('SelectGood', this.state.id);
     }

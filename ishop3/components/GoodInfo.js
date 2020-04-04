@@ -31,7 +31,7 @@ class GoodInfo extends React.PureComponent {
         return(
           <div className='GoodInfo'>
               <br></br>
-              <p><b>{this.state.name}</b></p>
+              <p><b>Product {this.state.name}</b></p>
 
               <p>Price: <b>{this.state.price}</b></p>
               <p>{this.state.url}</p>
