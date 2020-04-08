@@ -98,7 +98,8 @@ class GoodEdit extends React.PureComponent {
     render() {
         console.log("render GoodEdit "+this.props.id);
 
-        var b1 = <input type="button" value="Save" onClick={this.actionSave}/>;
+        var saveMode = !(this.state.errors.count=="" && this.state.errors.price=="" && this.state.errors.url=="" && this.state.errors.count=="")
+        var b1 = <input type="button" value="Save" onClick={this.actionSave} disabled={saveMode}/>;
         var b2 = <input type="button" value="Cancel" onClick={this.actionCancel}/>;
         var b3 = <input type="button" value="Add" onClick={this.actionAdd}/>;
         var buttons = (this.state.mode=='new') ? <div>{b3} {b2}</div> : <div>{b1} {b2}</div>;
