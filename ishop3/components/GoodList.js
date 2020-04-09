@@ -21,16 +21,19 @@ class GoodList extends React.PureComponent {
         }
       );
       this.state.showAddGood = false;
+      this.state.mode = "info";
     };
 
     static propTypes = {
       goods: PropTypes.array,
       showAddGood: PropTypes.bool,
+      mode: PropTypes.string,
     };
 
     state = {
       goods: this.props.goods,
       showAddGood: this.props.showAddGood,
+      mode: "info",
     };
 
     componentDidMount = () => {
@@ -70,7 +73,7 @@ class GoodList extends React.PureComponent {
           var good1 = Object.assign({}, newGoods);
           var good2 = u({'mode': "edit", 'isSelect': true}, good1[i]);
           newGoods[i] = good2;
-          this.setState({goods: newGoods});
+          this.setState({goods: newGoods, mode: "edit"});
           console.log("GoodList edit Good "+cid);
         }
         else if (newGoods[i].isSelect) {
@@ -111,25 +114,36 @@ class GoodList extends React.PureComponent {
       var maxID = 0;
       this.state.goods.forEach((g) => {maxID = (maxID<Number(g.id)) ? Number(g.id) : maxID});
 
-      var goods = this.state.goods.map( g =>
-        <Good key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url} isSelect={g.isSelect}/>
-      );
+      var isButtonDisable = (this.state.mode=="edit");
+//      var goods = this.state.goods.map( g =>
+  //      <Good key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url} isSelect={g.isSelect} isButtonDisable={this.isButtonDisable}/>
+    //  );
+      if (isButtonDisable) {
+        this.state.goods.map( g =>
+          <Good key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url} isSelect={g.isSelect} isButtonDisable={true}/>
+        );
+      }
+      else {
+        this.state.goods.map( g =>
+          <Good key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url} isSelect={g.isSelect} isButtonDisable={false}/>
+        );
+      }
 
-        var buttonNewProduct = <div className='NewProduct'><input type="button" value="New Product" onClick={this.goodAdd} /></div>
-        var goodbottom = this.state.goods.filter(g => g.isSelect);
-        var g = goodbottom[0];
-        if (g!=undefined) {
-          if (g.mode=='edit') {
-            goodbottom = <GoodEdit key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url}/>
-            buttonNewProduct = "";
-          }
-          else if (goodbottom.length>0) {
-            goodbottom = <GoodInfo key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url}/>
-          }
-          else {
-            goodbottom = "";
-          }
+      var buttonNewProduct = <div className='NewProduct'><input type="button" value="New Product" onClick={this.goodAdd} /></div>
+      var goodbottom = this.state.goods.filter(g => g.isSelect);
+      var g = goodbottom[0];
+      if (g!=undefined) {
+        if (g.mode=='edit') {
+          goodbottom = <GoodEdit key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url}/>
+          buttonNewProduct = "";
         }
+        else if (goodbottom.length>0) {
+          goodbottom = <GoodInfo key={g.id} name={g.name} id={g.id} count={g.count} price={g.price} url={g.url}/>
+          }
+        else {
+          goodbottom = "";
+        }
+      }
 
       return (
         <div className='Shop'>

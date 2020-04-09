@@ -25,6 +25,7 @@ class GoodEdit extends React.PureComponent {
       count: this.props.count,
       price: this.props.price,
       errors: {name: "", count: "", price: "", url: ""},
+      ischange: false,
     };
 
     // обработчик изменений name --- Начало кода
@@ -39,7 +40,7 @@ class GoodEdit extends React.PureComponent {
       if (this.state.errors.name!=errorName) {
         var errors1 = Object.assign({}, this.state.errors);
         var errors2 = u({'name': errorName}, errors1);
-        this.setState({errors: errors2});
+        this.setState({errors: errors2, ischange: true});
       }
     }
     // обработчик изменений name --- Конец кода
@@ -56,7 +57,7 @@ class GoodEdit extends React.PureComponent {
       if (this.state.errors.price!=errorprice) {
         var errors1 = Object.assign({}, this.state.errors);
         var errors2 = u({'price': errorprice}, errors1);
-        this.setState({errors: errors2});
+        this.setState({errors: errors2, ischange: true});
       }
     }
     // обработчик изменений price --- Конец кода
@@ -73,7 +74,7 @@ class GoodEdit extends React.PureComponent {
       if (this.state.errors.url!=errorurl) {
         var errors1 = Object.assign({}, this.state.errors);
         var errors2 = u({'url': errorurl}, errors1);
-        this.setState({errors: errors2});
+        this.setState({errors: errors2, ischange: true});
       }
     }
     // обработчик изменений url --- Конец кода
@@ -90,7 +91,7 @@ class GoodEdit extends React.PureComponent {
       if (this.state.errors.count!=errorcount) {
         var errors1 = Object.assign({}, this.state.errors);
         var errors2 = u({'count': errorcount}, errors1);
-        this.setState({errors: errors2});
+        this.setState({errors: errors2, ischange: true});
       }
     }
     // обработчик изменений count --- Конец кода

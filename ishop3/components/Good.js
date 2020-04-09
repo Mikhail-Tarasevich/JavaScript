@@ -8,9 +8,11 @@ class Good extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state.isDelete = false;
+    this.state.isButtonDisable = false;
   };
 
   static propTypes = {
+    isButtonDisable: PropTypes.bool,
     isDelete: PropTypes.bool,
     isSelect: PropTypes.bool,
     url: PropTypes.string,
@@ -33,6 +35,7 @@ class Good extends React.PureComponent {
       name: this.props.name,
       count: this.props.count,
       price: this.props.price,
+      isButtonDisable: this.props.isButtonDisable,
   };
 
   actionEdit = () => {
@@ -67,8 +70,8 @@ class Good extends React.PureComponent {
               <td><div><input className='cellText' size='5' type="text" readOnly={true} defaultValue={this.state.price}/></div></td>
               <td><div><input className='cellText' size='20' type="text" readOnly={true} defaultValue={this.state.url}/></div></td>
               <td><div><input className='cellText' size='5' type="text" readOnly={true} defaultValue={this.state.count}/></div></td>
-              <td className='GoodEdit' align='center' width='100px'><input type="button" value="Edit" onClick={this.actionEdit}/></td>
-              <td className='GoodDelete' align='center' width='100px'><input type="button" value="Delete" onClick={this.actionDelete}/></td>
+              <td className='GoodEdit' align='center' width='100px'><input type="button" value="Edit" disabled={this.state.isButtonDisable} onClick={this.actionEdit}/></td>
+              <td className='GoodDelete' align='center' width='100px'><input type="button" value="Delete" disabled={this.state.isButtonDisable} onClick={this.actionDelete}/></td>
             </tr>
           </thead>
         </table>
